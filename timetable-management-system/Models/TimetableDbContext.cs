@@ -11,6 +11,7 @@ namespace timetable_management_system.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbConfig.getConnectionString());
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
