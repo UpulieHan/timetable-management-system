@@ -21,5 +21,10 @@ namespace timetable_management_system
         {
             InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Welcome to project");
+        }
     }
 }
