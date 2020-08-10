@@ -24,12 +24,5 @@ namespace timetable_management_system
         {
             InitializeComponent();
         }
-        private void OpenWindow(object sender, RoutedEventArgs e)
-        {
-            //delete this
-            //DataWindow dataWindow = new DataWindow();
-            //this.Visibility = Visibility.Hidden;//hiding the current window
-            //dataWindow.Show();
-        }
     }
 }
