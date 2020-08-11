@@ -4,9 +4,9 @@ using System.Text;
 
 namespace timetable_management_system.Models
 {
-    class Test
+    class Faculty
     {
-        public int TestId { get; set; }
-        public string Text { get; set; }
+        public int FacultyId { get; set; }
+        public string FacultyName { get; set; }
     }
 }
