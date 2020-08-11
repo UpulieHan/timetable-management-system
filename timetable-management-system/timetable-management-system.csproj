@@ -8,8 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\DataWindow.xaml.cs" />
+    <Compile Remove="View\TestWindow.xaml.cs" />
+    <Compile Remove="View\UserControls\Tab_Days.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\back.png" />
+    <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\settings_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="View\DataWindow.xaml" />
+    <Page Remove="View\TestWindow.xaml" />
+    <Page Remove="View\UserControls\Tab_Days.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
