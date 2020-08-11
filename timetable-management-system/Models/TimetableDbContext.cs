@@ -8,7 +8,7 @@ namespace timetable_management_system.Models
 {
     class TimetableDbContext : DbContext
     {
-        public DbSet<Test> Tests { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,10 +20,10 @@ namespace timetable_management_system.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Test>(entity =>
+            modelBuilder.Entity<Faculty>(entity =>
             {
-                entity.HasKey(e => e.TestId);
-                entity.Property(e => e.Text);
+                entity.HasKey(e => e.FacultyId);
+                entity.Property(e => e.FacultyName);
             });
         }
     }
