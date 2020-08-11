@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
-        Title="ABC Institute Timetable System" Height="auto" Width="auto" FontFamily="Bahnschrift Light">
+        Title="ABC Institute Timetable System" ResizeMode="NoResize" Height="auto" Width="auto" WindowStyle="ToolWindow" FontFamily="Bahnschrift Light">
     <!--Grid can has multiple item inside it (Grid is like a table)-->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -29,16 +29,22 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Image Source="/logo.png"  Grid.Column="0" Grid.Row="1" Width="50" Height="50" Margin="15,0,0,0"/>
+        <Image Source="/Resources/logo.png"  Grid.Column="0" Grid.Row="1" Width="50" Height="50" Margin="15,0,0,0"/>
         <TextBlock Text="Creating a timetable was never a simple task. Until now" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="5" VerticalAlignment="Center"/>
-
-        <!--Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" Grid.Row="3" Grid.RowSpan="4"/-->
+        <Border BorderThickness="1" Grid.Column="0" Grid.Row="3" Grid.RowSpan="4">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF2684FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <Button  Grid.Column="2" Grid.Row="3" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical" Width="180" Height="180">
                     <TextBlock Text="1.Data" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="Add, Edit, Remove, View Days,Hours,Lecturer,Subject,Student,Tag and Location Data" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="Add, Edit, Remove, View Days,Hours,Lecturer,Subject,Student,Tag and Location Data" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>
@@ -49,10 +55,10 @@
         </Button>
         <Button  Grid.Column="4" Grid.Row="3" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical"  Width="180" Height="180">
                     <TextBlock Text="2.Availability" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="Allocate unavailable time of lecturers, sessions, groups and sub-groups" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="Allocate unavailable time of lecturers, sessions, groups and sub-groups" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>
@@ -63,10 +69,10 @@
         </Button>
         <Button  Grid.Column="6" Grid.Row="3" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical"  Width="180" Height="180">
                     <TextBlock Text="3.Sessions" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="View, Create session data" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="View, Create session data" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>
@@ -77,10 +83,10 @@
         </Button>
         <Button  Grid.Column="2" Grid.Row="5" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical" Width="180" Height="180">
                     <TextBlock Text="4.Session Configs" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="Add consecutive, parallel sessions" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="Add consecutive, parallel sessions" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>
@@ -91,10 +97,10 @@
         </Button>
         <Button  Grid.Column="4" Grid.Row="5" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical" Width="180" Height="180">
                     <TextBlock Text="5.Room configs" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="Set suitable room for a tag, lecturer, group, sub-group, session. Reserve a room" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="Set suitable room for a tag, lecturer, group, sub-group, session. Reserve a room" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>
@@ -105,10 +111,10 @@
         </Button>
         <Button  Grid.Column="6" Grid.Row="5" Background="White" Cursor="Hand">
             <Grid>
-                <StackPanel Orientation="Vertical" >
+                <StackPanel Orientation="Vertical" Width="180" Height="180">
                     <TextBlock Text="6.Timetables" Margin="20" FontSize="18" FontWeight="Bold" TextAlignment="Center" FontFamily="Bahnschrift"/>
-                    <Image Source="/settings_icon.png" Width="50" Height="50"/>
-                    <TextBlock Text="Check stats. Generate lecturer, group, room timetables. Print timetables" Margin="20" FontSize="7" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
+                    <Image Source="\Resources\settings_icon.png" Width="50" Height="50"/>
+                    <TextBlock Text="Check stats. Generate lecturer, group, room timetables. Print timetables" Margin="20" FontSize="9" MaxWidth="150" TextWrapping="WrapWithOverflow" TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
             <Button.Resources>

@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="logo.png" />
-    <None Remove="settings_icon.png" />
+    <None Remove="Resources\logo.png" />
+    <None Remove="Resources\settings_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="logo.png" />
-    <Resource Include="settings_icon.png" />
+    <Resource Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\settings_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
