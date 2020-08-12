@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Remove="Resources\back.png" />
+    <None Remove="Resources\green-tics.png" />
     <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\Save_tick.png" />
@@ -37,6 +38,9 @@
 
   <ItemGroup>
     <Resource Include="Resources\back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\green-tics.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\home.png">
