@@ -17,7 +17,7 @@
             <ComboBoxItem Content="Year 3"></ComboBoxItem>
             <ComboBoxItem Content="Year 4"></ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="comboBoxSemester" HorizontalAlignment="Left" Margin="480,18,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" IsReadOnly="True" Text="-Select Semester-">
+        <ComboBox x:Name="comboBoxSemester" HorizontalAlignment="Left" Margin="480,18,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" IsReadOnly="True" Text="-Select Semester-" SelectionChanged="comboBoxSemester_SelectionChanged" SelectedValuePath="Content">
             <ComboBoxItem Content="Semester 1"></ComboBoxItem>
             <ComboBoxItem Content="Semester 2"></ComboBoxItem>
             <ComboBoxItem Content="Semester 3"></ComboBoxItem>
