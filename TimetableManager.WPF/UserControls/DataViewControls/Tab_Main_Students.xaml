@@ -3,11 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TimetableManager.WPF.Controls"
+             xmlns:local="clr-namespace:TimetableManager.WPF.UserControls.StudentUserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="Content of locations goes here..." />
+        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" Margin="10">
+            <TabItem Header="Academic Year And Semester">
+                <local:Tab_Student_AcademicYearSemester/>
+            </TabItem>
+            <TabItem Header="Programme">
+                <local:Tab_Student_Programme/>
+            </TabItem>
+            <TabItem Header="Group Numbers">
+                <local:Tab_Student_GroupNo/>
+            </TabItem>
+            <TabItem Header="group IDs">
+                <local:Tab_Student_GroupID/>
+            </TabItem>
+            <TabItem Header="Sub-Group Numbers">
+                <local:Tab_Student_SubGroupNo/>
+            </TabItem>
+            <TabItem Header=" sub-group IDs">
+                <local:Tab_Student_SubGroupID/>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </UserControl>
     

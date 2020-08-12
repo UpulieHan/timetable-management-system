@@ -10,6 +10,7 @@
     <None Remove="Resources\back.png" />
     <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
+    <None Remove="Resources\Save_tick.png" />
     <None Remove="Resources\settings_icon.png" />
   </ItemGroup>
 
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Save_tick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\settings_icon.png">
