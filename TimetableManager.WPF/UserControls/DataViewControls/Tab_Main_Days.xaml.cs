@@ -22,5 +22,28 @@ namespace TimetableManager.WPF.Controls
         {
             InitializeComponent();
         }
+
+        private void comboBoxNoOfDays_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int selectedIndex = comboBoxNoOfDays.SelectedIndex;
+            //Object selectedItem = comboBoxNoOfDays.SelectedValue;
+            //textBox.Text = selectedItem.ToString();
+
+        }
+        private void comboBoxHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int selectedIndex = comboBoxNoOfDays.SelectedIndex;
+            //Object selectedItem = comboBoxNoOfDays.SelectedValue;
+            //textBox.Text = selectedItem.ToString();
+
+        }
+        private void comboBoxMinutes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //int selectedIndex = comboBoxNoOfDays.SelectedIndex;
+            //Object selectedItem = comboBoxNoOfDays.SelectedValue;
+            //textBox.Text = selectedItem.ToString();
+
+        }
+
     }
 }
