@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace timetable_management_system.View.UserControls
+namespace TimetableManager.WPF.UserControls.LocationUserControls
 {
     /// <summary>
-    /// Interaction logic for Tab_Main_Lecturers.xaml
+    /// Interaction logic for Tab_Locations_addBuildings.xaml
     /// </summary>
-    public partial class Tab_Main_Lecturers : UserControl
+    public partial class Tab_Locations_addBuildings : UserControl
     {
-        public Tab_Main_Lecturers()
+        public Tab_Locations_addBuildings()
         {
             InitializeComponent();
         }
