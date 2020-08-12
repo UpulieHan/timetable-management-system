@@ -11,7 +11,10 @@
         <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,55,0,0" Stroke="Black" VerticalAlignment="Top" Width="500"/>
         <Label x:Name="labelYearSemester" Content="Select Year And Semester" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
         <Label x:Name="labelShortNameYearSemester" Content="Short Name for Year And Semester" HorizontalAlignment="Left" Margin="156,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
-        <ComboBox x:Name="comboBoxYear" HorizontalAlignment="Left" Margin="355,18,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsReadOnly="True" Text="-Select Year-" SelectionChanged="comboBoxYear_SelectionChanged" SelectedValuePath="Content">
+        <ComboBox x:Name="comboBoxYear" HorizontalAlignment="Left" Margin="355,18,0,0" VerticalAlignment="Top"
+                  Width="120" IsEditable="True" IsReadOnly="True" 
+                  Text="-Select Year-" SelectionChanged="comboBoxYear_SelectionChanged"
+                  SelectedValuePath="Content">
             <ComboBoxItem Content="Year 1"></ComboBoxItem>
             <ComboBoxItem Content="Year 2"></ComboBoxItem>
             <ComboBoxItem Content="Year 3"></ComboBoxItem>
