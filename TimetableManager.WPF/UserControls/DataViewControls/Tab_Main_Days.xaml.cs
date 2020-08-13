@@ -21,11 +21,11 @@ namespace TimetableManager.WPF.Controls
     public partial class Tab_Main_Days : UserControl
     {
         public ObservableCollection<BoolStringClass> TheDaysList { get; set; }
-        public int noOfDays = 0;
-        public int selectedNoOfDays;
-        public int? hours;
-        public int? mins;
-        public int? timeSlot;
+        private int noOfDays = 0;
+        private int selectedNoOfDays;
+        private int? hours;
+        private int? mins;
+        private int? timeSlot;
         public Tab_Main_Days()
         {
             InitializeComponent();
@@ -107,7 +107,7 @@ namespace TimetableManager.WPF.Controls
             foreach (var item in TheDaysList)
             {
 
-                if (item.IsSelected == true)
+                if (item.IsSelected)
                 {
                     Trace.WriteLine(item.TheText);
                     Trace.WriteLine("Now selected no of days is " + item.TheText);
