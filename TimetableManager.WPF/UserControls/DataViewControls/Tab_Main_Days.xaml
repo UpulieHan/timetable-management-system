@@ -25,16 +25,36 @@
                     <StackPanel Background="White" >
                         <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,10,10,0">
                             <ComboBox x:Name="comboBoxNoOfDays" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="260" IsEditable="True" IsReadOnly="False" Text="No of Working Days" SelectionChanged="comboBoxNoOfDays_SelectionChanged" SelectedValuePath="Content">
-
+                                <ComboBoxItem Content="0"></ComboBoxItem>
                                 <ComboBoxItem Content="1"></ComboBoxItem>
                                 <ComboBoxItem Content="2"></ComboBoxItem>
                                 <ComboBoxItem Content="3"></ComboBoxItem>
                                 <ComboBoxItem Content="4"></ComboBoxItem>
+                                <ComboBoxItem Content="5"></ComboBoxItem>
+                                <ComboBoxItem Content="6"></ComboBoxItem>
+                                <ComboBoxItem Content="7"></ComboBoxItem>
                             </ComboBox>
                         </Border>
                         <Border BorderBrush="Gray" BorderThickness="1,0,1,1" Margin="10,0,10,0">
-                            <Label Content="Names of Working days" Margin="20,10,0,10" />
+                            <Grid>
+                                <Label Content="Names of Working days" Margin="20,10,0,10" />
+                                <Border BorderBrush="Gray" BorderThickness="0" Margin="20,40,20,20">
+                                    <ListBox ItemsSource="{Binding TheDaysList}" >
 
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding TheText}" Margin="10,10,0,10" Width="110"/>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Grid>
                         </Border>
                         <Border BorderBrush="Gray" BorderThickness="1,0,1,1" Margin="10,0,10,0">
                             <Grid>
@@ -85,50 +105,16 @@
                         <Border BorderBrush="Gray" BorderThickness="1,0,1,1" Margin="10,0,10,0">
                             <Grid>
                                 <Label Content="Preferred Time Slot" Margin="20,10,0,10" />
-                                <ToggleButton x:Name="changeButBorderedBlinky" Width="82" Height="82" Background="Transparent" Padding="-1"  Focusable="false" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,20,0,0" Cursor="Hand">
-                                    <ToggleButton.Template>
-                                        <ControlTemplate TargetType="{x:Type ButtonBase}">
-                                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="Button.IsDefaulted" Value="True"/>
-                                                <Trigger Property="IsMouseOver" Value="True"/>
-                                                <Trigger Property="IsPressed" Value="True"/>
-                                                <Trigger Property="ToggleButton.IsChecked" Value="True"/>
-                                                <Trigger Property="IsEnabled" Value="False">
-                                                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="#FF838383"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </ToggleButton.Template>
-                                    <ToggleButton.Style>
-                                        <Style TargetType="{x:Type ToggleButton}">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <Border BorderThickness="0"  >
-                                                        <Image Source="/Resources/30mins.png" />
-                                                    </Border>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Content">
-                                                        <Setter.Value>
-                                                            <Border  BorderThickness="0" >
-                                                                <Image Source="/Resources/1hour.png" />
-                                                            </Border>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ToggleButton.Style>
-                                </ToggleButton>
+                                <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="250" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
+                                    <ComboBoxItem Content="30 mins"></ComboBoxItem>
+                                    <ComboBoxItem Content="1 hour"></ComboBoxItem>
+                                </ComboBox>
                             </Grid>
                         </Border>
                         <Border Margin="0,40,10,0">
                             <Grid>
-                                <Image Source="/Resources/Save_tick.png"  Width="25" HorizontalAlignment="Right" Margin="0,0,160,0" />
-                                <Button Content="Save" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,0,40,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" >
+                                <Image x:Name="tickImage"  Width="25" HorizontalAlignment="Right" Margin="0,0,160,0" />
+                                <Button Content="Save" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,0,40,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="{x:Type Border}">
                                             <Setter Property="CornerRadius" Value="4"/>

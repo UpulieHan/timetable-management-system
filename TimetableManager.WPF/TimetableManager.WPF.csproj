@@ -10,6 +10,8 @@
     <None Remove="Resources\1hour.png" />
     <None Remove="Resources\30mins.png" />
     <None Remove="Resources\back.png" />
+    <None Remove="Resources\cancel.png" />
+    <None Remove="Resources\Cancel_tick.png" />
     <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\Save_tick.png" />
@@ -29,6 +31,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\back.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Cancel_tick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\home.png">
