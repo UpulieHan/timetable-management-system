@@ -107,7 +107,7 @@ namespace TimetableManager.WPF.Controls
             foreach (var item in TheDaysList)
             {
 
-                if (item.IsSelected == true)
+                if (item.IsSelected)
                 {
                     Trace.WriteLine(item.TheText);
                     Trace.WriteLine("Now selected no of days is " + item.TheText);
