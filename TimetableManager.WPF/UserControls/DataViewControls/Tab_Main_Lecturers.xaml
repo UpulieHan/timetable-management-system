@@ -4,9 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimetableManager.WPF.Controls"
+             xmlns:controls="clr-namespace:TimetableManager.WPF.UserControls.LecturerViewControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="Content of lecturers goes here..." />
+        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" Margin="10">
+            <TabItem Header="View Lecturers">
+                <controls:ViewLecturers />
+            </TabItem>
+            <TabItem Header="Add/Edit Lecturer">
+                <controls:AddEditLecturer />
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
