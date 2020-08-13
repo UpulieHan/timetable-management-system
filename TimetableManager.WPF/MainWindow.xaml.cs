@@ -50,6 +50,8 @@ namespace TimetableManager.WPF
         private void OpenTimetablesWindow(object sender, RoutedEventArgs e)
         {
             //interation logic for Timetables Window
+            MainTimetablesWindow maintimetableWindow = new MainTimetablesWindow();
+            maintimetableWindow.Show();
         }
     }
 }
