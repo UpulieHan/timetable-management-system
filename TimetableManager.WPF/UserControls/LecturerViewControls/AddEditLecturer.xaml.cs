@@ -47,12 +47,10 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
                 DispatcherPriority.ApplicationIdle,
                 new Action(() =>
                 {
-                    //this.SetFacultyList();
+                    this.SetFacultyList();
+                    this.SetCenterList();
+                    this.SetLevelList();
                 }));
-
-            this.SetFacultyList();
-            this.SetCenterList();
-            this.SetLevelList();
         }
 
         private async void SetFacultyList()
