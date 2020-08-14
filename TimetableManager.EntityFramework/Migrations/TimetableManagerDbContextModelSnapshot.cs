@@ -21,7 +21,7 @@ namespace TimetableManager.EntityFramework.Migrations
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Building", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BuildingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,14 +29,19 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<string>("BuildingName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("CenterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BuildingId");
+
+                    b.HasIndex("CenterId");
 
                     b.ToTable("Buildings");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Center", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CenterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -44,14 +49,31 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<string>("CenterName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CenterId");
 
                     b.ToTable("Centers");
+
+                    b.HasData(
+                        new
+                        {
+                            CenterId = 1,
+                            CenterName = "Malabe"
+                        },
+                        new
+                        {
+                            CenterId = 2,
+                            CenterName = "Matara"
+                        },
+                        new
+                        {
+                            CenterId = 3,
+                            CenterName = "Kandy"
+                        });
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Department", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DepartmentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -59,14 +81,19 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentId");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Faculty", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FacultyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -74,9 +101,26 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<string>("FacultyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("FacultyId");
 
                     b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            FacultyId = 1,
+                            FacultyName = "Computing"
+                        },
+                        new
+                        {
+                            FacultyId = 2,
+                            FacultyName = "Engineering"
+                        },
+                        new
+                        {
+                            FacultyId = 3,
+                            FacultyName = "Business"
+                        });
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Lecturer", b =>
@@ -95,6 +139,9 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmployeeName")
                         .HasColumnType("nvarchar(max)");
 
@@ -108,6 +155,8 @@ namespace TimetableManager.EntityFramework.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("EmployeeId");
 
                     b.HasIndex("BuildingId");
 
@@ -129,12 +178,75 @@ namespace TimetableManager.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("LevelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LevelName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("LevelId");
+
                     b.ToTable("Levels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LevelId = 1,
+                            LevelName = "Professor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LevelId = 2,
+                            LevelName = "Assistant Professor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LevelId = 3,
+                            LevelName = "Senior Lecturer(HG)"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            LevelId = 4,
+                            LevelName = "Senior Lecturer"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            LevelId = 5,
+                            LevelName = "Lecturer"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            LevelId = 6,
+                            LevelName = "Assistant Lecturer"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            LevelId = 7,
+                            LevelName = "Instructors"
+                        });
+                });
+
+            modelBuilder.Entity("TimetableManager.Domain.Models.Building", b =>
+                {
+                    b.HasOne("TimetableManager.Domain.Models.Center", "Center")
+                        .WithMany("Buildings")
+                        .HasForeignKey("CenterId");
+                });
+
+            modelBuilder.Entity("TimetableManager.Domain.Models.Department", b =>
+                {
+                    b.HasOne("TimetableManager.Domain.Models.Faculty", "Faculty")
+                        .WithMany("Departments")
+                        .HasForeignKey("FacultyId");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Tag", b =>
