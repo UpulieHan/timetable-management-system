@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TimetableManager.Domain.Models;
-using TimetableManager.EntityFramework.Services;
 
 namespace TimetableManager.WPF.Controls
 {
@@ -22,6 +20,7 @@ namespace TimetableManager.WPF.Controls
     /// </summary>
     public partial class Tab_Main_Days : UserControl
     {
+        public ObservableCollection<BoolStringClass> TheDaysList { get; set; }
         private int noOfDays = 0;
         private int selectedNoOfDays;
         private int? hours;
@@ -32,7 +31,14 @@ namespace TimetableManager.WPF.Controls
             InitializeComponent();
 
             //setting the selected Days list
-            //DayList = new ObservableCollection<Day>();
+            TheDaysList = new ObservableCollection<BoolStringClass>();
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Monday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Tuesday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Wednesday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Thursday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Friday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Saturday" });
+            TheDaysList.Add(new BoolStringClass { IsSelected = false, TheText = "Sunday" });
 
             this.DataContext = this;
         }
@@ -82,14 +88,6 @@ namespace TimetableManager.WPF.Controls
             {
                 var uriSource = new Uri("/Resources/Save_tick.png", UriKind.Relative);
                 tickImage.Source = new BitmapImage(uriSource);
-
-
-                //creating a service of DaysAndHours using IDataService interface
-                //IDataService<DaysAndHours> daysAndHoursDataService = new GenericDataService<DaysAndHours>(new EntityFramework.TimetableManagerDbContext());
-
-
-
-
                 MessageBox.Show("All good");
             }
             else
@@ -106,16 +104,16 @@ namespace TimetableManager.WPF.Controls
             selectedNoOfDays = 0;
 
             //the selected no of days days
-            //foreach (var item in DayList)
-            //{
+            foreach (var item in TheDaysList)
+            {
 
-            //    if (item.IsSelected)
-            //    {
-            //        Trace.WriteLine(item.DayName);
-            //        Trace.WriteLine("Now selected no of days is " + item.DayName);
-            //        selectedNoOfDays++;
-            //    }
-            //}
+                if (item.IsSelected)
+                {
+                    Trace.WriteLine(item.TheText);
+                    Trace.WriteLine("Now selected no of days is " + item.TheText);
+                    selectedNoOfDays++;
+                }
+            }
 
             //the number of days
             if (selectedNoOfDays == noOfDays)
@@ -126,6 +124,11 @@ namespace TimetableManager.WPF.Controls
             {
                 return false;
             }
+        }
+        public class BoolStringClass
+        {
+            public string TheText { get; set; }
+            public bool IsSelected { get; set; }
         }
     }
 }
