@@ -14,6 +14,7 @@ namespace TimetableManager.EntityFramework
         public DbSet<Center> Centers { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public TimetableManagerDbContext(DbContextOptions options) : base(options) { }
 
