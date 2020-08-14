@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -47,13 +48,13 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
                 DispatcherPriority.ApplicationIdle,
                 new Action(() =>
                 {
-                    this.SetFacultyList();
-                    this.SetCenterList();
-                    this.SetLevelList();
+                    _ = this.SetFacultyList();
+                    _ = this.SetCenterList();
+                    _ = this.SetLevelList();
                 }));
         }
 
-        private async void SetFacultyList()
+        private async Task SetFacultyList()
         {
             FacultyDataService facultyDataService = new FacultyDataService(new EntityFramework.TimetableManagerDbContext());
 
@@ -64,7 +65,7 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
                 FacultyNameList.Add(list.FacultyName);
             });
         }
-        private async void SetCenterList()
+        private async Task SetCenterList()
         {
             CenterDataService centerDataService = new CenterDataService(new EntityFramework.TimetableManagerDbContext());
 
@@ -75,7 +76,7 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
                 CenterNameList.Add(e.CenterName);
             });
         }        
-        private async void SetLevelList()
+        private async Task SetLevelList()
         {
             LevelDataService levelDataService = new LevelDataService(new EntityFramework.TimetableManagerDbContext());
 
