@@ -39,7 +39,7 @@
                             <Grid>
                                 <Label Content="Names of Working days" Margin="20,10,0,10" />
                                 <Border BorderBrush="Gray" BorderThickness="0" Margin="20,40,20,20">
-                                    <ListBox ItemsSource="{Binding TheDaysList}" >
+                                    <ListBox ItemsSource="{Binding theDaysList}" >
 
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
@@ -49,7 +49,7 @@
 
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding TheText}" Margin="10,10,0,10" Width="110"/>
+                                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DayName}" Margin="10,10,0,10" Width="110"/>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>

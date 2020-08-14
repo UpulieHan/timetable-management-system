@@ -9,8 +9,6 @@ namespace TimetableManager.Domain.Models
     {
         public int Id { get; set; }
         public int NoOfDays { get; set; }
-
-        //how to reference this data on the xaml?
         public ObservableCollection<Day> DayList { get; set; }
         public int Hours { get; set; }
         public int Mins { get; set; }
