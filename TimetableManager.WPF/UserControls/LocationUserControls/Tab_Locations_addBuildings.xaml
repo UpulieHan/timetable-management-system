@@ -29,7 +29,7 @@
                 Margin="498,195,0,0"
                 VerticalAlignment="Top" 
                 Width="94" Height="30"
-                 Background="Blue" Foreground="White"/>
+                 Background="Blue" Foreground="White" Click="button_Click"/>
         <Image x:Name="image" Source="/Resources/green-tics.png" HorizontalAlignment="Left" 
                Height="31" Margin="436,195,0,0"
                VerticalAlignment="Top" Width="40"/>
