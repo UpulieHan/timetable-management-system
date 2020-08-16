@@ -98,15 +98,25 @@ namespace TimetableManager.WPF.Controls
                 daysAndHours.Mins = mins;
                 daysAndHours.TimeSlot = timeSlot;
 
-                //there's no such think as .Create() we must implement it.
-                //daysAndHoursDataService.Create();
 
+                //Adding the daysAndHours object to the DB
+                try
+                {
+                    timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
+                    timetableManagerDbContext.SaveChanges();
 
+                    //although not needed here, in the case of needing to refresh a spefic dataset (Eg: Items)(after saving one more item to the db)
+                    //Items.Refresh();
 
-
-
-
-
+                    //if you want to delete a specific item
+                    //timetableManagerDBContext.Items.Remove(selectedItem);
+                    //timetableManagerDBContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    //in case if the connection to the DB is lost
+                    MessageBox.Show(ex.Message);
+                }
                 MessageBox.Show("All good");
             }
             else
