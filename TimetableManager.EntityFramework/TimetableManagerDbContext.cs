@@ -15,6 +15,8 @@ namespace TimetableManager.EntityFramework
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
 
+      
+
         public TimetableManagerDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
