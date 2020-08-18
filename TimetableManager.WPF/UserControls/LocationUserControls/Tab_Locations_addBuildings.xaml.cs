@@ -33,12 +33,12 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
 
             this.DataContext = this;
 
-            this.Dispatcher.Invoke(
+            _ = this.Dispatcher.Invoke(
                 DispatcherPriority.ApplicationIdle,
                 new Action(() =>
                 {
 
-                    this.SetCenterList();
+                    _ = this.SetCenterList();
 
                 }));
         }
