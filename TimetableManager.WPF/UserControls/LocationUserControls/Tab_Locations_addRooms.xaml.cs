@@ -22,5 +22,10 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
         {
             InitializeComponent();
         }
+
+        private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
