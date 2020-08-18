@@ -9,10 +9,23 @@
     <Compile Remove="Migrations\20200811165645_initial.Designer.cs" />
     <Compile Remove="Migrations\20200811172404_DomainObjectModelAdded.cs" />
     <Compile Remove="Migrations\20200811172404_DomainObjectModelAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200811172627_UpdatedMigration.cs" />
+    <Compile Remove="Migrations\20200811172627_UpdatedMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200813182639_test.cs" />
+    <Compile Remove="Migrations\20200813182639_test.Designer.cs" />
+    <Compile Remove="Migrations\20200813184342_new-migration-init.cs" />
+    <Compile Remove="Migrations\20200813184342_new-migration-init.Designer.cs" />
+    <Compile Remove="Migrations\20200813185035_add-sample-center-data.cs" />
+    <Compile Remove="Migrations\20200813185035_add-sample-center-data.Designer.cs" />
+    <Compile Remove="Migrations\20200813190823_add-sample-level-data.cs" />
+    <Compile Remove="Migrations\20200813190823_add-sample-level-data.Designer.cs" />
+    <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.cs" />
+    <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>

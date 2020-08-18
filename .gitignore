@@ -339,3 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
+/TimetableManager.WPF/Timetable.db-wal
+/TimetableManager.WPF/Timetable.db-shm
+/TimetableManager.WPF/Timetable.db

@@ -4,8 +4,10 @@ using System.Text;
 
 namespace TimetableManager.Domain.Models
 {
-    public class Level : DomainObject
+    public class Level
     {
+        public int Id { get; set; }
+        public int LevelId { get; set; }
         public string LevelName { get; set; }
     }
 }
