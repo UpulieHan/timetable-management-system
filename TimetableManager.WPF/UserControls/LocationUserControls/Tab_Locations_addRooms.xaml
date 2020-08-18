@@ -29,7 +29,7 @@
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="421,193,0,239" Text="Enter Capacity" TextWrapping="Wrap" Width="117"/>
         <Button x:Name="btnSave" Content="save" 
                 Margin="564,269,131,153" 
-                Background="Blue" Foreground="White"/>
+                Background="Blue" Foreground="White" Click="btnSave_Click"/>
         <Image x:Name="image" Source="/Resources/green-tics.png" HorizontalAlignment="Left" Height="29" 
                Margin="514,275,0,0" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.529,0.345"/>
         <ComboBox x:Name="comboBoxcenter" HorizontalAlignment="Left" Margin="464,102,0,0" VerticalAlignment="Top" Width="101" ItemsSource="{Binding BuildingNameList}" SelectionChanged="comboBox1_SelectionChanged"/>

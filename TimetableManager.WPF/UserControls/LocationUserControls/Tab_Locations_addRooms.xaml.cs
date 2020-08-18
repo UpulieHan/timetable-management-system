@@ -77,5 +77,10 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
             });
 
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
