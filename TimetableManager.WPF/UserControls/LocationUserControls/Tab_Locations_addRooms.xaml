@@ -18,13 +18,10 @@
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" 
                   Margin="268,102,0,0" VerticalAlignment="Top" Width="177"
                   IsEditable="True" IsReadOnly="True"
-                   Text="-Select Building-" SelectedValuePath="Content">
+                   Text="-Select Building-" SelectedValuePath="Content" ItemsSource="{Binding BuildingNameList}"/>
 
-            <ComboBoxItem Content="Main Building"></ComboBoxItem>
-            <ComboBoxItem Content="New Building"></ComboBoxItem>
-            <ComboBoxItem Content="Engineering Building"></ComboBoxItem>
-            <ComboBoxItem Content="Business Building"></ComboBoxItem>
-        </ComboBox>
+
+
         <Rectangle HorizontalAlignment="Left" Height="84" Margin="266,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
         <Label x:Name="label1" Content="Rooms" HorizontalAlignment="Left" Margin="266,162,0,0" VerticalAlignment="Top" Width="87"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="268,193,0,0" Text="Enter Room" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
@@ -35,7 +32,7 @@
                 Background="Blue" Foreground="White"/>
         <Image x:Name="image" Source="/Resources/green-tics.png" HorizontalAlignment="Left" Height="29" 
                Margin="514,275,0,0" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.529,0.345"/>
-        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="464,102,0,0" VerticalAlignment="Top" Width="101" SelectionChanged="comboBox1_SelectionChanged"/>
+        <ComboBox x:Name="comboBoxcenter" HorizontalAlignment="Left" Margin="464,102,0,0" VerticalAlignment="Top" Width="101" ItemsSource="{Binding BuildingNameList}" SelectionChanged="comboBox1_SelectionChanged"/>
 
     </Grid>
 </UserControl>
