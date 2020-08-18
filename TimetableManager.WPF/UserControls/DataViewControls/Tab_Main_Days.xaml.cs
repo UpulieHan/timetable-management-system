@@ -25,6 +25,7 @@ namespace TimetableManager.WPF.Controls
     public partial class Tab_Main_Days : UserControl
     {
         public ObservableCollection<Day> theDaysList { get; set; }
+        private DaysAndHours daysAndHours;
         private int noOfDays = 0;
         private int selectedNoOfDays;
         private int hours;
@@ -36,9 +37,55 @@ namespace TimetableManager.WPF.Controls
         {
             InitializeComponent();
 
-            //setting the selected Days list to an ObservableCollection so it could be bound to the view
-            theDaysList = new ObservableCollection<Day>(timetableManagerDbContext.Days);
-            this.DataContext = this;
+            //retrieving the DaysAndHours data from the DB if exists
+            try
+            {
+                //setting the selected Days list to an ObservableCollection so it could be bound to the view
+                theDaysList = new ObservableCollection<Day>(timetableManagerDbContext.Days);
+
+                //setting the rest of the saved data
+                daysAndHours = timetableManagerDbContext.DaysAndHours.FirstOrDefault<DaysAndHours>();
+
+                if (daysAndHours != null)
+                {
+                    noOfDays = daysAndHours.NoOfDays;
+                    hours = daysAndHours.Hours;
+                    mins = daysAndHours.Mins;
+                    timeSlot = daysAndHours.TimeSlot;
+
+                    //setting data to the view
+                    comboBoxNoOfDays.SelectedIndex = noOfDays;
+                    comboBoxHours.SelectedIndex = hours;
+
+                    if (mins.Equals(30))
+                    {
+                        comboBoxMinutes.Text = "30";
+                    }
+                    else if (mins.Equals(60))
+                    {
+                        comboBoxMinutes.Text = "00";
+                    }
+
+                    if (timeSlot.Equals(30))
+                    {
+                        comboBoxDuration.Text = "30 mins";
+                    }
+                    else if (timeSlot.Equals(60))
+                    {
+                        comboBoxDuration.Text = "1 hour";
+                    }
+
+                }
+                this.DataContext = this;
+
+            }
+            catch (Exception e)
+            {
+                //in case if the connection to the DB is lost
+                MessageBox.Show("first error " + e.Message);
+            }
+
+
         }
 
         private void comboBoxNoOfDays_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,7 +102,15 @@ namespace TimetableManager.WPF.Controls
         private void comboBoxMinutes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string text = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
-            mins = Int32.Parse(text);
+
+            if (text.Equals("00"))
+            {
+                mins = 60;
+            }
+            else if (text.Equals("30"))
+            {
+                mins = 30;
+            }
         }
 
         private void comboBoxDuration_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,38 +141,38 @@ namespace TimetableManager.WPF.Controls
                 var uriSource = new Uri("/Resources/Save_tick.png", UriKind.Relative);
                 tickImage.Source = new BitmapImage(uriSource);
 
-                //saving data to the DB
-                DaysAndHoursDataService daysAndHoursDataService = new DaysAndHoursDataService(new EntityFramework.TimetableManagerDbContext());
-
-                //check from the GenericDataService what to pass to this (T entity)
-                //changed the int? to int
-                DaysAndHours daysAndHours = new DaysAndHours();
-                //daysAndHours.Id=
-                daysAndHours.NoOfDays = noOfDays;
-                daysAndHours.Hours = hours;
-                daysAndHours.Mins = mins;
-                daysAndHours.TimeSlot = timeSlot;
-
-
                 //Adding the daysAndHours object to the DB
                 try
                 {
-                    timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
+
+                    if (daysAndHours != null)
+                    {
+                        daysAndHours.NoOfDays = noOfDays;
+                        daysAndHours.Hours = hours;
+                        daysAndHours.Mins = mins;
+                        daysAndHours.TimeSlot = timeSlot;
+
+                        //timetableManagerDbContext.DaysAndHours.RemoveRange();
+                        timetableManagerDbContext.DaysAndHours.Update(daysAndHours);
+                    }
+                    else
+                    {
+                        daysAndHours = new DaysAndHours();
+                        daysAndHours.NoOfDays = noOfDays;
+                        daysAndHours.Hours = hours;
+                        daysAndHours.Mins = mins;
+                        daysAndHours.TimeSlot = timeSlot;
+
+                        timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
+                    }
                     timetableManagerDbContext.SaveChanges();
-
-                    //although not needed here, in the case of needing to refresh a spefic dataset (Eg: Items)(after saving one more item to the db)
-                    //Items.Refresh();
-
-                    //if you want to delete a specific item
-                    //timetableManagerDBContext.Items.Remove(selectedItem);
-                    //timetableManagerDBContext.SaveChanges();
+                    MessageBox.Show("Changes saved");
                 }
                 catch (Exception ex)
                 {
                     //in case if the connection to the DB is lost
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("second error" + ex.Message);
                 }
-                MessageBox.Show("All good");
             }
             else
             {
