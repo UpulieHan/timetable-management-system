@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetableManager.EntityFramework;
 
 namespace TimetableManager.EntityFramework.Migrations
 {
     [DbContext(typeof(TimetableManagerDbContext))]
-    partial class TimetableManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200814155408_CreateDaysAndHours")]
+    partial class CreateDaysAndHours
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,21 +216,6 @@ namespace TimetableManager.EntityFramework.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TimetableManager.Domain.Models.GroupNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("GroupNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupNumbers");
-                });
-
             modelBuilder.Entity("TimetableManager.Domain.Models.Lecturer", b =>
                 {
                     b.Property<int>("Id")
@@ -339,75 +326,6 @@ namespace TimetableManager.EntityFramework.Migrations
                             LevelId = 7,
                             LevelName = "Instructors"
                         });
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Programme", b =>
-                {
-                    b.Property<int>("ProgrammeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ProgrammeFullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProgrammeShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ProgrammeId");
-
-                    b.ToTable("Programmes");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.SubGroupNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SubGroupNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubGroupNumbers");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Tag", b =>
-                {
-                    b.Property<int>("TagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("TagName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TagId");
-
-                    b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Year_Semester", b =>
-                {
-                    b.Property<int>("YsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("YsSemester")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YsShortName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YsYear")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("YsId");
-
-                    b.ToTable("Year_Semesters");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Building", b =>

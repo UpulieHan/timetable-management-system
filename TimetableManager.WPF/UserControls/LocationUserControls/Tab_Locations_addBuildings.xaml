@@ -12,17 +12,24 @@
                    Width="499"/>
         <Label x:Name="label" Content="Buildings" 
                Margin="262,90,447,334"/>
-        <TextBox x:Name="textBox" 
+        <TextBox x:Name="textBoxBuilding" 
                  HorizontalAlignment="Left" 
                  Margin="262,151,0,0" 
                  Text="Enter Building" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="125" Height="40"/>
+        <ComboBox x:Name="CenComboBox" HorizontalAlignment="Left" 
+                  Margin="436,103,0,0" VerticalAlignment="Top" Width="178"
+                  IsEditable="True" IsReadOnly="True"
+                   Text="-Select Center-" 
+            ItemsSource="{Binding CenterNameList}" />
+
+
         <Button x:Name="button" Content="Save"
                 HorizontalAlignment="Left" 
                 Margin="498,195,0,0"
                 VerticalAlignment="Top" 
                 Width="94" Height="30"
-                 Background="Blue" Foreground="White"/>
+                 Background="Blue" Foreground="White" Click="savebuildingbutton_Click"/>
         <Image x:Name="image" Source="/Resources/green-tics.png" HorizontalAlignment="Left" 
                Height="31" Margin="436,195,0,0"
                VerticalAlignment="Top" Width="40"/>

@@ -159,5 +159,32 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
                 });
             }
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Lecturer lecturer = new Lecturer();
+            lecturer.EmployeeId = Int32.Parse(EmployeeIdTextBox.Text.Trim());
+            lecturer.EmployeeName = EmployeeNameTextBox.Text.Trim();
+            lecturer.Rank = float.Parse(RankTextBox.Text.Trim());
+
+            string facultyName = FacutlyComboBox.SelectedItem.ToString();
+            string departmentName = DepartmentComboBox.SelectedItem.ToString();
+            string centerName = CenterComboBox.SelectedItem.ToString();
+            string buildingName = BuildingComboBox.SelectedItem.ToString();
+            string levelName = LevelComboBox.SelectedItem.ToString();
+
+            LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
+
+            lecturerDataService.AddLecturer(lecturer, facultyName, departmentName, centerName, buildingName, levelName).ContinueWith(result =>
+            {
+                if(result != null)
+                {
+                    MessageBox.Show("Lecture Added!", "Success");
+                } else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
+        }
     }
 }

@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TimetableManager.Domain.Models;
 
+
 namespace TimetableManager.EntityFramework.Services
 {
-    public class LevelDataService
+    public class DayDataService
     {
         private readonly TimetableManagerDbContext _context;
 
-        public LevelDataService(TimetableManagerDbContext context)
+        public DayDataService(TimetableManagerDbContext context)
         {
             _context = context;
         }
-
-        public async Task<List<Level>> GetLevelsAsync()
+        public async Task<List<Day>> GetDaysAsync()
         {
-            return await _context.Levels.ToListAsync();
+            return await _context.Days.ToListAsync();
         }
     }
 }
