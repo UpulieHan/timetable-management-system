@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid x:Name="LecturerDataGrid" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding LecturerDataList}">
+        <DataGrid x:Name="LecturerDataGrid" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding LecturerDataList}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" />
                 <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" />
