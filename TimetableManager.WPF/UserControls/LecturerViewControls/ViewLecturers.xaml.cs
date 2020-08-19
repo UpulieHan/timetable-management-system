@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework.Services;
+using TimetableManager.WPF.Controls;
 
 namespace TimetableManager.WPF.UserControls.LecturerViewControls
 {
@@ -54,6 +58,25 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
 
                 LecturerDataList.Add(lecturerObj);
             });
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            LecturerGridModel lecturer = (LecturerGridModel)LecturerDataGrid.SelectedItem;
+
+            LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
+
+            lecturerDataService.DeleteLecturer(lecturer.EmployeeId).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = LecturerDataList.Remove(lecturer);
         }
     }
 }
