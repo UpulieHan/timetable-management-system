@@ -23,10 +23,22 @@
     <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.Designer.cs" />
     <Compile Remove="Migrations\20200814051720_sqlserver-new.cs" />
     <Compile Remove="Migrations\20200814051720_sqlserver-new.Designer.cs" />
+    <Compile Remove="Migrations\20200814155408_CreateDaysAndHours.cs" />
+    <Compile Remove="Migrations\20200814155408_CreateDaysAndHours.Designer.cs" />
+    <Compile Remove="Migrations\20200818183115_TagMigrations.cs" />
+    <Compile Remove="Migrations\20200818183115_TagMigrations.Designer.cs" />
+    <Compile Remove="Migrations\20200819174825_YearSemesterMigration.cs" />
+    <Compile Remove="Migrations\20200819174825_YearSemesterMigration.Designer.cs" />
     <Compile Remove="Migrations\20200819175142_roomscap.cs" />
     <Compile Remove="Migrations\20200819175142_roomscap.Designer.cs" />
     <Compile Remove="Migrations\20200818181956_TagMigration.cs" />
     <Compile Remove="Migrations\20200818181956_TagMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200819182101_ProgrammeMigration.cs" />
+    <Compile Remove="Migrations\20200819182101_ProgrammeMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200819185602_GroupNumberMigration.cs" />
+    <Compile Remove="Migrations\20200819185602_GroupNumberMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200819192219_SubGroupNumberMigration.cs" />
+    <Compile Remove="Migrations\20200819192219_SubGroupNumberMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +53,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TimetableManager.Domain\TimetableManager.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
