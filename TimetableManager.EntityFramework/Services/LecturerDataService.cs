@@ -38,5 +38,16 @@ namespace TimetableManager.EntityFramework.Services
 
             return _context.SaveChangesAsync();
         }
+
+        public async Task<List<Lecturer>> GetLecturersAsync()
+        {
+            return await _context.Lecturers
+                                .Include(f => f.Faculty)
+                                .Include(d => d.Department)
+                                .Include(c => c.Center)
+                                .Include(b => b.Building)
+                                .Include(l => l.Level)
+                                .ToListAsync();
+        }
     }
 }
