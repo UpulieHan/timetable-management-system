@@ -39,6 +39,8 @@
     <Compile Remove="Migrations\20200819185602_GroupNumberMigration.Designer.cs" />
     <Compile Remove="Migrations\20200819192219_SubGroupNumberMigration.cs" />
     <Compile Remove="Migrations\20200819192219_SubGroupNumberMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200819211833_ClutterFreeMigration.cs" />
+    <Compile Remove="Migrations\20200819211833_ClutterFreeMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +55,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TimetableManager.Domain\TimetableManager.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
