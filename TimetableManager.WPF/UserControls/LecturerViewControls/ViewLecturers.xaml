@@ -7,6 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="View Lecturers" />
+        <DataGrid x:Name="LecturerDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding LecturerDataList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" />
+                <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" />
+                <DataGridTextColumn Header="Faculty" Binding="{Binding FacultyName}" />
+                <DataGridTextColumn Header="Department" Binding="{Binding DepartmentName}" />
+                <DataGridTextColumn Header="Center" Binding="{Binding CenterName}" />
+                <DataGridTextColumn Header="Building" Binding="{Binding BuildingName}" />
+                <DataGridTextColumn Header="Level" Binding="{Binding LevelName}" />
+                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
