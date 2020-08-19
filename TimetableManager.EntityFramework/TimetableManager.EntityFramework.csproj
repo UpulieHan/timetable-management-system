@@ -55,8 +55,4 @@
     <ProjectReference Include="..\TimetableManager.Domain\TimetableManager.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
