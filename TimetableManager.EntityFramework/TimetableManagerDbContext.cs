@@ -14,6 +14,7 @@ namespace TimetableManager.EntityFramework
         public DbSet<Center> Centers { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Year_Semester> Year_Semesters { get; set; }
         public DbSet<Programme> Programmes { get; set; }
@@ -23,6 +24,7 @@ namespace TimetableManager.EntityFramework
         //upulie's
         public DbSet<Day> Days { get; set; }
         public DbSet<DaysAndHours> DaysAndHours { get; set; }
+
 
         public TimetableManagerDbContext() { }
 

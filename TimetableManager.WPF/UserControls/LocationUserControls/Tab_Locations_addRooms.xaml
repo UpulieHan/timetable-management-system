@@ -11,30 +11,28 @@
         <Rectangle Margin="0,32,114,136" Stroke="Black"
                    HorizontalAlignment="Right" 
                    Width="499"/>
-        <Rectangle HorizontalAlignment="Left" Height="73" Margin="266,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="318"/>
+        <Rectangle HorizontalAlignment="Left" Height="73" Margin="266,66,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
 
         <Label x:Name="label" Content="Buildings" 
                Margin="268,71,441,353"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" 
+        <ComboBox x:Name="comboBoxbuild" HorizontalAlignment="Left" 
                   Margin="268,102,0,0" VerticalAlignment="Top" Width="177"
                   IsEditable="True" IsReadOnly="True"
-                   Text="-Select Building-" SelectedValuePath="Content">
+                   Text="-Select Building-" SelectedValuePath="Content" ItemsSource="{Binding BuildingNameList}"/>
 
-            <ComboBoxItem Content="Main Building"></ComboBoxItem>
-            <ComboBoxItem Content="New Building"></ComboBoxItem>
-            <ComboBoxItem Content="Engineering Building"></ComboBoxItem>
-            <ComboBoxItem Content="Business Building"></ComboBoxItem>
-        </ComboBox>
-        <Rectangle HorizontalAlignment="Left" Height="84" Margin="266,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="318"/>
+
+
+        <Rectangle HorizontalAlignment="Left" Height="84" Margin="266,151,0,0" Stroke="Black" VerticalAlignment="Top" Width="350"/>
         <Label x:Name="label1" Content="Rooms" HorizontalAlignment="Left" Margin="266,162,0,0" VerticalAlignment="Top" Width="87"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="268,193,0,0" Text="Enter Room" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
+        <TextBox x:Name="textBoxrname" HorizontalAlignment="Left" Margin="268,193,0,0" Text="Enter Room" TextWrapping="Wrap" VerticalAlignment="Top" Width="107"/>
         <Label x:Name="label2" Content="Capacity" HorizontalAlignment="Left" Margin="421,162,0,0" VerticalAlignment="Top" Width="85"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="421,193,0,239" Text="Enter Capacity" TextWrapping="Wrap" Width="117"/>
+        <TextBox x:Name="textBox1capacity" HorizontalAlignment="Left" Margin="421,193,0,239" Text="Enter Capacity" TextWrapping="Wrap" Width="117"/>
         <Button x:Name="btnSave" Content="save" 
                 Margin="564,269,131,153" 
-                Background="Blue" Foreground="White"/>
+                Background="Blue" Foreground="White" Click="btnSave_Click"/>
         <Image x:Name="image" Source="/Resources/green-tics.png" HorizontalAlignment="Left" Height="29" 
                Margin="514,275,0,0" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.529,0.345"/>
+        <ComboBox x:Name="comboBoxcenter" HorizontalAlignment="Left" Margin="464,102,0,0" VerticalAlignment="Top" Width="101" ItemsSource="{Binding CenterNameList}" SelectionChanged="comboBox1_SelectionChanged"/>
 
     </Grid>
 </UserControl>
