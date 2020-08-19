@@ -49,5 +49,14 @@ namespace TimetableManager.EntityFramework.Services
                                 .Include(l => l.Level)
                                 .ToListAsync();
         }
+
+        public async Task<int> DeleteLecturer(int id)
+        {
+            var lecturer =  _context.Lecturers.Where(e => e.EmployeeId == id).First();
+
+            _context.Lecturers.Remove(lecturer);
+
+            return await _context.SaveChangesAsync();
+        }
     }
 }
