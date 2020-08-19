@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetableManager.EntityFramework;
 
 namespace TimetableManager.EntityFramework.Migrations
 {
     [DbContext(typeof(TimetableManagerDbContext))]
-    partial class TimetableManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819185602_GroupNumberMigration")]
+    partial class GroupNumberMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,21 +268,6 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.HasKey("ProgrammeId");
 
                     b.ToTable("Programmes");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.SubGroupNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SubGroupNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubGroupNumbers");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Tag", b =>
