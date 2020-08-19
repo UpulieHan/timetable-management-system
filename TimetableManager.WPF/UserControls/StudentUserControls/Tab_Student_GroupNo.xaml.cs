@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimetableManager.Domain.Models;
+using TimetableManager.EntityFramework.Services;
 
 namespace TimetableManager.WPF.UserControls.StudentUserControls
 {
@@ -18,9 +22,42 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
     /// </summary>
     public partial class Tab_Student_GroupNo : UserControl
     {
+        GroupNumber groupNumber = new GroupNumber();
+        public ObservableCollection<GroupNumber> GroupNumberDataList { get; private set; }
+        public List<GroupNumber> GroupNumberList { get; private set; }
         public Tab_Student_GroupNo()
         {
             InitializeComponent();
+            this.DataContext = this;
+            GroupNumberDataList = new ObservableCollection<GroupNumber>();
+            _ = this.load();
+        }
+        public async Task load()
+        {
+            GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+            GroupNumberList = await groupNumberDataService.GetGroupNumbers();
+            GroupNumberList.ForEach(e =>
+            {
+                GroupNumber l = new GroupNumber();
+                l.Id = e.Id;
+                l.GroupNum = e.GroupNum;
+                GroupNumberDataList.Add(l);
+            });
+
+        }
+
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+            if (textBoxgrpNo.Text != "")
+            {
+                groupNumber.GroupNum = textBoxgrpNo.Text;
+                await groupNumberDataService.AddGroupNumber(groupNumber);
+            }
+            else
+            {
+                MessageBox.Show("Insert a Group Number!!");
+            }
         }
     }
 }
