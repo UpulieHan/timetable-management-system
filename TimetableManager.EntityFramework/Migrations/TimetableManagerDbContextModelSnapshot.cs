@@ -81,15 +81,10 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.Property<string>("DayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DaysAndHoursId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsSelected")
                         .HasColumnType("bit");
 
                     b.HasKey("DayId");
-
-                    b.HasIndex("DaysAndHoursId");
 
                     b.ToTable("Days");
 
@@ -347,6 +342,7 @@ namespace TimetableManager.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("ProgrammeFullName")
                         .HasColumnType("nvarchar(max)");
 
@@ -356,6 +352,34 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.HasKey("ProgrammeId");
 
                     b.ToTable("Programmes");
+                });
+
+            modelBuilder.Entity("TimetableManager.Domain.Models.Room", b =>
+                {
+                    b.Property<int>("RoomId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BuildingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CenterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoomName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoomId");
+
+                    b.HasIndex("BuildingId");
+
+                    b.HasIndex("CenterId");
+
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.SubGroupNumber", b =>
@@ -407,7 +431,6 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.HasKey("YsId");
 
                     b.ToTable("Year_Semesters");
-
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Building", b =>
@@ -415,13 +438,6 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.HasOne("TimetableManager.Domain.Models.Center", "Center")
                         .WithMany("Buildings")
                         .HasForeignKey("CenterId");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Day", b =>
-                {
-                    b.HasOne("TimetableManager.Domain.Models.DaysAndHours", null)
-                        .WithMany("DayList")
-                        .HasForeignKey("DaysAndHoursId");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Department", b =>
