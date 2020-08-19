@@ -30,29 +30,15 @@
         <Label Content="Building" Grid.Column="0" Grid.Row="5" />
         <Label Content="Level" Grid.Column="0" Grid.Row="6" />
         <Label Content="Rank" Grid.Column="0" Grid.Row="7" />
-        <TextBox Grid.Column="1" Grid.Row="0" />
-        <TextBox Grid.Column="1" Grid.Row="1" />
-        <ComboBox x:Name="FacutlyComboBox" Grid.Column="1" Grid.Row="2">
-            <ComboBoxItem Content="Computing"></ComboBoxItem>
-            <ComboBoxItem Content="Engineering"></ComboBoxItem>
-            <ComboBoxItem Content="Business Studies"></ComboBoxItem>
-        </ComboBox>
-        <ComboBox x:Name="DepartmentComboBox" Grid.Column="1" Grid.Row="3">
-            
-        </ComboBox>
-        <ComboBox x:Name="CenterComboBox" Grid.Column="1" Grid.Row="4">
-            <ComboBoxItem Content="Malabe" />
-            <ComboBoxItem Content="Matara" />
-            <ComboBoxItem Content="Kandy" />
-        </ComboBox>
-        <ComboBox x:Name="BuildingComboBox" Grid.Column="1" Grid.Row="5">
-            
-        </ComboBox>
-        <ComboBox x:Name="LevelComboBox" Grid.Column="1" Grid.Row="6">
-            <ComboBoxItem Content="Professor"/>
-            <ComboBoxItem Content="Assistant Professor" />
-        </ComboBox>
-        <TextBox Grid.Column="1" Grid.Row="7" IsEnabled="False"  />
-        <Button Grid.Column="1" Grid.Row="8" Content="Save"/>
+        <TextBox x:Name="EmployeeNameTextBox" Grid.Column="1" Grid.Row="0" />
+        <TextBox x:Name="EmployeeIdTextBox" Grid.Column="1" Grid.Row="1" PreviewTextInput="EmployeeIdTextBox_PreviewTextInput" />
+        <ComboBox x:Name="FacutlyComboBox" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding FacultyNameList}" SelectionChanged="FacutlyComboBox_SelectionChanged" />
+        <ComboBox x:Name="DepartmentComboBox" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding DepartmentNameList}" />
+        <ComboBox x:Name="CenterComboBox" Grid.Column="1" Grid.Row="4" ItemsSource="{Binding CenterNameList}" SelectionChanged="CenterComboBox_SelectionChanged" />
+        <ComboBox x:Name="BuildingComboBox" Grid.Column="1" Grid.Row="5" ItemsSource="{Binding BuildingNameList}" />
+        <ComboBox x:Name="LevelComboBox" Grid.Column="1" Grid.Row="6" ItemsSource="{Binding LevelNameList}" SelectionChanged="LevelComboBox_SelectionChanged" />
+
+        <TextBox x:Name="RankTextBox" Grid.Column="1" Grid.Row="7" IsEnabled="False"  />
+        <Button x:Name="SaveButton" Grid.Column="1" Grid.Row="8" Content="Save" Click="SaveButton_Click"/>
     </Grid>
 </UserControl>

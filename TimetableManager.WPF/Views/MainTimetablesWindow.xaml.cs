@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -11,27 +10,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TimetableManager.Domain.Models;
-using TimetableManager.EntityFramework.Services;
 
-namespace TimetableManager.WPF.UserControls.LocationUserControls
+namespace TimetableManager.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for Tab_Locations_addRooms.xaml
+    /// Interaction logic for MainTimetablesWindow.xaml
     /// </summary>
-    public partial class Tab_Locations_addRooms : UserControl
+    public partial class MainTimetablesWindow : Window
     {
-
-      
-
-        public Tab_Locations_addRooms()
+        public MainTimetablesWindow()
         {
             InitializeComponent();
-          
-
-           
         }
-
-        
     }
 }
