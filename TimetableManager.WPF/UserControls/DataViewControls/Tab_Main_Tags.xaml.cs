@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
-using TimetableManager.Domain.Services;
 using TimetableManager.EntityFramework.Services;
 
 namespace TimetableManager.WPF.Controls
@@ -21,30 +22,42 @@ namespace TimetableManager.WPF.Controls
     /// </summary>
     public partial class Tab_Main_Tags : UserControl
     {
+
         Tag tag = new Tag();
+        public ObservableCollection<Tag> TagDataList { get; private set; }
+        public List<Tag> TagList { get; private set; }
         public Tab_Main_Tags()
         {
             InitializeComponent();
-            List<Tag> users = new List<Tag>();
-            users.Add(new Tag() { Id = 1, TagName = "John Doe"});
-            users.Add(new Tag() { Id = 2, TagName = "Jane Doe"});
-            users.Add(new Tag() { Id = 3, TagName = "Sammy Doe"});
-
-            dataGrid.ItemsSource = users;
+            this.DataContext = this;
+           TagDataList = new ObservableCollection<Tag>();
+            _ = this.load();
         }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            IDataService<Tag> TagDataService = new GenericDataService<Tag>(new EntityFramework.TimetableManagerDbContextFactory());
-            if (textBoxtag.Text == "")
-            {
-                MessageBox.Show("Plese Enter a tag!..", "Error!", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
+            var tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
+            if (textBoxtag.Text != "")
             {
                 tag.TagName = textBoxtag.Text;
-                TagDataService.Create(tag);
+                await tagDataService.AddTag(tag);
             }
+            else 
+            {
+                MessageBox.Show("Insert a Tag!!");
+            }
+        }
+        public async Task load()
+        {
+            TagDataService tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
+            TagList = await tagDataService.GetTags();
+            TagList.ForEach(e =>
+            {
+                Tag l = new Tag();
+                l.TagId = e.TagId;
+                l.TagName = e.TagName;
+                TagDataList.Add(l);
+            });
+
         }
 
         

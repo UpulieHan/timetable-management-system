@@ -12,7 +12,29 @@
         <TextBox x:Name="textBoxtag" HorizontalAlignment="Left" Margin="340,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="27"/>
         <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="525,70,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click"/>
         <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="466,73,304,341"/>
-        <DataGrid x:Name="dataGrid" Margin="87,151,100,76" />
+
+        <DataGrid x:Name="dataGridtag" Margin="55,134,132,93" AutoGenerateColumns="False"  ItemsSource="{Binding TagDataList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding TagId}" Width="150"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding TagName}" Width="300"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Action"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnupdate" Content="update" Width="100"/>
+                                <Button x:Name="btndelete" Content="delete" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        
+        </DataGrid>
 
     </Grid>
 </UserControl>
