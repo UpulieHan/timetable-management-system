@@ -7,27 +7,56 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="500"/>
-        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,55,0,0" Stroke="Black" VerticalAlignment="Top" Width="500"/>
+        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,55,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
         <Label x:Name="labelYearSemester" Content="Select Year And Semester" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
         <Label x:Name="labelShortNameYearSemester" Content="Short Name for Year And Semester" HorizontalAlignment="Left" Margin="156,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
-        <ComboBox x:Name="comboBoxYear" HorizontalAlignment="Left" Margin="355,18,0,0" VerticalAlignment="Top"
-                  Width="120" IsEditable="True" IsReadOnly="True" 
+        <ComboBox x:Name="comboBoxYear" HorizontalAlignment="Left" Margin="400,18,0,0" VerticalAlignment="Top"
+                  Width="150" IsEditable="True" IsReadOnly="True" 
                   Text="-Select Year-" SelectionChanged="comboBoxYear_SelectionChanged"
                   SelectedValuePath="Content">
             <ComboBoxItem Content="Year 1"></ComboBoxItem>
             <ComboBoxItem Content="Year 2"></ComboBoxItem>
             <ComboBoxItem Content="Year 3"></ComboBoxItem>
             <ComboBoxItem Content="Year 4"></ComboBoxItem>
+            <ComboBoxItem Content="Year 5"></ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="comboBoxSemester" HorizontalAlignment="Left" Margin="480,18,0,0" VerticalAlignment="Top" Width="160" IsEditable="True" IsReadOnly="True" Text="-Select Semester-" SelectionChanged="comboBoxSemester_SelectionChanged" SelectedValuePath="Content">
+        <ComboBox x:Name="comboBoxSemester" HorizontalAlignment="Left" Margin="560,18,0,0" VerticalAlignment="Top" Width="180" IsEditable="True" IsReadOnly="True" Text="-Select Semester-" SelectionChanged="comboBoxSemester_SelectionChanged" SelectedValuePath="Content">
             <ComboBoxItem Content="Semester 1"></ComboBoxItem>
             <ComboBoxItem Content="Semester 2"></ComboBoxItem>
-            <ComboBoxItem Content="Semester 3"></ComboBoxItem>
-            <ComboBoxItem Content="Semester 4"></ComboBoxItem>
         </ComboBox>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="425,62,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="27"/>
-        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="525,132,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White"/>
-        <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="456,137,294,285"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="480,62,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="27"/>
+        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="675,132,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click_1"/>
+        <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="350,137,294,285"/>
+
+        <DataGrid x:Name="dataGridYs" Margin="55,200,132,93" AutoGenerateColumns="False"  ItemsSource="{Binding YsDataList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding YsId}" Width="80"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding YsYear}" Width="250"/>
+                <DataGridTextColumn Header="Semester" Binding="{Binding YsSemester}" Width="250"/>
+                <DataGridTextColumn Header="ShortName" Binding="{Binding YsShortName}" Width="250"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Action"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnupdate" Content="update" Width="100"/>
+                                <Button x:Name="btndelete" Content="delete" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+
+
     </Grid>
+
+   
 </UserControl>

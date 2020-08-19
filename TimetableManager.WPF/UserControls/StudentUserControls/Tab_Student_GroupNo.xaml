@@ -7,24 +7,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
-        <Label x:Name="labelGrpNo" Content="Select group Number" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
-        <ComboBox x:Name="comboBoxGrpNo" HorizontalAlignment="Left" Margin="355,18,0,0" VerticalAlignment="Top"
-                  Width="210" IsEditable="True" IsReadOnly="True" 
-                  Text="-Select group Number-"
-                  SelectedValuePath="Content">
-                    <ComboBoxItem Content="01"></ComboBoxItem>
-                    <ComboBoxItem Content="02"></ComboBoxItem>
-                    <ComboBoxItem Content="03"></ComboBoxItem>
-                    <ComboBoxItem Content="04"></ComboBoxItem>
-                    <ComboBoxItem Content="05"></ComboBoxItem>
-                    <ComboBoxItem Content="06"></ComboBoxItem>
-                    <ComboBoxItem Content="07"></ComboBoxItem>
-                    <ComboBoxItem Content="08"></ComboBoxItem>
-                    <ComboBoxItem Content="09"></ComboBoxItem>
-                    <ComboBoxItem Content="10"></ComboBoxItem>
-        </ComboBox>
-        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="480,68,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White"/>
-        <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="400,76,294,285"/>
+        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+        <Label x:Name="labelGrpNo" Content="Enter group Number" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
+        <TextBox x:Name="textBoxgrpNo" HorizontalAlignment="Left" Margin="400,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Height="27"/>
+        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="650,68,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click"/>
+        <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="550,76,294,285"/>
+
+        <DataGrid x:Name="dataGridgrpNo" Margin="55,134,132,93" AutoGenerateColumns="False"  ItemsSource="{Binding GroupNumberDataList}" Width="700">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="200"/>
+                <DataGridTextColumn Header="Group Number" Binding="{Binding GroupNum}" Width="285"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Action"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnupdate" Content="update" Width="100"/>
+                                <Button x:Name="btndelete" Content="delete" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+
     </Grid>
 </UserControl>

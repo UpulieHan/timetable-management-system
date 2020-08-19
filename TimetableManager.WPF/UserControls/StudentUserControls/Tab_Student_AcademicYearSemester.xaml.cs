@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimetableManager.Domain.Models;
+using TimetableManager.EntityFramework.Services;
 
 namespace TimetableManager.WPF.UserControls.StudentUserControls
 {
@@ -22,9 +26,31 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         string Semester;
         string YearShortname;
         string SemesterShortname;
+        Year_Semester year_Semester = new Year_Semester();
+        public ObservableCollection<Year_Semester> YsDataList { get; private set; }
+        public List<Year_Semester> YsList { get; private set; }
         public Tab_Student_AcademicYearSemester()
         {
             InitializeComponent();
+            this.DataContext = this;
+            YsDataList = new ObservableCollection<Year_Semester>();
+            _ = this.load();
+
+        }
+        public async Task load()
+        {
+            Year_SemesterDataService year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+            YsList = await year_SemesterDataService.GetYs();
+            YsList.ForEach(e =>
+            {
+                Year_Semester l = new Year_Semester();
+                l.YsId = e.YsId;
+                l.YsYear = e.YsYear;
+                l.YsSemester = e.YsSemester;
+                l.YsShortName = e.YsShortName;
+                YsDataList.Add(l);
+            });
+
         }
 
         private void comboBoxYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,6 +73,10 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             {
                 YearShortname = "Y4";
             }
+            if (Year.Equals("Year 5"))
+            {
+                YearShortname = "Y5";
+            }
             textBox.Text = YearShortname + SemesterShortname;
 
 
@@ -64,17 +94,24 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             {
                 SemesterShortname = "S2";
             }
-            if (Semester.Equals("Semester 3"))
-            {
-                SemesterShortname = "S3";
-            }
-            if (Semester.Equals("Semester 4"))
-            {
-                SemesterShortname = "S4";
-            }
+           
             textBox.Text = YearShortname + SemesterShortname;
 
         }
-
+        private async void  btnSave_Click_1(object sender, RoutedEventArgs e)
+        {
+            var year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+            if (textBox.Text != "")
+            {
+                year_Semester.YsYear = Year;
+                year_Semester.YsSemester = Semester;
+                year_Semester.YsShortName = YearShortname + SemesterShortname;
+                await year_SemesterDataService.AddYs(year_Semester);
+            }
+            else
+            {
+                MessageBox.Show("fill all fields!!");
+            }
+        }
     }
 }
