@@ -9,7 +9,6 @@
         public string CenterName { get; set; }
         public string BuildingName { get; set; }
         public string LevelName { get; set; }
-        public string Level { get; set; }
         public float Rank { get; set; }
     }
 }
