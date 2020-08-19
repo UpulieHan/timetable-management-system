@@ -9,7 +9,6 @@ namespace TimetableManager.Domain.Models
     {
         public int Id { get; set; }
         public int NoOfDays { get; set; }
-        public ObservableCollection<Day> DayList { get; set; }
         public int Hours { get; set; }
         public int Mins { get; set; }
         public int TimeSlot { get; set; }

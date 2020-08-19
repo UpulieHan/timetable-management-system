@@ -152,7 +152,6 @@ namespace TimetableManager.WPF.Controls
                         daysAndHours.Mins = mins;
                         daysAndHours.TimeSlot = timeSlot;
 
-                        //timetableManagerDbContext.DaysAndHours.RemoveRange();
                         timetableManagerDbContext.DaysAndHours.Update(daysAndHours);
                     }
                     else

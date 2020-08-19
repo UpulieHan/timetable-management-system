@@ -18,7 +18,6 @@ namespace TimetableManager.EntityFramework.Services
         }
         public async Task<List<DaysAndHours>> GetDaysAndHoursAsync()
         {
-            //shouldn't this contain the DaysList?
             return await _context.DaysAndHours.ToListAsync();
         }
     }
