@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20200813190823_add-sample-level-data.Designer.cs" />
     <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.cs" />
     <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.Designer.cs" />
+    <Compile Remove="Migrations\20200818181956_TagMigration.cs" />
+    <Compile Remove="Migrations\20200818181956_TagMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

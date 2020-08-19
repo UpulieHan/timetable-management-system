@@ -7,21 +7,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
-        <Label x:Name="labelSubGrpNo" Content="Select Sub-group Number" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
-        <ComboBox x:Name="comboBoxSubGrpNo" HorizontalAlignment="Left" Margin="355,18,0,0" VerticalAlignment="Top"
-                  Width="230" IsEditable="True" IsReadOnly="True" 
-                  Text="-Select sub group Number-"
-                  SelectedValuePath="Content">
-            <ComboBoxItem Content="1"></ComboBoxItem>
-            <ComboBoxItem Content="2"></ComboBoxItem>
-            <ComboBoxItem Content="3"></ComboBoxItem>
-            <ComboBoxItem Content="4"></ComboBoxItem>
-            <ComboBoxItem Content="5"></ComboBoxItem>
-            <ComboBoxItem Content="6"></ComboBoxItem>
-        </ComboBox>
-        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="480,68,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="40" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+        <Label x:Name="labelSubGrpNo" Content="Enter Sub-group Number" HorizontalAlignment="Left" Margin="156,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
+        <TextBox x:Name="textBoxsubgrpNo" HorizontalAlignment="Left" Margin="400,16,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="330" Height="27"/>
+        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="600,68,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click"/>
         <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="400,76,294,285"/>
+
+        <DataGrid x:Name="dataGridsubgrpNo" Margin="55,134,132,93" AutoGenerateColumns="False"  ItemsSource="{Binding SubGroupNumberDataList}" Width="700">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="200"/>
+                <DataGridTextColumn Header="Sub Group Number" Binding="{Binding SubGroupNum}" Width="285"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Action"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnupdate" Content="update" Width="100"/>
+                                <Button x:Name="btndelete" Content="delete" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
 
     </Grid>
 </UserControl>

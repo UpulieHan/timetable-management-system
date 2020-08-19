@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetableManager.EntityFramework;
 
 namespace TimetableManager.EntityFramework.Migrations
 {
     [DbContext(typeof(TimetableManagerDbContext))]
-    partial class TimetableManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819182101_ProgrammeMigration")]
+    partial class ProgrammeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,97 +73,6 @@ namespace TimetableManager.EntityFramework.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TimetableManager.Domain.Models.Day", b =>
-                {
-                    b.Property<int>("DayId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DaysAndHoursId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("bit");
-
-                    b.HasKey("DayId");
-
-                    b.HasIndex("DaysAndHoursId");
-
-                    b.ToTable("Days");
-
-                    b.HasData(
-                        new
-                        {
-                            DayId = 1,
-                            DayName = "Monday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 2,
-                            DayName = "Tuesday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 3,
-                            DayName = "Wednesday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 4,
-                            DayName = "Thursday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 5,
-                            DayName = "Friday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 6,
-                            DayName = "Saturday",
-                            IsSelected = false
-                        },
-                        new
-                        {
-                            DayId = 7,
-                            DayName = "Sunday",
-                            IsSelected = false
-                        });
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.DaysAndHours", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Hours")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Mins")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NoOfDays")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeSlot")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DaysAndHours");
-                });
-
             modelBuilder.Entity("TimetableManager.Domain.Models.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
@@ -212,21 +123,6 @@ namespace TimetableManager.EntityFramework.Migrations
                             FacultyId = 3,
                             FacultyName = "Business"
                         });
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.GroupNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("GroupNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupNumbers");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Lecturer", b =>
@@ -359,21 +255,6 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.ToTable("Programmes");
                 });
 
-            modelBuilder.Entity("TimetableManager.Domain.Models.SubGroupNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SubGroupNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubGroupNumbers");
-                });
-
             modelBuilder.Entity("TimetableManager.Domain.Models.Tag", b =>
                 {
                     b.Property<int>("TagId")
@@ -415,13 +296,6 @@ namespace TimetableManager.EntityFramework.Migrations
                     b.HasOne("TimetableManager.Domain.Models.Center", "Center")
                         .WithMany("Buildings")
                         .HasForeignKey("CenterId");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Day", b =>
-                {
-                    b.HasOne("TimetableManager.Domain.Models.DaysAndHours", null)
-                        .WithMany("DayList")
-                        .HasForeignKey("DaysAndHoursId");
                 });
 
             modelBuilder.Entity("TimetableManager.Domain.Models.Department", b =>

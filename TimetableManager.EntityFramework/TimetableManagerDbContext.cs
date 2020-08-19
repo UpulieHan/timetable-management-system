@@ -14,6 +14,11 @@ namespace TimetableManager.EntityFramework
         public DbSet<Center> Centers { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Year_Semester> Year_Semesters { get; set; }
+        public DbSet<Programme> Programmes { get; set; }
+        public DbSet<GroupNumber> GroupNumbers { get; set; }
+        public DbSet<SubGroupNumber> SubGroupNumbers { get; set; }
 
         //upulie's
         public DbSet<Day> Days { get; set; }
