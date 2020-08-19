@@ -7,15 +7,18 @@ using TimetableManager.Domain.Models;
 
 namespace TimetableManager.EntityFramework.Services
 {
-    public class LevelDataService : IDataService
+    public class LevelDataService
     {
-        public LevelDataService(TimetableManagerDbContext context) : base(context)
+        private readonly TimetableManagerDbContext _context;
+
+        public LevelDataService(TimetableManagerDbContext context)
         {
+            _context = context;
         }
 
         public async Task<List<Level>> GetLevelsAsync()
         {
-            return await base._context.Levels.ToListAsync();
+            return await _context.Levels.ToListAsync();
         }
     }
 }
