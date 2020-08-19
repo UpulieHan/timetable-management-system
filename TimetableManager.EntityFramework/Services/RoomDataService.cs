@@ -22,7 +22,7 @@ namespace TimetableManager.EntityFramework.Services
         public Task<int> AddRooms(Room rooms, string cName, string buildName)
         {
 
-            var center = _context.Centers.Include(e => e.Rooms).Single(e => e.CenterName == cName);
+           var center = _context.Centers.Include(e => e.Rooms).Single(e => e.CenterName == cName);
             center.Rooms.Add(rooms);
 
             var building = _context.Buildings.Include(e => e.Rooms).Single(e => e.BuildingName == buildName);

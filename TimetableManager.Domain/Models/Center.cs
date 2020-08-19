@@ -10,7 +10,6 @@ namespace TimetableManager.Domain.Models
         public string CenterName { get; set; }
         public List<Building> Buildings { get; set; }
         public List<Lecturer> Lecturers { get; set; }
-
         public List<Room> Rooms { get; set; }
     }
 }

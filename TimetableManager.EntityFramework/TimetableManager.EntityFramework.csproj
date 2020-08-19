@@ -21,6 +21,10 @@
     <Compile Remove="Migrations\20200813190823_add-sample-level-data.Designer.cs" />
     <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.cs" />
     <Compile Remove="Migrations\20200813193816_add-sample-faculty-data.Designer.cs" />
+    <Compile Remove="Migrations\20200814051720_sqlserver-new.cs" />
+    <Compile Remove="Migrations\20200814051720_sqlserver-new.Designer.cs" />
+    <Compile Remove="Migrations\20200819175142_roomscap.cs" />
+    <Compile Remove="Migrations\20200819175142_roomscap.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -85,8 +85,8 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
             room.Capacity = Int32.Parse(textBox1capacity.Text.Trim());
             room.RoomName = textBoxrname.Text.Trim();
 
-            string builName = comboBoxbuild.SelectedItem.ToString();
-            string CName = comboBoxcenter.SelectedItem.ToString();
+            string CName = comboBoxbuild.SelectedItem.ToString();
+            string builName = comboBoxcenter.SelectedItem.ToString();
 
             RoomDataService roomDataService = new RoomDataService(new EntityFramework.TimetableManagerDbContext());
 
