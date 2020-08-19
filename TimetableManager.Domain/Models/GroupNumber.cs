@@ -4,9 +4,9 @@ using System.Text;
 
 namespace TimetableManager.Domain.Models
 {
-    public class Tag
+    public class GroupNumber
     {
-        public int TagId { get; set; }
-        public string TagName { get; set; }
+        public int Id { get; set; }
+        public string GroupNum { get; set; }
     }
 }
