@@ -27,10 +27,7 @@ namespace TimetableManager.EntityFramework.Services
             return _context.SaveChangesAsync();
         }
 
-       /* public async Task<List<Building>> GetBuildingsAsync()
-        {
-            return await _context.Buildings.Include(e => e.Center).ToListAsync();
-        }*/
+       
 
     }
 }
