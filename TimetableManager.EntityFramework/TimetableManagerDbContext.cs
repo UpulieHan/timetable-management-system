@@ -15,7 +15,7 @@ namespace TimetableManager.EntityFramework
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
 
-      
+        public DbSet<Room> Rooms { get; set; }
 
         public TimetableManagerDbContext() { }
 

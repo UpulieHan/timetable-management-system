@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimetableManager.Domain.Models;
 
 namespace TimetableManager.EntityFramework.Services
 {
@@ -15,37 +18,25 @@ namespace TimetableManager.EntityFramework.Services
             _context = context;
         }
 
-       /* public async Task<bool> AddRooms(Rooms rooms)
+
+        public Task<int> AddRooms(Room rooms, string cName, string buildName)
         {
-            _context.Faculties.Add(rooms);
-            int resRoom = await _context.SaveChangesAsync();
 
-            if (resRoom > 0)
-            {
-                return true;
-            }
+            var center = _context.Centers.Include(e => e.Rooms).Single(e => e.CenterName == cName);
+            center.Rooms.Add(rooms);
 
-            return false;
+            var building = _context.Buildings.Include(e => e.Rooms).Single(e => e.BuildingName == buildName);
+            building.Rooms.Add(rooms);
+
+            return _context.SaveChangesAsync();
         }
 
-        public async Task<bool> AddCapacity(Rooms rooms)
-        {
-            _context.Faculties.Add(rooms);
-            int resRoom = await _context.SaveChangesAsync();
-
-            if (resRoom > 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public async Task<List<Rooms>> GetFacultiesAsync()
-        {
-            return await _context.Faculties.Include(e => e.Romes).ToListAsync();
-        }
-       */
+        
+         public async Task<List<Room>> GetRoomAsync()
+         {
+             return await _context.Rooms.Include(e => e.Center).ToListAsync();
+         }
+        
     }
 
     

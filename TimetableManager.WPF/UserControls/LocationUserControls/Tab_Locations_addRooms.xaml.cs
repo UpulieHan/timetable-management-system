@@ -80,7 +80,27 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            Room room = new Room();
 
+            room.Capacity = Int32.Parse(textBox1capacity.Text.Trim());
+            room.RoomName = textBoxrname.Text.Trim();
+
+            string builName = comboBoxbuild.SelectedItem.ToString();
+            string CName = comboBoxcenter.SelectedItem.ToString();
+
+            RoomDataService roomDataService = new RoomDataService(new EntityFramework.TimetableManagerDbContext());
+
+            roomDataService.AddRooms(room, builName, CName).ContinueWith(resultroom =>
+            {
+                if (resultroom != null)
+                {
+                    MessageBox.Show("Room and capacity Added!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
         }
     }
 }

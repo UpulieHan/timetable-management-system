@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetableManager.EntityFramework;
 
 namespace TimetableManager.EntityFramework.Migrations
 {
     [DbContext(typeof(TimetableManagerDbContext))]
-    partial class TimetableManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819175142_roomscap")]
+    partial class roomscap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
