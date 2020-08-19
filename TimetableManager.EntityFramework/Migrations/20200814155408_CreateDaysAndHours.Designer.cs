@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimetableManager.EntityFramework;
 
 namespace TimetableManager.EntityFramework.Migrations
 {
     [DbContext(typeof(TimetableManagerDbContext))]
-    partial class TimetableManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200814155408_CreateDaysAndHours")]
+    partial class CreateDaysAndHours
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,34 +328,6 @@ namespace TimetableManager.EntityFramework.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TimetableManager.Domain.Models.Room", b =>
-                {
-                    b.Property<int>("RoomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BuildingId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CenterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoomName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RoomId");
-
-                    b.HasIndex("BuildingId");
-
-                    b.HasIndex("CenterId");
-
-                    b.ToTable("Rooms");
-                });
-
             modelBuilder.Entity("TimetableManager.Domain.Models.Building", b =>
                 {
                     b.HasOne("TimetableManager.Domain.Models.Center", "Center")
@@ -378,35 +352,24 @@ namespace TimetableManager.EntityFramework.Migrations
             modelBuilder.Entity("TimetableManager.Domain.Models.Lecturer", b =>
                 {
                     b.HasOne("TimetableManager.Domain.Models.Building", "Building")
-                        .WithMany("Lecturers")
+                        .WithMany()
                         .HasForeignKey("BuildingId");
 
                     b.HasOne("TimetableManager.Domain.Models.Center", "Center")
-                        .WithMany("Lecturers")
+                        .WithMany()
                         .HasForeignKey("CenterId");
 
                     b.HasOne("TimetableManager.Domain.Models.Department", "Department")
-                        .WithMany("Lecturers")
+                        .WithMany()
                         .HasForeignKey("DepartmentId");
 
                     b.HasOne("TimetableManager.Domain.Models.Faculty", "Faculty")
-                        .WithMany("Lecturers")
+                        .WithMany()
                         .HasForeignKey("FacultyId");
 
                     b.HasOne("TimetableManager.Domain.Models.Level", "Level")
-                        .WithMany("Lecturers")
+                        .WithMany()
                         .HasForeignKey("LevelId");
-                });
-
-            modelBuilder.Entity("TimetableManager.Domain.Models.Room", b =>
-                {
-                    b.HasOne("TimetableManager.Domain.Models.Building", "Building")
-                        .WithMany("Rooms")
-                        .HasForeignKey("BuildingId");
-
-                    b.HasOne("TimetableManager.Domain.Models.Center", "Center")
-                        .WithMany("Rooms")
-                        .HasForeignKey("CenterId");
                 });
 #pragma warning restore 612, 618
         }

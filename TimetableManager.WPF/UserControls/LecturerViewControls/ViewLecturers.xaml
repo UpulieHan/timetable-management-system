@@ -7,6 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="View Lecturers" />
+        <DataGrid x:Name="LecturerDataGrid" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding LecturerDataList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" />
+                <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" />
+                <DataGridTextColumn Header="Faculty" Binding="{Binding FacultyName}" />
+                <DataGridTextColumn Header="Department" Binding="{Binding DepartmentName}" />
+                <DataGridTextColumn Header="Center" Binding="{Binding CenterName}" />
+                <DataGridTextColumn Header="Building" Binding="{Binding BuildingName}" />
+                <DataGridTextColumn Header="Level" Binding="{Binding LevelName}" />
+                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Action" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button x:Name="EditButton" Content="Edit" Grid.Column="0" Grid.Row="0" Click="EditButton_Click"></Button>
+                                <Button x:Name="DeleteButton" Content="Delete" Grid.Column="1" Grid.Row="0" Click="DeleteButton_Click"></Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

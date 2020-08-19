@@ -7,15 +7,19 @@ using TimetableManager.Domain.Models;
 namespace TimetableManager.EntityFramework
 {
     public class TimetableManagerDbContext : DbContext
-    {   
+    {
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Center> Centers { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Level> Levels { get; set; }
-
         public DbSet<Room> Rooms { get; set; }
+        
+        //upulie's
+        public DbSet<Day> Days { get; set; }
+        public DbSet<DaysAndHours> DaysAndHours { get; set; }
+
 
         public TimetableManagerDbContext() { }
 
@@ -46,6 +50,18 @@ namespace TimetableManager.EntityFramework
 
             // Add Sample Faculty Data
             modelBuilder.Entity<Faculty>().HasData(GetFacultyList());
+
+            //upulies
+            modelBuilder.Entity<Day>().HasData(GetDayList());
+
+            modelBuilder.Entity<DaysAndHours>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.NoOfDays);
+                entity.Property(e => e.Hours);
+                entity.Property(e => e.Mins);
+                entity.Property(e => e.TimeSlot);
+            });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -81,6 +97,19 @@ namespace TimetableManager.EntityFramework
                 new Faculty { FacultyId = 1, FacultyName = "Computing"},
                 new Faculty { FacultyId = 2, FacultyName = "Engineering"},
                 new Faculty { FacultyId = 3, FacultyName = "Business"}
+            };
+        }
+        private Day[] GetDayList()
+        {
+            return new Day[]
+            {
+                new Day { DayId= 1, DayName = "Monday",IsSelected = false},
+                new Day { DayId= 2, DayName = "Tuesday",IsSelected = false},
+                new Day { DayId= 3, DayName = "Wednesday",IsSelected = false},
+                new Day { DayId= 4, DayName = "Thursday",IsSelected = false},
+                new Day { DayId= 5, DayName = "Friday",IsSelected = false},
+                new Day { DayId= 6, DayName = "Saturday",IsSelected = false},
+                new Day { DayId= 7, DayName = "Sunday",IsSelected = false}
             };
         }
     }
