@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TimetableManager.Domain.Models;
@@ -15,26 +16,21 @@ namespace TimetableManager.EntityFramework.Services
         public BuildingDataService(TimetableManagerDbContext context)
         {
             _context = context;
-        } 
-
-        public async Task<bool> AddBuilding(Building building)
-        {
-            _context.Buildings.Add(building);
-            int resultbuilding = await _context.SaveChangesAsync();
-
-            if (resultbuilding > 0)
-            {
-                return true;
-            }
-
-            return false;
-
         }
 
-        public async Task<List<Building>> GetBuildingsAsync()
+        public Task<int> AddBuilding(Building Building, string cName)
+        {
+            
+            var center = _context.Centers.Include(e => e.Buildings).Single(e => e.CenterName == cName);
+            center.Buildings.Add(Building);
+
+            return _context.SaveChangesAsync();
+        }
+
+       /* public async Task<List<Building>> GetBuildingsAsync()
         {
             return await _context.Buildings.Include(e => e.Center).ToListAsync();
-        }
+        }*/
 
     }
 }
