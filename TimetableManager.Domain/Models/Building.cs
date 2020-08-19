@@ -9,5 +9,6 @@ namespace TimetableManager.Domain.Models
         public int BuildingId { get; set; }
         public string BuildingName { get; set; }
         public Center Center { get; set; }
+        public List<Lecturer> Lecturers { get; set; }
     }
 }

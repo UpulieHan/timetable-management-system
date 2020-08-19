@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,17 +33,17 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
 
             this.DataContext = this;
 
-            this.Dispatcher.Invoke(
+            _ = this.Dispatcher.Invoke(
                 DispatcherPriority.ApplicationIdle,
                 new Action(() =>
                 {
 
-                    this.SetCenterList();
+                    _ = this.SetCenterList();
 
                 }));
         }
 
-        private async void SetCenterList()
+        private async Task SetCenterList()
         {
             CenterDataService centerDataService = new CenterDataService(new EntityFramework.TimetableManagerDbContext());
 
@@ -54,9 +55,27 @@ namespace TimetableManager.WPF.UserControls.LocationUserControls
             });
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void savebuildingbutton_Click(object sender, RoutedEventArgs e)
         {
+            Building building = new Building();
+           
+            building.BuildingName = textBoxBuilding.Text.Trim();
 
+            string centerName = CenComboBox.SelectedItem.ToString();
+
+            BuildingDataService buildingDataService = new BuildingDataService(new EntityFramework.TimetableManagerDbContext());
+
+            buildingDataService.AddBuilding(building, centerName).ContinueWith(result =>
+            {
+                if (result != null)
+                {
+                    MessageBox.Show("Building Added!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
         }
     }
 }
