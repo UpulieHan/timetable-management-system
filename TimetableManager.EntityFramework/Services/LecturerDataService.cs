@@ -58,5 +58,38 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
+
+        public async Task<Lecturer> GetLectureById(int id)
+        {
+            return await _context.Lecturers.Where(e => e.EmployeeId == id)
+                                .Include(e => e.Faculty)
+                                .Include(e => e.Department)
+                                .Include(e => e.Center)
+                                .Include(e => e.Building)
+                                .Include(e => e.Level)
+                                .FirstAsync();
+        }
+
+        public async Task<int> UpdateLecturer(Lecturer lecturer, string fName, string dName, string cName, string bName, string lName)
+        {
+            await this.DeleteLecturer(lecturer.EmployeeId);
+
+            var faculty = _context.Faculties.Include(e => e.Lecturers).Single(e => e.FacultyName == fName);
+            faculty.Lecturers.Add(lecturer);
+
+            var department = _context.Departments.Include(e => e.Lecturers).Single(e => e.DepartmentName == dName);
+            department.Lecturers.Add(lecturer);
+
+            var center = _context.Centers.Include(e => e.Lecturers).Single(e => e.CenterName == cName);
+            center.Lecturers.Add(lecturer);
+
+            var building = _context.Buildings.Include(e => e.Lecturers).Single(e => e.BuildingName == bName);
+            building.Lecturers.Add(lecturer);
+
+            var level = _context.Levels.Include(e => e.Lecturers).Single(e => e.LevelName == lName);
+            level.Lecturers.Add(lecturer);
+
+            return await _context.SaveChangesAsync();
+        }
     }
 }
