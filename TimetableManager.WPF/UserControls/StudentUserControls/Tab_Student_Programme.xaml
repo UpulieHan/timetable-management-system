@@ -17,7 +17,7 @@
         <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="600,120,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click"/>
         <Image Source="/Resources/save_tick.png"  Grid.Column="0" Width="30" Margin="456,125,294,285"/>
 
-        <DataGrid x:Name="dataGridprogramme" Margin="103,175,84,52" AutoGenerateColumns="False"  ItemsSource="{Binding programmeDataList}">
+        <DataGrid x:Name="dataGridprogramme" Margin="103,175,84,52" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True"  ItemsSource="{Binding programmeDataList}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding ProgrammeId}" Width="100"/>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding ProgrammeFullName}" Width="300"/>
@@ -25,15 +25,22 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="Action"/>
+                            <TextBlock Text="Action" />
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="btnupdate" Content="update" Width="100"/>
-                                <Button x:Name="btndelete" Content="delete" Width="100"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Button x:Name="EditButton" Content="Edit" Grid.Column="0" Grid.Row="0" Click="EditButton_Click" Width="100"></Button>
+                                <Button x:Name="DeleteButton" Content="Delete" Grid.Column="1" Grid.Row="0" Click="DeleteButton_Click" Width="100"></Button>
+                            </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TimetableManager.Domain.Models;
@@ -31,6 +32,13 @@ namespace TimetableManager.EntityFramework.Services
         {
             return await _context.Programmes.ToListAsync();
         }
+        public async Task<int> DeleteProgramme(int id)
+        {
+            var p = _context.Programmes.Where(e => e.ProgrammeId == id).First();
 
+            _context.Programmes.Remove(p);
+
+            return await _context.SaveChangesAsync();
+        }
     }
 }

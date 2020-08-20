@@ -59,7 +59,26 @@ namespace TimetableManager.WPF.Controls
             });
 
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
 
-        
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Tag tag = (Tag)dataGridtag.SelectedItem;
+
+            TagDataService tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
+
+            tagDataService.DeleteTag(tag.TagId).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = TagDataList.Remove(tag);
+        }
+
+
+
     }
 }
