@@ -59,5 +59,23 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 MessageBox.Show("Insert a Group Number!!");
             }
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            GroupNumber grpno = (GroupNumber)dataGridgrpNo.SelectedItem;
+
+            GroupNumberDataService groupNumberData = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+
+            groupNumberData.DeleteGroupNumbers(grpno.Id).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = GroupNumberDataList.Remove(grpno);
+        }
     }
 }

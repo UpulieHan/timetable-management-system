@@ -59,5 +59,23 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 MessageBox.Show("Insert a Sub-Group Number!!");
             }
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            SubGroupNumber subgrpno = (SubGroupNumber)dataGridsubgrpNo.SelectedItem;
+
+            SubGroupNumberDataService groupNumberData = new SubGroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+
+            groupNumberData.DeleteSubGroupNumber(subgrpno.Id).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = SubGroupNumberDataList.Remove(subgrpno);
+        }
     }
 }
