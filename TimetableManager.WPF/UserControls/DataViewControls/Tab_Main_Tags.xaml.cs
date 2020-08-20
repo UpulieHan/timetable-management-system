@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework.Services;
+using TimetableManager.WPF.UserControls.DataViewControls;
 
 namespace TimetableManager.WPF.Controls
 {
@@ -61,7 +62,12 @@ namespace TimetableManager.WPF.Controls
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Edit button clicked");
+            Tag ys = (Tag)dataGridtag.SelectedItem;
+            Tab_Main_Tags_Update updateysWindow = new Tab_Main_Tags_Update(ys.TagId);
+            updateysWindow.Show();
+
+            // Close current main data window. Hard coded. Need to be changed
+            Application.Current.Windows[2].Close();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
