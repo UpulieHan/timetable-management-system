@@ -15,9 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework.Services;
 using TimetableManager.WPF.Controls;
+using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF.UserControls.LecturerViewControls
 {
@@ -62,7 +64,12 @@ namespace TimetableManager.WPF.UserControls.LecturerViewControls
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Edit button clicked");
+            LecturerGridModel lecturer = (LecturerGridModel)LecturerDataGrid.SelectedItem;
+            UpdateLecturerWindow updateLecturerWindow = new UpdateLecturerWindow(lecturer.EmployeeId);
+            updateLecturerWindow.Show();
+
+            // Close current main data window. Hard coded. Need to be changed
+            Application.Current.Windows[2].Close();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
