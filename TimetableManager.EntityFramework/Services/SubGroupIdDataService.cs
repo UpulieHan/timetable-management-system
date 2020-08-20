@@ -8,16 +8,16 @@ using TimetableManager.Domain.Models;
 
 namespace TimetableManager.EntityFramework.Services
 {
-    public class TagDataService
+    public class SubGroupIdDataService
     {
         private readonly TimetableManagerDbContext _context;
-        public TagDataService(TimetableManagerDbContext context)
+        public SubGroupIdDataService(TimetableManagerDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> AddTag(Tag tag)
+        public async Task<bool> AddSubGroupId(SubGroupId subGroupId)
         {
-            _context.Tags.Add(tag);
+            _context.SubGroupIds.Add(subGroupId);
             int result = await _context.SaveChangesAsync();
 
             if (result > 0)
@@ -27,15 +27,15 @@ namespace TimetableManager.EntityFramework.Services
 
             return false;
         }
-        public async Task<List<Tag>> GetTags()
+        public async Task<List<SubGroupId>> GetSubGroupId()
         {
-            return await _context.Tags.ToListAsync();
+            return await _context.SubGroupIds.ToListAsync();
         }
-        public async Task<int> DeleteTag(int id)
+        public async Task<int> DeleteSubGroupId(int id)
         {
-            var p = _context.Tags.Where(e => e.TagId == id).First();
+            var p = _context.SubGroupIds.Where(e => e.Id == id).First();
 
-            _context.Tags.Remove(p);
+            _context.SubGroupIds.Remove(p);
 
             return await _context.SaveChangesAsync();
         }

@@ -113,5 +113,23 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 MessageBox.Show("fill all fields!!");
             }
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Year_Semester ys = (Year_Semester)dataGridYs.SelectedItem;
+
+            Year_SemesterDataService year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+
+            year_SemesterDataService.DeleteYear_Semester(ys.YsId).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = YsDataList.Remove(ys);
+        }
     }
 }

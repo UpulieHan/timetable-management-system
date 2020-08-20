@@ -41,6 +41,10 @@
     <Compile Remove="Migrations\20200819192219_SubGroupNumberMigration.Designer.cs" />
     <Compile Remove="Migrations\20200819211833_ClutterFreeMigration.cs" />
     <Compile Remove="Migrations\20200819211833_ClutterFreeMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200820024610_GroupIdMigration.cs" />
+    <Compile Remove="Migrations\20200820024610_GroupIdMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200820030932_SubGroupIdMigration.cs" />
+    <Compile Remove="Migrations\20200820030932_SubGroupIdMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

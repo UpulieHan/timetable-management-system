@@ -61,5 +61,23 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 MessageBox.Show("fill all fields!!");
             }
         }
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit button clicked");
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Programme programme = (Programme)dataGridprogramme.SelectedItem;
+
+            ProgrammeDataService programmeDataService = new ProgrammeDataService(new EntityFramework.TimetableManagerDbContext());
+
+            programmeDataService.DeleteProgramme(programme.ProgrammeId).ContinueWith(result =>
+            {
+                MessageBox.Show("Deleted");
+            });
+
+            _ = programmeDataList.Remove(programme);
+        }
     }
 }
