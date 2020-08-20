@@ -61,7 +61,12 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Edit button clicked");
+            GroupNumber ys = (GroupNumber)dataGridgrpNo.SelectedItem;
+            Tab_Student_GroupNo_Update updateysWindow = new Tab_Student_GroupNo_Update(ys.Id);
+            updateysWindow.Show();
+
+            // Close current main data window. Hard coded. Need to be changed
+            Application.Current.Windows[2].Close();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
