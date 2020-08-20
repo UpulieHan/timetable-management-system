@@ -21,6 +21,21 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
         public Tab_Stat_subject()
         {
             InitializeComponent();
+            List<Sub> sub = new List<Sub>();
+
+            sub.Add(new Sub() { module = "AF", hours = 25 });
+            sub.Add(new Sub() { module = "CN", hours = 30 });
+            sub.Add(new Sub() { module = "SA", hours = 30 });
+            sub.Add(new Sub() { module = "DS", hours = 25 });
+            dataGridstd.ItemsSource = sub;
         }
+    }
+
+    internal class Sub
+    {
+        public string module { get; set; }
+
+        public int hours { get; set; }
+
     }
 }
