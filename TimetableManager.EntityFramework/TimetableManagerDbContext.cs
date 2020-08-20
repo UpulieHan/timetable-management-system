@@ -24,6 +24,8 @@ namespace TimetableManager.EntityFramework
         //upulie's
         public DbSet<Day> Days { get; set; }
         public DbSet<DaysAndHours> DaysAndHours { get; set; }
+        public DbSet<GroupId> GroupIds { get; set; }
+        public DbSet<SubGroupId> SubGroupIds { get; set; }
 
 
         public TimetableManagerDbContext() { }
