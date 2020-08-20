@@ -21,6 +21,47 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
         public Tab_Stat_lecturer()
         {
             InitializeComponent();
+            List<Lec> lec = new List<Lec>();
+
+            lec.Add(new Lec() { rank = "Prof", number =2 });
+            lec.Add(new Lec() { rank = "Senior Lec", number = 4 });
+            lec.Add(new Lec() { rank = "Hod", number = 5 });
+            lec.Add(new Lec() { rank = "Lecturer", number = 30 });
+            lec.Add(new Lec() { rank = "Assistant", number = 40 });
+            dataGrid.ItemsSource = lec;
+
         }
+
+
+       /* public class lec
+        {
+            public string rank { get; set; }
+
+            public int number { get; set; }
+
+            public string Details { get {
+
+                    return String.Format("", rank, number);
+                
+                } }
+
+        }*/
+    }
+
+    internal class Lec
+    {
+        public string rank { get; set; }
+
+        public int number { get; set; }
+
+     /*   public string Details
+        {
+            get
+            {
+
+                return String.Format( rank, number);
+
+            }
+        }*/
     }
 }
