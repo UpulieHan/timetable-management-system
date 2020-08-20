@@ -39,5 +39,15 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
+        public async Task<SubGroupNumber> GetSubGroupNoById(int id)
+        {
+            return await _context.SubGroupNumbers.Where(e => e.Id == id).FirstAsync();
+        }
+        public async Task<int> UpdateSubgroupNo(SubGroupNumber sub, int id)
+        {
+            await this.DeleteSubGroupNumber(id);
+            _context.SubGroupNumbers.Add(sub);
+            return await _context.SaveChangesAsync();
+        }
     }
 }

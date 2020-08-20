@@ -40,5 +40,15 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
+        public async Task<Year_Semester> GetYsById(int id)
+        {
+            return await _context.Year_Semesters.Where(e => e.YsId == id).FirstAsync();
+        }
+        public async Task<int> UpdateYs(Year_Semester ys,int id)
+        {
+            await this.DeleteYear_Semester(id);
+            _context.Year_Semesters.Add(ys);
+            return await _context.SaveChangesAsync();
+        }
     }
 }

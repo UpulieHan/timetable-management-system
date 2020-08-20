@@ -40,5 +40,15 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
+        public async Task<Programme> GetProgrammeById(int id)
+        {
+            return await _context.Programmes.Where(e => e.ProgrammeId == id).FirstAsync();
+        }
+        public async Task<int> UpdateProgramme(Programme programme, int id)
+        {
+            await this.DeleteProgramme(id);
+            _context.Programmes.Add(programme);
+            return await _context.SaveChangesAsync();
+        }
     }
 }
