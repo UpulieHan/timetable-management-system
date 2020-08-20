@@ -7,6 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <DataGrid x:Name="dataGridstd" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Module" Binding="{Binding module}" />
+                <DataGridTextColumn Header="Hours" Binding="{Binding hours}" />
+            </DataGrid.Columns>
+
+        </DataGrid>  
     </Grid>
 </UserControl>
