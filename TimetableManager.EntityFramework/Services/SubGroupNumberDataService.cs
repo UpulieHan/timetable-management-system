@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TimetableManager.Domain.Models;
@@ -29,6 +30,14 @@ namespace TimetableManager.EntityFramework.Services
         public async Task<List<SubGroupNumber>> GetSubGroupNumbers()
         {
             return await _context.SubGroupNumbers.ToListAsync();
+        }
+        public async Task<int> DeleteSubGroupNumber(int id)
+        {
+            var p = _context.SubGroupNumbers.Where(e => e.Id == id).First();
+
+            _context.SubGroupNumbers.Remove(p);
+
+            return await _context.SaveChangesAsync();
         }
     }
 }

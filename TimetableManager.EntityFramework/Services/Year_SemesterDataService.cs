@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TimetableManager.Domain.Models;
@@ -30,6 +31,14 @@ namespace TimetableManager.EntityFramework.Services
         public async Task<List<Year_Semester>> GetYs()
         {
             return await _context.Year_Semesters.ToListAsync();
+        }
+        public async Task<int> DeleteYear_Semester(int id)
+        {
+            var p = _context.Year_Semesters.Where(e => e.YsId == id).First();
+
+            _context.Year_Semesters.Remove(p);
+
+            return await _context.SaveChangesAsync();
         }
     }
 }
