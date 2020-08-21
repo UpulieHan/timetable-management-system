@@ -34,10 +34,21 @@ namespace TimetableManager.EntityFramework.Services
         
          public async Task<List<Room>> GetRoomAsync()
          {
-             return await _context.Rooms.Include(e => e.Center).ToListAsync();
+             return await _context.Rooms.Include(e => e.Center)
+                                        .Include(f => f.Building).ToListAsync();
          }
-        
+
+        public async Task<int> deleteRooms(int id)
+        {
+            var rr = _context.Rooms.Where(e => e.RoomId == id).First();
+
+            _context.Rooms.Remove(rr);
+
+            return await _context.SaveChangesAsync();
+        }
+
+
     }
 
-    
+
 }
