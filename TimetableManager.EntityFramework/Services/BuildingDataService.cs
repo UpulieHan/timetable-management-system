@@ -58,16 +58,8 @@ namespace TimetableManager.EntityFramework.Services
         {
             await this.deleteBuilding(building.BuildingId);
 
-            
-
-            
-
             var center = _context.Centers.Include(e => e.Buildings).Single(e => e.CenterName == cName);
             center.Buildings.Add(building);
-
-          
-
-         
 
             return await _context.SaveChangesAsync();
         }
