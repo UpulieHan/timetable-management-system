@@ -342,3 +342,6 @@ healthchecksdb
 /TimetableManager.WPF/Timetable.db-wal
 /TimetableManager.WPF/Timetable.db-shm
 /TimetableManager.WPF/Timetable.db
+/TimetableManager.EntityFramework/Timetable.db-wal
+/TimetableManager.EntityFramework/Timetable.db-shm
+/TimetableManager.EntityFramework/Timetable.db
