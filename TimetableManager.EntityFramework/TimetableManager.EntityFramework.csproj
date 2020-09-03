@@ -45,6 +45,8 @@
     <Compile Remove="Migrations\20200820024610_GroupIdMigration.Designer.cs" />
     <Compile Remove="Migrations\20200820030932_SubGroupIdMigration.cs" />
     <Compile Remove="Migrations\20200820030932_SubGroupIdMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200903052602_test.cs" />
+    <Compile Remove="Migrations\20200903052602_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
