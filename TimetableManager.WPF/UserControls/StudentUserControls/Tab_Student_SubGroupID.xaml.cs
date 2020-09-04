@@ -61,5 +61,70 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
             _ = SubGroupIdDataList.Remove(groupId);
         }
+
+        private async Task LoadDataForGenerate()
+        {
+            Year_SemesterDataService year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+            List<Year_Semester> YsList = await year_SemesterDataService.GetYs();
+            List<string> YearNameList = new List<string>();
+            YsList.ForEach(e =>
+            {
+                YearNameList.Add(e.YsShortName);
+            });
+
+            ProgrammeDataService programmeDataService = new ProgrammeDataService(new EntityFramework.TimetableManagerDbContext());
+            List<Programme> programmeList = await programmeDataService.GetProgramme();
+            List<string> ProgrammeNameList = new List<string>();
+            programmeList.ForEach(e =>
+            {
+                ProgrammeNameList.Add(e.ProgrammeShortName);
+            });
+
+            GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+            List<GroupNumber> GroupNumberList = await groupNumberDataService.GetGroupNumbers();
+            List<string> GroupNameList = new List<string>();
+            GroupNumberList.ForEach(e =>
+            {
+                GroupNameList.Add(e.GroupNum);
+            });
+
+            SubGroupNumberDataService subGroupNumberDataService = new SubGroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+            List<SubGroupNumber> SubGroupNumberList = await subGroupNumberDataService.GetSubGroupNumbers();
+            List<string> SubGroupNameList = new List<string>();
+            SubGroupNumberList.ForEach(e =>
+            {
+                SubGroupNameList.Add(e.SubGroupNum);
+            });
+
+            List<string> GeneratedList = new List<string>();
+
+            YearNameList.ForEach(y =>
+            {
+                ProgrammeNameList.ForEach(p =>
+                {
+                    GroupNameList.ForEach(g =>
+                    {
+                        SubGroupNameList.ForEach(s =>
+                        {
+                            string id = String.Concat(y, ".", p, ".", g, ".", s);
+                            GeneratedList.Add(id);
+                        });
+                    });
+                });
+            });
+
+            GeneratedList.ForEach(e =>
+            {
+                SubGroupIdDataList.Add(new SubGroupId
+                {
+                    SubGroupID = e
+                });
+            });
+        }
+
+        private void btnSubGrpIDs_Click(object sender, RoutedEventArgs e)
+        {
+            _ = this.LoadDataForGenerate();
+        }
     }
 }
