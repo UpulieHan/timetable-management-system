@@ -27,6 +27,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         string YearShortname;
         string SemesterShortname;
         Year_Semester year_Semester = new Year_Semester();
+        private bool isEditState = false;
         public ObservableCollection<Year_Semester> YsDataList { get; private set; }
         public List<Year_Semester> YsList { get; private set; }
         public Tab_Student_AcademicYearSemester()
@@ -103,24 +104,53 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             var year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
             if (textBox.Text != "")
             {
-                year_Semester.YsYear = Year;
-                year_Semester.YsSemester = Semester;
-                year_Semester.YsShortName = YearShortname + SemesterShortname;
-                await year_SemesterDataService.AddYs(year_Semester);
+                if(isEditState)
+                {
+                    isEditState = false;
+                } else
+                {
+                    Year_Semester yearSemester = new Year_Semester
+                    {
+                        YsYear = Year,
+                        YsSemester = Semester,
+                        YsShortName = YearShortname + "." + SemesterShortname
+                    };
+
+                    await year_SemesterDataService.AddYs(yearSemester);
+                }
+                
             }
             else
             {
                 MessageBox.Show("fill all fields!!");
             }
+
+            YsDataList.Clear();
+            _ = this.load();
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             Year_Semester ys = (Year_Semester)dataGridYs.SelectedItem;
-            Tab_Student_AcademicYearSemester_Update updateysWindow = new Tab_Student_AcademicYearSemester_Update(ys.YsId);
-            updateysWindow.Show();
+            //Tab_Student_AcademicYearSemester_Update updateysWindow = new Tab_Student_AcademicYearSemester_Update(ys.YsId);
+            //updateysWindow.Show();
 
             // Close current main data window. Hard coded. Need to be changed
-            Application.Current.Windows[2].Close();
+            //Application.Current.Windows[2].Close();
+
+            _ = LoadYearDataForEdit(ys.YsId);
+        }
+
+        private async Task LoadYearDataForEdit(int id)
+        {
+            Year_SemesterDataService year_SemesterData = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+
+            year_Semester = await year_SemesterData.GetYsById(id);
+
+            comboBoxYear.SelectedItem = year_Semester.YsYear;
+            comboBoxSemester.SelectedItem = year_Semester.YsSemester;
+            textBox.Text = year_Semester.YsShortName;
+
+            isEditState = true;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

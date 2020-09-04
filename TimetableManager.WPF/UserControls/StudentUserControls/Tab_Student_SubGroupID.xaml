@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <!--<Rectangle HorizontalAlignment="Left" Height="45" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
-        <Button x:Name="btnSubGrpIDs" Content="Generate Sub-Group IDs" HorizontalAlignment="Left" Margin="290,15,0,0" VerticalAlignment="Top" Height="34" Width="200" Background="Blue" Foreground="White"/>
-        -->
+        <Rectangle HorizontalAlignment="Left" Height="45" Margin="150,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="450"/>
+        <Button x:Name="btnSubGrpIDs" Content="Generate Sub-Group IDs" HorizontalAlignment="Left" Margin="290,15,0,0" VerticalAlignment="Top" Height="34" Width="200" Background="Blue" Foreground="White" Click="btnSubGrpIDs_Click"/>
+        
 
         <DataGrid x:Name="dataGridSubGroupID" Margin="30,50,84,52" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True"  ItemsSource="{Binding SubGroupIdDataList}" Width="512">
             <DataGrid.Columns>

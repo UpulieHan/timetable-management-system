@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework.Services;
-using TimetableManager.WPF.UserControls.DataViewControls;
 
 namespace TimetableManager.WPF.Controls
 {
@@ -25,6 +24,7 @@ namespace TimetableManager.WPF.Controls
     {
 
         Tag tag = new Tag();
+        private bool isEditState = false;
         public ObservableCollection<Tag> TagDataList { get; private set; }
         public List<Tag> TagList { get; private set; }
         public Tab_Main_Tags()
@@ -39,13 +39,29 @@ namespace TimetableManager.WPF.Controls
             var tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
             if (textBoxtag.Text != "")
             {
-                tag.TagName = textBoxtag.Text;
-                await tagDataService.AddTag(tag);
+                if(isEditState)
+                {
+                    tag.TagName = textBoxtag.Text;
+                    await tagDataService.UpdateTag(tag, tag.TagId);
+                    isEditState = false;
+                }
+                else
+                {
+                    Tag newTag = new Tag
+                    {
+                        TagName = textBoxtag.Text
+                    };
+                    await tagDataService.AddTag(newTag);
+                }
+                textBoxtag.Clear();
             }
             else 
             {
                 MessageBox.Show("Insert a Tag!!");
             }
+
+            TagDataList.Clear();
+            _ = load();
         }
         public async Task load()
         {
@@ -63,11 +79,20 @@ namespace TimetableManager.WPF.Controls
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             Tag ys = (Tag)dataGridtag.SelectedItem;
-            Tab_Main_Tags_Update updateysWindow = new Tab_Main_Tags_Update(ys.TagId);
-            updateysWindow.Show();
+            //Tab_Main_Tags_Update updateysWindow = new Tab_Main_Tags_Update(ys.TagId);
+            // updateysWindow.Show();
 
             // Close current main data window. Hard coded. Need to be changed
-            Application.Current.Windows[2].Close();
+            // Application.Current.Windows[2].Close();
+            _ = LoadTagDataForEdit(ys.TagId);
+        }
+
+        private async Task LoadTagDataForEdit(int id)
+        {
+            TagDataService tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
+            tag = await tagDataService.GetTagById(id);
+            textBoxtag.Text = tag.TagName;
+            isEditState = true;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
