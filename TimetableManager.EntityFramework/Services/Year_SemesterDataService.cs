@@ -46,8 +46,11 @@ namespace TimetableManager.EntityFramework.Services
         }
         public async Task<int> UpdateYs(Year_Semester ys,int id)
         {
-            await this.DeleteYear_Semester(id);
-            _context.Year_Semesters.Add(ys);
+            Year_Semester newys = await _context.Year_Semesters.Where(e => e.YsId == id).FirstAsync();
+            newys.YsYear = ys.YsYear;
+            newys.YsSemester = ys.YsSemester;
+            newys.YsShortName = ys.YsShortName;
+
             return await _context.SaveChangesAsync();
         }
     }

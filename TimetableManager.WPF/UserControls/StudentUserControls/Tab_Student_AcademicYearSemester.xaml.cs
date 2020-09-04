@@ -106,6 +106,10 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             {
                 if(isEditState)
                 {
+                    year_Semester.YsYear = Year;
+                    year_Semester.YsSemester = Semester;
+                    year_Semester.YsShortName = YearShortname + "." + SemesterShortname;
+                    await year_SemesterDataService.UpdateYs(year_Semester, year_Semester.YsId);
                     isEditState = false;
                 } else
                 {
@@ -131,12 +135,6 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             Year_Semester ys = (Year_Semester)dataGridYs.SelectedItem;
-            //Tab_Student_AcademicYearSemester_Update updateysWindow = new Tab_Student_AcademicYearSemester_Update(ys.YsId);
-            //updateysWindow.Show();
-
-            // Close current main data window. Hard coded. Need to be changed
-            //Application.Current.Windows[2].Close();
-
             _ = LoadYearDataForEdit(ys.YsId);
         }
 
@@ -146,8 +144,8 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
             year_Semester = await year_SemesterData.GetYsById(id);
 
-            comboBoxYear.SelectedItem = year_Semester.YsYear;
-            comboBoxSemester.SelectedItem = year_Semester.YsSemester;
+            comboBoxYear.Text = year_Semester.YsYear;
+            comboBoxSemester.Text = year_Semester.YsSemester;
             textBox.Text = year_Semester.YsShortName;
 
             isEditState = true;
