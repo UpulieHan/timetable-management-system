@@ -40,7 +40,7 @@ namespace TimetableManager.WPF.Controls
         public Tab_Main_Lecturers()
         {
             InitializeComponent();
-            
+
             LecturerDataList = new ObservableCollection<LecturerGridModel>();
             _ = this.LoadLecturerData();
 
@@ -83,7 +83,6 @@ namespace TimetableManager.WPF.Controls
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             LecturerGridModel lecturer = (LecturerGridModel)LecturerDataGrid.SelectedItem;
-            
 
             _ = this.LoadDataForEditAsync(lecturer.EmployeeId);
             LecturerTabControl.SelectedIndex = 1;
@@ -97,7 +96,7 @@ namespace TimetableManager.WPF.Controls
 
             EmployeeNameTextBox.Text = lecturer.EmployeeName;
             EmployeeIdTextBox.Text = lecturer.EmployeeId.ToString();
-            EmployeeIdTextBox.IsReadOnly = true;
+            EmployeeIdTextBox.IsEnabled = false;
             FacutlyComboBox.SelectedItem = lecturer.Faculty.FacultyName;
             DepartmentComboBox.SelectedItem = lecturer.Department.DepartmentName;
             CenterComboBox.SelectedItem = lecturer.Center.CenterName;
@@ -122,6 +121,10 @@ namespace TimetableManager.WPF.Controls
 
         private void FacutlyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (FacutlyComboBox.SelectedItem == null)
+            {
+                return;
+            }
             String faculty = FacutlyComboBox.SelectedItem.ToString();
 
             FacultyList.ForEach(e =>
@@ -161,6 +164,10 @@ namespace TimetableManager.WPF.Controls
 
         private void CenterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CenterComboBox.SelectedItem == null)
+            {
+                return;
+            }
             string center = CenterComboBox.SelectedItem.ToString();
 
             CenterList.ForEach(e =>
@@ -178,6 +185,10 @@ namespace TimetableManager.WPF.Controls
 
         private void LevelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (LevelComboBox.SelectedItem == null)
+            {
+                return;
+            }
             string LevelName = LevelComboBox.SelectedItem.ToString();
             string EmployeeId = EmployeeIdTextBox.Text.Trim();
 
@@ -193,6 +204,11 @@ namespace TimetableManager.WPF.Controls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (EmployeeIdTextBox.Text.Trim() == "" || EmployeeNameTextBox.Text.Trim() == "" || RankTextBox.Text.Trim() == "" || FacutlyComboBox.SelectedItem == null || DepartmentComboBox.SelectedItem == null || CenterComboBox.SelectedItem == null || BuildingComboBox.SelectedItem == null || LevelComboBox.SelectedItem == null) 
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            } 
             Lecturer lecturer = new Lecturer
             {
                 EmployeeId = Int32.Parse(EmployeeIdTextBox.Text.Trim()),
@@ -208,9 +224,9 @@ namespace TimetableManager.WPF.Controls
 
             LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
 
-            if (EmployeeIdTextBox.IsReadOnly)
+            if (!EmployeeIdTextBox.IsEnabled)
             {
-                EmployeeIdTextBox.IsReadOnly = false;
+                EmployeeIdTextBox.IsEnabled = true;
 
                 lecturerDataService.UpdateLecturer(lecturer, facultyName, departmentName, centerName, buildingName, levelName).ContinueWith(result =>
                 {
@@ -238,7 +254,15 @@ namespace TimetableManager.WPF.Controls
                 });
             }
 
- 
+            EmployeeIdTextBox.Clear();
+            EmployeeNameTextBox.Clear();
+            RankTextBox.Clear();
+            FacutlyComboBox.SelectedIndex = -1;
+            DepartmentComboBox.SelectedIndex = -1;
+            CenterComboBox.SelectedIndex = -1;
+            BuildingComboBox.SelectedIndex = -1;
+            LevelComboBox.SelectedIndex = -1;
+
             LecturerDataList.Clear();
             _ = this.LoadLecturerData();
         }

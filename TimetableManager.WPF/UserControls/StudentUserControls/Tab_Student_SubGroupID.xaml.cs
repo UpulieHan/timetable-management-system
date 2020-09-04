@@ -124,6 +124,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
         private void btnSubGrpIDs_Click(object sender, RoutedEventArgs e)
         {
+            SubGroupIdDataList.Clear();
             _ = this.LoadDataForGenerate();
         }
     }

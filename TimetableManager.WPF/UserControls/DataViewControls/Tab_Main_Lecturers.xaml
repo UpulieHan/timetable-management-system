@@ -73,7 +73,7 @@
                     <Label Content="Level" Grid.Column="0" Grid.Row="6" />
                     <Label Content="Rank" Grid.Column="0" Grid.Row="7" />
                     <TextBox x:Name="EmployeeNameTextBox" Grid.Column="1" Grid.Row="0" />
-                    <TextBox x:Name="EmployeeIdTextBox" Grid.Column="1" Grid.Row="1" PreviewTextInput="EmployeeIdTextBox_PreviewTextInput" />
+                    <TextBox x:Name="EmployeeIdTextBox" MaxLength="6" Grid.Column="1" Grid.Row="1" PreviewTextInput="EmployeeIdTextBox_PreviewTextInput" />
                     <ComboBox x:Name="FacutlyComboBox" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding FacultyNameList}" SelectionChanged="FacutlyComboBox_SelectionChanged" />
                     <ComboBox x:Name="DepartmentComboBox" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding DepartmentNameList}" />
                     <ComboBox x:Name="CenterComboBox" Grid.Column="1" Grid.Row="4" ItemsSource="{Binding CenterNameList}" SelectionChanged="CenterComboBox_SelectionChanged" />

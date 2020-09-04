@@ -62,6 +62,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
         private void btnGrpID_Click(object sender, RoutedEventArgs e)
         {
+            GroupIdDataList.Clear();
             _ = LoadDataForGenerate();
         }
 
