@@ -23,6 +23,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
     public partial class Tab_Student_SubGroupNo : UserControl
     {
         SubGroupNumber subGroup = new SubGroupNumber();
+        private bool isEditState = false;
         public ObservableCollection<SubGroupNumber> SubGroupNumberDataList { get; private set; }
         public List<SubGroupNumber> SubGroupNumberList { get; private set; }
         public Tab_Student_SubGroupNo()
@@ -51,22 +52,43 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             SubGroupNumberDataService subgroupNumberDataService = new SubGroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
             if (textBoxsubgrpNo.Text != "")
             {
-                subGroup.SubGroupNum = textBoxsubgrpNo.Text;
-                await subgroupNumberDataService.AddSubGroupNumber(subGroup);
+                if(isEditState)
+                {
+                    subGroup.SubGroupNum = textBoxsubgrpNo.Text;
+                    await subgroupNumberDataService.UpdateSubgroupNo(subGroup, subGroup.Id);
+                    isEditState = false;
+                } else
+                {
+                    SubGroupNumber subGroupNumber = new SubGroupNumber
+                    {
+                        SubGroupNum = textBoxsubgrpNo.Text
+                    };
+                    await subgroupNumberDataService.AddSubGroupNumber(subGroupNumber);
+                }
+
+                textBoxsubgrpNo.Clear();
             }
             else
             {
                 MessageBox.Show("Insert a Sub-Group Number!!");
             }
+
+            SubGroupNumberDataList.Clear();
+            _ = this.load();
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             SubGroupNumber ys = (SubGroupNumber)dataGridsubgrpNo.SelectedItem;
-            Tab_Student_SubGroupNo_Update updateysWindow = new Tab_Student_SubGroupNo_Update(ys.Id);
-            updateysWindow.Show();
+            _ = LoadSubGroupForEdit(ys.Id);
+        }
 
-            // Close current main data window. Hard coded. Need to be changed
-            Application.Current.Windows[2].Close();
+        private async Task LoadSubGroupForEdit(int id)
+        {
+            SubGroupNumberDataService subGroupNumberDataService = new SubGroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+
+            subGroup = await subGroupNumberDataService.GetSubGroupNoById(id);
+            textBoxsubgrpNo.Text = subGroup.SubGroupNum;
+            isEditState = true;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

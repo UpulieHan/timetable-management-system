@@ -23,6 +23,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
     public partial class Tab_Student_GroupNo : UserControl
     {
         GroupNumber groupNumber = new GroupNumber();
+        private bool isEditState = false;
         public ObservableCollection<GroupNumber> GroupNumberDataList { get; private set; }
         public List<GroupNumber> GroupNumberList { get; private set; }
         public Tab_Student_GroupNo()
@@ -51,22 +52,48 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
             if (textBoxgrpNo.Text != "")
             {
-                groupNumber.GroupNum = textBoxgrpNo.Text;
-                await groupNumberDataService.AddGroupNumber(groupNumber);
+                if(isEditState)
+                {
+                    isEditState = false;
+
+                    groupNumber.GroupNum = textBoxgrpNo.Text;
+
+                    await groupNumberDataService.UpdateGroupNo(groupNumber, groupNumber.Id);
+                } else
+                {
+                    GroupNumber groupNumber = new GroupNumber
+                    {
+                        GroupNum = textBoxgrpNo.Text
+                    };
+
+                    await groupNumberDataService.AddGroupNumber(groupNumber);
+                }
+
+                textBoxgrpNo.Clear();
             }
             else
             {
                 MessageBox.Show("Insert a Group Number!!");
             }
+
+            this.GroupNumberDataList.Clear();
+            _ = load();
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             GroupNumber ys = (GroupNumber)dataGridgrpNo.SelectedItem;
-            Tab_Student_GroupNo_Update updateysWindow = new Tab_Student_GroupNo_Update(ys.Id);
-            updateysWindow.Show();
+            _ = LoadGroupForEdit(ys.Id);
+        }
 
-            // Close current main data window. Hard coded. Need to be changed
-            Application.Current.Windows[2].Close();
+        private async Task LoadGroupForEdit(int id)
+        {
+            GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+
+            groupNumber = await groupNumberDataService.GetGroupNoById(id);
+
+            textBoxgrpNo.Text = groupNumber.GroupNum;
+
+            isEditState = true;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
