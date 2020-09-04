@@ -23,6 +23,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
     public partial class Tab_Student_Programme : UserControl
     {
         Programme programme = new Programme();
+        private bool isEditState = false;
         public ObservableCollection<Programme> programmeDataList { get; private set; }
         public List<Programme> programmeList { get; private set; }
         public Tab_Student_Programme()
@@ -52,25 +53,60 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
             var programmeDataService = new ProgrammeDataService(new EntityFramework.TimetableManagerDbContext());
             if (textBoxfullname.Text != "" || textBoxshortame.Text != "")
             {
-                programme.ProgrammeFullName = textBoxfullname.Text;
-                programme.ProgrammeShortName = textBoxshortame.Text;
-                await programmeDataService.AddProgramme(programme);
+                if(isEditState)
+                {
+                    isEditState = false;
+
+                    programme.ProgrammeFullName = textBoxfullname.Text;
+                    programme.ProgrammeShortName = textBoxshortame.Text;
+
+                    await programmeDataService.UpdateProgramme(programme, programme.ProgrammeId).ContinueWith(result =>
+                    {
+                        if(result != null)
+                        {
+                            MessageBox.Show("Updated Successfully!", "Success");
+                        }
+                    });
+                } else
+                {
+                    Programme newProgramme = new Programme
+                    {
+                        ProgrammeFullName = textBoxfullname.Text,
+                        ProgrammeShortName = textBoxshortame.Text
+                    };
+                    await programmeDataService.AddProgramme(newProgramme);
+                }
+
+                textBoxfullname.Clear();
+                textBoxshortame.Clear();
+
             }
             else
             {
                 MessageBox.Show("fill all fields!!");
             }
+
+            this.programmeDataList.Clear();
+            _ = this.load();
         }
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             Programme ys = (Programme)dataGridprogramme.SelectedItem;
-            Tab_Student_Programme_Update updateysWindow = new Tab_Student_Programme_Update(ys.ProgrammeId);
-            updateysWindow.Show();
 
-            // Close current main data window. Hard coded. Need to be changed
-            Application.Current.Windows[2].Close();
+            _ = this.LoadProgrammeForEditAsync(ys.ProgrammeId);
         }
     
+        private async Task LoadProgrammeForEditAsync(int id)
+        {
+            ProgrammeDataService programmeDataService = new ProgrammeDataService(new EntityFramework.TimetableManagerDbContext());
+
+            programme = await programmeDataService.GetProgrammeById(id);
+            
+            textBoxshortame.Text = programme.ProgrammeShortName;
+            textBoxfullname.Text = programme.ProgrammeFullName;
+
+            isEditState = true;
+        }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
