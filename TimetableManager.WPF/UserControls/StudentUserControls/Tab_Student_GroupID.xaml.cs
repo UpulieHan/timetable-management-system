@@ -59,5 +59,59 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
             _ = GroupIdDataList.Remove(groupId);
         }
+
+        private void btnGrpID_Click(object sender, RoutedEventArgs e)
+        {
+            _ = LoadDataForGenerate();
+        }
+
+        private async Task LoadDataForGenerate()
+        {
+            Year_SemesterDataService year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
+            List<Year_Semester> YsList = await year_SemesterDataService.GetYs();
+            List<string> YearNameList = new List<string>();
+            YsList.ForEach(e =>
+            {
+                YearNameList.Add(e.YsShortName);
+            });
+
+            ProgrammeDataService programmeDataService = new ProgrammeDataService(new EntityFramework.TimetableManagerDbContext());
+            List<Programme> programmeList = await programmeDataService.GetProgramme();
+            List<string> ProgrammeNameList = new List<string>();
+            programmeList.ForEach(e =>
+            {
+                ProgrammeNameList.Add(e.ProgrammeShortName);
+            });
+
+            GroupNumberDataService groupNumberDataService = new GroupNumberDataService(new EntityFramework.TimetableManagerDbContext());
+            List<GroupNumber> GroupNumberList = await groupNumberDataService.GetGroupNumbers();
+            List<string> GroupNameList = new List<string>();
+            GroupNumberList.ForEach(e =>
+            {
+                GroupNameList.Add(e.GroupNum);
+            });
+
+            List<string> GeneratedList = new List<string>();
+
+            YearNameList.ForEach(y =>
+            {
+                ProgrammeNameList.ForEach(p =>
+                {
+                    GroupNameList.ForEach(g =>
+                    {
+                        string id = String.Concat(y, ".", p, ".", g);
+                        GeneratedList.Add(id);
+                    });
+                });
+            });
+
+            GeneratedList.ForEach(e =>
+            {
+                GroupIdDataList.Add(new GroupId
+                {
+                    GroupID = e
+                });
+            });
+        }
     }
 }
