@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework.Services;
-using TimetableManager.WPF.UserControls.DataViewControls;
 
 namespace TimetableManager.WPF.Controls
 {
