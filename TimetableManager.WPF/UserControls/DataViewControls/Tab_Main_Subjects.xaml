@@ -77,10 +77,10 @@
                     <ComboBox x:Name="YearSemesterComboBox" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding YearSemesterNameList}" />
                     <TextBox x:Name="SubjectNameTextBox"  Grid.Column="1" Grid.Row="2" />
                     <TextBox x:Name="SubjectCodeTextBox" Grid.Column="1" Grid.Row="3" />
-                    <TextBox x:Name="LectureHoursTextBox" Grid.Column="1" Grid.Row="4" />
-                    <TextBox x:Name="TutorialHoursTextBox" Grid.Column="1" Grid.Row="5" />
-                    <TextBox x:Name="LabHoursTextBox" Grid.Column="1" Grid.Row="6" />
-                    <TextBox x:Name="EvaluationHoursTextBox" Grid.Column="1" Grid.Row="7" />
+                    <TextBox x:Name="LectureHoursTextBox" Grid.Column="1" Grid.Row="4" PreviewTextInput="CheckTextInput" />
+                    <TextBox x:Name="TutorialHoursTextBox" Grid.Column="1" Grid.Row="5" PreviewTextInput="CheckTextInput" />
+                    <TextBox x:Name="LabHoursTextBox" Grid.Column="1" Grid.Row="6" PreviewTextInput="CheckTextInput" />
+                    <TextBox x:Name="EvaluationHoursTextBox" Grid.Column="1" Grid.Row="7"  PreviewTextInput="CheckTextInput" />
                     <Button x:Name="SaveButton" Grid.Column="1" Grid.Row="8" Content="Save" Click="SaveButton_Click" />
                 </Grid>
             </TabItem>
