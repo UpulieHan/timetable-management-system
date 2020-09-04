@@ -32,11 +32,16 @@ namespace TimetableManager.EntityFramework.Services
         }
 
         
-         public async Task<List<Room>> GetRoomAsync()
-         {
-             return await _context.Rooms.Include(e => e.Center)
-                                        .Include(f => f.Building).ToListAsync();
-         }
+        public async Task<List<Room>> GetRoomAsync()
+        {
+            return await _context.Rooms.Include(e => e.Center)
+                                    .Include(f => f.Building).ToListAsync();
+        }
+
+        public async Task<Room> GetRoomById(int id)
+        {
+            return await _context.Rooms.Include(e => e.Center).Include(e => e.Building).Where(e => e.RoomId == id).FirstAsync();
+        }
 
         public async Task<int> deleteRooms(int id)
         {
@@ -47,6 +52,15 @@ namespace TimetableManager.EntityFramework.Services
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<int> UpdateRoom(Room room)
+        {
+            Room newRoom = await GetRoomById(room.RoomId);
+
+            newRoom.RoomName = room.RoomName;
+            newRoom.Capacity = room.Capacity;
+
+            return await _context.SaveChangesAsync();
+        }
 
     }
 

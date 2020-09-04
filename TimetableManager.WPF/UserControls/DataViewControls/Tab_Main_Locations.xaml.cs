@@ -23,6 +23,7 @@ namespace TimetableManager.WPF.Controls
     /// </summary>
     public partial class Tab_Main_Locations : UserControl
     {
+        private Room SelectedRoom;
         public int BuildingId { get; set; }
         public ObservableCollection<string> CenterNameList { get; private set; }
         public List<Center> CenterList { get; private set; }
@@ -35,6 +36,10 @@ namespace TimetableManager.WPF.Controls
         public List<Building> BuildingList { get; private set; }
 
         public List<Room> roomList { get; private set; }
+
+        //
+        public ObservableCollection<string> BuildingNameList { get; private set; }
+
         public Tab_Main_Locations()
         {
             InitializeComponent();
@@ -43,7 +48,7 @@ namespace TimetableManager.WPF.Controls
 
             BuildingDataList = new ObservableCollection<BuildingGridModel>();
             RoomDataList = new ObservableCollection<RoomGridModel>();
-
+            BuildingNameList = new ObservableCollection<string>();
 
             _ = this.LoadBuildingData();
             _ = this.LoadRoomData();
@@ -179,7 +184,22 @@ namespace TimetableManager.WPF.Controls
 
         private void EditButtonrro_Click(object sender, RoutedEventArgs e)
         {
+            LocationsTabControl.SelectedIndex = 2;
+            RoomGridModel room = (RoomGridModel)dataGridRoom.SelectedItem;
+            _ = LoadDataForEditRoom(room.RoomId);
+        }
 
+        private async Task LoadDataForEditRoom(int id)
+        {
+            RoomDataService roomdataservice = new RoomDataService(new EntityFramework.TimetableManagerDbContext());
+
+            SelectedRoom = await roomdataservice.GetRoomById(id);
+            comboBoxcenter.SelectedItem = SelectedRoom.Center.CenterName;
+            comboBoxcenter.IsEnabled = false;
+            comboBoxbuild.SelectedItem = SelectedRoom.Building.BuildingName;
+            comboBoxbuild.IsEnabled = false;
+            textBoxrname.Text = SelectedRoom.RoomName;
+            textBox1capacity.Text = SelectedRoom.Capacity.ToString();
         }
 
         private void DeleteButtonroom_Click(object sender, RoutedEventArgs e)
@@ -194,6 +214,66 @@ namespace TimetableManager.WPF.Controls
             });
 
             _ = RoomDataList.Remove(roo);
+        }
+
+        private void comboBoxcenter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string center = comboBoxcenter.SelectedItem.ToString();
+
+            CenterList.ForEach(e =>
+            {
+                if (e.CenterName.Equals(center))
+                {
+                    BuildingNameList.Clear();
+                    e.Buildings.ForEach(b =>
+                    {
+                        BuildingNameList.Add(b.BuildingName);
+                    });
+                }
+            });
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            RoomDataService roomDataService = new RoomDataService(new EntityFramework.TimetableManagerDbContext());
+
+            if (comboBoxcenter.IsEnabled)
+            {
+                Room room = new Room();
+
+                room.Capacity = Int32.Parse(textBox1capacity.Text.Trim());
+                room.RoomName = textBoxrname.Text.Trim();
+
+                string CName = comboBoxbuild.SelectedItem.ToString();
+                string builName = comboBoxcenter.SelectedItem.ToString();
+
+               
+
+                roomDataService.AddRooms(room, builName, CName).ContinueWith(resultroom =>
+                {
+                    if (resultroom != null)
+                    {
+                        MessageBox.Show("Room and capacity Added!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Error occured!", "Error");
+                    }
+                });
+            } else
+            {
+                comboBoxcenter.IsEnabled = true;
+                comboBoxbuild.IsEnabled = true;
+
+                SelectedRoom.RoomName = textBoxrname.Text.Trim();
+                SelectedRoom.Capacity = Int32.Parse(textBox1capacity.Text.Trim());
+
+                _ = roomDataService.UpdateRoom(SelectedRoom);
+            }
+            
+
+            RoomDataList.Clear();
+            _ = LoadRoomData();
         }
     }
 }
