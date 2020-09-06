@@ -13,7 +13,7 @@
 
         <DataGrid x:Name="dataGridSubGroupID" Margin="30,50,84,52" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True"  ItemsSource="{Binding SubGroupIdDataList}" Width="512">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="100"/>
+                <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="100"/>-->
                 <DataGridTextColumn Header="Group IDs" Binding="{Binding SubGroupID}" Width="300"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.HeaderTemplate>

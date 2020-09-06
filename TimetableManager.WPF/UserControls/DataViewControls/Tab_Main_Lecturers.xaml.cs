@@ -113,7 +113,10 @@ namespace TimetableManager.WPF.Controls
 
             lecturerDataService.DeleteLecturer(lecturer.EmployeeId).ContinueWith(result =>
             {
-                MessageBox.Show("Deleted");
+                if(result == null)
+                {
+                    MessageBox.Show("Sorry! Error occured", "Error");
+                }
             });
 
             _ = LecturerDataList.Remove(lecturer);

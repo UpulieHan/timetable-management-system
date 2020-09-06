@@ -345,3 +345,4 @@ healthchecksdb
 /TimetableManager.EntityFramework/Timetable.db-wal
 /TimetableManager.EntityFramework/Timetable.db-shm
 /TimetableManager.EntityFramework/Timetable.db
+/TimetableManager.EntityFramework/Migrations
