@@ -11,14 +11,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticTimetableViewControls
+namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserControl
 {
-    /// <summary>
-    /// Interaction logic for Tab_Main_Timetables.xaml
-    /// </summary>
-    public partial class Tab_Main_Timetables : UserControl
+    public partial class Tab_Timetable_Generate : UserControl
     {
-        public Tab_Main_Timetables()
+        public Tab_Timetable_Generate()
         {
             InitializeComponent();
         }
