@@ -19,5 +19,10 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
         {
             InitializeComponent();
         }
+
+        private void generateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -12,11 +12,18 @@
     <None Remove="Resources\back.png" />
     <None Remove="Resources\cancel.png" />
     <None Remove="Resources\Cancel_tick.png" />
+    <None Remove="Resources\generate.png" />
     <None Remove="Resources\green-tics.png" />
     <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
     <None Remove="Resources\Save_tick.png" />
     <None Remove="Resources\settings_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\generate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
