@@ -12,11 +12,20 @@
     <None Remove="Resources\back.png" />
     <None Remove="Resources\cancel.png" />
     <None Remove="Resources\Cancel_tick.png" />
+    <None Remove="Resources\generate.png" />
     <None Remove="Resources\green-tics.png" />
     <None Remove="Resources\home.png" />
     <None Remove="Resources\logo.png" />
+    <None Remove="Resources\print.png" />
     <None Remove="Resources\Save_tick.png" />
     <None Remove="Resources\settings_icon.png" />
+    <None Remove="Resources\view.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\generate.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,10 +55,16 @@
     <Resource Include="Resources\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\print.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Save_tick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\settings_icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\view.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
