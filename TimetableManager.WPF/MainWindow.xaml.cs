@@ -34,6 +34,8 @@ namespace TimetableManager.WPF
         private void OpenAvailabilityWindow(object sender, RoutedEventArgs e)
         {
             //interation logic for Availability Window
+            MainAvailabilityWindow mainDataWindow = new MainAvailabilityWindow();
+            mainDataWindow.Show();
         }
         private void OpenSessionsWindow(object sender, RoutedEventArgs e)
         {
@@ -41,7 +43,8 @@ namespace TimetableManager.WPF
         }
         private void OpenSessionConfigWindow(object sender, RoutedEventArgs e)
         {
-            //interation logic for Session Config Window
+            MainSessionConfigWindow mainDataWindow = new MainSessionConfigWindow();
+            mainDataWindow.Show();
         }
         private void OpenRoomConfigWindow(object sender, RoutedEventArgs e)
         {
