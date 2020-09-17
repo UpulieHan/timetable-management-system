@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
 
         private void generateButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Trace.WriteLine("generateButton click");
         }
     }
 }

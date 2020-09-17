@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" Margin="10">
+        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" Margin="10" BorderThickness="0,6,0,0" BorderBrush="#008CFF">
             <TabItem Header="Generate timetables">
                 <local:Tab_Timetable_Generate/>
             </TabItem>
