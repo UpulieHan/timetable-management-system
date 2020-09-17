@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TimetableManager.WPF.StatisticsTimetableDataControls.SatatTimeViewControls.Tab_Main_stat"
+﻿<UserControl x:Class="TimetableManager.WPF.StatisticsTimetableDataControls.StatisticTimetableViewControls.Tab_Main_stat"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

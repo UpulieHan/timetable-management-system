@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TimetableManager.WPF.StatisticsTimetableDataControls.SatatTimeViewControls
+namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticTimetableViewControls
 {
     /// <summary>
     /// Interaction logic for Tab_Main_Timetables.xaml
