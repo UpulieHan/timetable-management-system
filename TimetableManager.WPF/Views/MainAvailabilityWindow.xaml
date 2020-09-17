@@ -1,0 +1,153 @@
+﻿<Window x:Class="TimetableManager.WPF.Views.MainAvailabilityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimetableManager.WPF.Views"
+        mc:Ignorable="d"
+        Title="ABC Institute Timetable System" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="10" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border 
+                                Name="Border"
+                                Margin="0,0,-4,0" 
+                                Background="White"
+                                BorderBrush="Gray" 
+                                BorderThickness="1,1,1,1" 
+                                CornerRadius="2,12,0,0" >
+                                <ContentPresenter 
+                                    x:Name="ContentSite"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    ContentSource="Header"
+                                    Margin="12,2,12,2"
+                                    RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="Border" Property="Background" Value="#008CFF" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="Yellow" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Pink" />
+                                <Setter Property="Foreground" Value="Purple" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Image Source="/Resources/logo.png"  Grid.Column="0" Grid.Row="1" Width="50" Height="50" />
+        <TextBlock Text="Creating a timetable was never a simple task. Until now" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+        <Border BorderThickness="1" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Margin="0,10,0,0">
+            <StackPanel Orientation="Vertical">
+                <Button Background="{x:Null}" BorderBrush="Black" Cursor="Hand">
+                    <StackPanel Width="65" Height="65">
+                        <Image Source="/Resources/home.png" Width="65" Height="65" />
+                    </StackPanel>
+                </Button>
+                <Button Background="{x:Null}" BorderBrush="Black" Cursor="Hand">
+                    <StackPanel Width="65" Height="65">
+                        <Image Source="/Resources/back.png" Width="35" Height="35" Margin="0,14,0,0" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#008CFF" Width="auto" Height="auto">
+            <TabItem Header="Set unavailability">
+                <Border BorderBrush="Gray" BorderThickness="1,0,1,1">
+                    <Grid>
+                        <Rectangle HorizontalAlignment="Left" Height="40" Margin="50,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+                        <Rectangle HorizontalAlignment="Left" Height="40" Margin="50,55,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+                        <Label x:Name="label" Content="Select Day and Time" HorizontalAlignment="Left" Margin="56,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
+                        <Label x:Name="label1" Content="Unavailable Resource" HorizontalAlignment="Left" Margin="56,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.633,0.38"/>
+                        <ComboBox
+                            x:Name="comboBoxDay"
+                            HorizontalAlignment="Left" 
+                            Margin="300,18,0,0" 
+                            VerticalAlignment="Top"
+                            Width="150" 
+                            IsEditable="True" 
+                            IsReadOnly="True" 
+                            Text="-Select Day-" 
+                            SelectedValuePath="Content">
+                        </ComboBox>
+                        <ComboBox 
+                            x:Name="comboBoxTime" 
+                            HorizontalAlignment="Left" 
+                            Margin="460,18,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="180" 
+                            IsEditable="True" 
+                            IsReadOnly="True" 
+                            Text="-Select Time-"  
+                            SelectedValuePath="Content">
+                        
+                        </ComboBox>
+                        <ComboBox
+                            x:Name="comboBoxSelectRes"
+                            HorizontalAlignment="Left" 
+                            Margin="300,60,0,0" 
+                            VerticalAlignment="Top"
+                            Width="150" 
+                            IsEditable="True" 
+                            IsReadOnly="True" 
+                            Text="-Select one-" 
+                            SelectedValuePath="Content">
+                        </ComboBox>
+                        <ComboBox 
+                            x:Name="comboBoxResVal" 
+                            HorizontalAlignment="Left" 
+                            Margin="460,60,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="180" 
+                            IsEditable="True" 
+                            IsReadOnly="True" 
+                            Text="-value-"  
+                            SelectedValuePath="Content">
+                        </ComboBox>
+                        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="500,132,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White"/>
+
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="View unavailability" >
+                <Border BorderBrush="Gray" BorderThickness="1,0,1,1">
+
+                    <Grid></Grid>
+                </Border>
+
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
