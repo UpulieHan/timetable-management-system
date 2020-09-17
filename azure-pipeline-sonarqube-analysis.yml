@@ -23,9 +23,9 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'sonarqube-server'
+    SonarQube: 'sonarqube-server-linode-vps'
     scannerMode: 'MSBuild'
-    projectKey: 'timetable-management-system'
+    projectKey: 'timetable-management-system-key'
     projectName: 'timetable-management-system'
 
 - task: VSBuild@1
