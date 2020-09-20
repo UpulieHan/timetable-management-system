@@ -39,6 +39,17 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
+        public async Task<int> DeleteAllGroupId()
+        {
+            foreach (var id in _context.GroupIds.Select(e => e.Id))
+            {
+                var entity = new GroupId { Id = id };
+                _context.GroupIds.Attach(entity);
+                _context.GroupIds.Remove(entity);
+            }
+
+            return await _context.SaveChangesAsync();
+        }
 
     }
 }
