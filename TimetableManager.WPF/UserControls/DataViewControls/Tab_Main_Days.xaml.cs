@@ -25,6 +25,7 @@ namespace TimetableManager.WPF.Controls
     public partial class Tab_Main_Days : UserControl
     {
         public ObservableCollection<Day> theDaysList { get; set; }
+        public ObservableCollection<string> selectedDaysList { get; set; }
         private DaysAndHours daysAndHours;
         private int noOfDays = 0;
         private int selectedNoOfDays;
@@ -42,6 +43,7 @@ namespace TimetableManager.WPF.Controls
             {
                 //setting the selected Days list to an ObservableCollection so it could be bound to the view
                 theDaysList = new ObservableCollection<Day>(timetableManagerDbContext.Days);
+                selectedDaysList = new ObservableCollection<string>();
 
                 //setting the rest of the saved data
                 daysAndHours = timetableManagerDbContext.DaysAndHours.FirstOrDefault<DaysAndHours>();
@@ -86,6 +88,44 @@ namespace TimetableManager.WPF.Controls
             }
 
 
+        }
+        private void comboBoxDay_Checked(object sender, EventArgs e)
+        {
+            selectedDaysList.Add((string)((CheckBox)sender).Content);
+            foreach (string s in selectedDaysList)
+            {
+                Trace.WriteLine(s);
+            }
+        }
+
+        private void comboBoxDay_Unchecked(object sender, EventArgs e)
+        {
+            selectedDaysList.Remove((string)((CheckBox)sender).Content);
+            foreach (string s in selectedDaysList)
+            {
+                Trace.WriteLine(s);
+            }
+        }
+
+        private void comboBoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.WriteLine("comboBoxDay_SelectionChanged");
+        }
+        private void comboBoxStartHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.WriteLine("comboBoxStartHours_SelectionChanged");
+        }
+        private void comboBoxStartMins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.WriteLine("comboBoxStartMins_SelectionChanged");
+        }
+        private void comboBoxEndHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.WriteLine("comboBoxEndHours_SelectionChanged");
+        }
+        private void comboBoxEndMins_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.WriteLine("comboBoxEndMins_SelectionChanged");
         }
 
         private void comboBoxNoOfDays_SelectionChanged(object sender, SelectionChangedEventArgs e)
