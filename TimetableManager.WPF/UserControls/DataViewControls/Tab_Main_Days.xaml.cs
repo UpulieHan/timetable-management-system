@@ -92,7 +92,7 @@ namespace TimetableManager.WPF.Controls
                         if (day.IsSelected == true)
                         {
                             createStackPanelBorder();
-                            createStackPanel(day.DayName);
+                            createStackPanel(day.DayName, day.IsSelected, day.startHour, day.startMin, day.endHour, day.endMin);
                         }
                     }
                 }
@@ -108,7 +108,7 @@ namespace TimetableManager.WPF.Controls
         private void comboBoxDay_Checked(object sender, EventArgs e)
         {
             selectedDaysList.Add((string)((CheckBox)sender).Content);
-            createStackPanel((string)((CheckBox)sender).Content);
+            createStackPanel((string)((CheckBox)sender).Content, false, null, null, null, null);
         }
 
         private void comboBoxDay_Unchecked(object sender, EventArgs e)
@@ -319,7 +319,7 @@ namespace TimetableManager.WPF.Controls
                 daysSPBorder.BorderThickness = new Thickness(1);
             }
         }
-        private void createStackPanel(string dayName)
+        private void createStackPanel(string dayName, bool isSelected, string startHour, string startMin, string endHour, string endMin)
         {
             List<string> hourList = new List<string>() { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
 
@@ -345,6 +345,12 @@ namespace TimetableManager.WPF.Controls
                 Content = dayName
             };
 
+            //setting starthour text 
+            if (startHour == null)
+            {
+                startHour = "Start Hour";
+            }
+
             //comboBoxStartHour
             ComboBox comboBoxStartHour = new ComboBox
             {
@@ -354,11 +360,16 @@ namespace TimetableManager.WPF.Controls
                 Width = 130,
                 IsEditable = true,
                 IsReadOnly = false,
-                Text = "Start Hour",
+                Text = startHour,
             };
             comboBoxStartHour.SelectionChanged += comboBoxStartHours_SelectionChanged;
             comboBoxStartHour.ItemsSource = hourList;
 
+            //setting startmin text 
+            if (startMin == null)
+            {
+                startMin = "Start Minutes";
+            }
 
             //comboBoxStartMin
             ComboBox comboBoxStartMin = new ComboBox
@@ -369,11 +380,16 @@ namespace TimetableManager.WPF.Controls
                 Width = 150,
                 IsEditable = true,
                 IsReadOnly = false,
-                Text = "Start Minutes",
+                Text = startMin,
             };
             comboBoxStartMin.SelectionChanged += comboBoxStartMins_SelectionChanged;
             comboBoxStartMin.ItemsSource = minList;
 
+            //setting endhour text 
+            if (endHour == null)
+            {
+                endHour = "End Hour";
+            }
 
             //comboBoxEndHour
             ComboBox comboBoxEndHour = new ComboBox
@@ -384,10 +400,17 @@ namespace TimetableManager.WPF.Controls
                 Width = 150,
                 IsEditable = true,
                 IsReadOnly = false,
-                Text = "End Hour",
+                Text = endHour,
             };
             comboBoxEndHour.SelectionChanged += comboBoxEndHours_SelectionChanged;
             comboBoxEndHour.ItemsSource = hourList;
+
+
+            //setting endhour text 
+            if (endMin == null)
+            {
+                endMin = "End Minutes";
+            }
 
             //comboBoxEndMin
             ComboBox comboBoxEndMin = new ComboBox
@@ -398,7 +421,7 @@ namespace TimetableManager.WPF.Controls
                 Width = 150,
                 IsEditable = true,
                 IsReadOnly = false,
-                Text = "End Minutes",
+                Text = endMin,
             };
             comboBoxEndMin.SelectionChanged += comboBoxEndMins_SelectionChanged;
             comboBoxEndMin.ItemsSource = minList;
