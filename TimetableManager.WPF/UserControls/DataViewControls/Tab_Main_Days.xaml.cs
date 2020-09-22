@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,22 +90,104 @@ namespace TimetableManager.WPF.Controls
 
 
         }
+
         private void comboBoxDay_Checked(object sender, EventArgs e)
         {
+            List<string> hourList = new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24" };
+            List<string> minList = new List<string>() { "00", "30" };
+
             selectedDaysList.Add((string)((CheckBox)sender).Content);
-            foreach (string s in selectedDaysList)
+            StackPanel sp = new StackPanel
             {
-                Trace.WriteLine(s);
-            }
+                Name = "daySubPanel" + (string)((CheckBox)sender).Content,
+                Orientation = Orientation.Horizontal,
+            };
+
+            //comboBoxDays
+            Label comboBoxDays = new Label
+            {
+                Name = "comboBoxDays",
+                Margin = new Thickness(20, 10, 0, 10),
+                Padding = new Thickness(10),
+                Width = 130,
+                Content = (string)((CheckBox)sender).Content
+            };
+
+            //comboBoxStartHour
+            ComboBox comboBoxStartHour = new ComboBox
+            {
+                Name = "comboBoxStartHour",
+                Margin = new Thickness(20, 10, 0, 10),
+                Padding = new Thickness(10),
+                Width = 130,
+                IsEditable = true,
+                IsReadOnly = false,
+                Text = "Start Hour",
+            };
+            comboBoxStartHour.SelectionChanged += comboBoxStartHours_SelectionChanged;
+            comboBoxStartHour.SelectedValuePath = "Content";
+            comboBoxStartHour.ItemsSource = hourList;
+
+
+            //comboBoxStartMin
+            ComboBox comboBoxStartMin = new ComboBox
+            {
+                Name = "comboBoxStartMin",
+                Margin = new Thickness(20, 10, 0, 10),
+                Padding = new Thickness(10),
+                Width = 150,
+                IsEditable = true,
+                IsReadOnly = false,
+                Text = "Start Minutes",
+            };
+            comboBoxStartMin.SelectionChanged += comboBoxStartMins_SelectionChanged;
+            comboBoxStartMin.SelectedValuePath = "Content";
+            comboBoxStartMin.ItemsSource = minList;
+
+
+            //comboBoxEndHour
+            ComboBox comboBoxEndHour = new ComboBox
+            {
+                Name = "comboBoxEndHour",
+                Margin = new Thickness(20, 10, 0, 10),
+                Padding = new Thickness(10),
+                Width = 150,
+                IsEditable = true,
+                IsReadOnly = false,
+                Text = "End Hour",
+            };
+            comboBoxEndHour.SelectionChanged += comboBoxEndHours_SelectionChanged;
+            comboBoxEndHour.SelectedValuePath = "Content";
+            comboBoxEndHour.ItemsSource = hourList;
+
+            //comboBoxEndMin
+            ComboBox comboBoxEndMin = new ComboBox
+            {
+                Name = "comboBoxEndMin",
+                Margin = new Thickness(20, 10, 0, 10),
+                Padding = new Thickness(10),
+                Width = 150,
+                IsEditable = true,
+                IsReadOnly = false,
+                Text = "End Minutes",
+            };
+            comboBoxEndMin.SelectionChanged += comboBoxEndMins_SelectionChanged;
+            comboBoxEndMin.SelectedValuePath = "Content";
+            comboBoxEndMin.ItemsSource = minList;
+
+
+            sp.Children.Add(comboBoxDays);
+            sp.Children.Add(comboBoxStartHour);
+            sp.Children.Add(comboBoxStartMin);
+            sp.Children.Add(comboBoxEndHour);
+            sp.Children.Add(comboBoxEndMin);
+            daysStackPanel.Children.Add(sp);
         }
 
         private void comboBoxDay_Unchecked(object sender, EventArgs e)
         {
             selectedDaysList.Remove((string)((CheckBox)sender).Content);
-            foreach (string s in selectedDaysList)
-            {
-                Trace.WriteLine(s);
-            }
+
         }
 
         private void comboBoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)

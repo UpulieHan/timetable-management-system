@@ -97,79 +97,13 @@
                         </StackPanel>
                     </Border>
                     <Label Content="Start/End Time for each day" Margin="20,10,0,0" Grid.Row="2"/>
-                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,0,10,0"  Grid.Row="3">
-                        <StackPanel Orientation="Vertical" Name="daysStackPanel">
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox x:Name="comboBoxDays" Margin="20,10,0,10" Padding="10,10,10,10"  Width="130" IsEditable="True" IsReadOnly="False" Text="Day" SelectionChanged="comboBoxDay_SelectionChanged" SelectedValuePath="Content" ItemsSource="{Binding selectedDaysList}"/>
-                                <ComboBox x:Name="comboBoxStartHour" Margin="20,10,0,10" Padding="10,10,10,10" Width="130" IsEditable="True" IsReadOnly="False" Text="Start Hour" SelectionChanged="comboBoxStartHours_SelectionChanged" SelectedValuePath="Content" >
-                                    <ComboBoxItem Content="0"></ComboBoxItem>
-                                    <ComboBoxItem Content="1"></ComboBoxItem>
-                                    <ComboBoxItem Content="2"></ComboBoxItem>
-                                    <ComboBoxItem Content="3"></ComboBoxItem>
-                                    <ComboBoxItem Content="4"></ComboBoxItem>
-                                    <ComboBoxItem Content="5"></ComboBoxItem>
-                                    <ComboBoxItem Content="6"></ComboBoxItem>
-                                    <ComboBoxItem Content="7"></ComboBoxItem>
-                                    <ComboBoxItem Content="8"></ComboBoxItem>
-                                    <ComboBoxItem Content="9"></ComboBoxItem>
-                                    <ComboBoxItem Content="10"></ComboBoxItem>
-                                    <ComboBoxItem Content="11"></ComboBoxItem>
-                                    <ComboBoxItem Content="12"></ComboBoxItem>
-                                    <ComboBoxItem Content="13"></ComboBoxItem>
-                                    <ComboBoxItem Content="14"></ComboBoxItem>
-                                    <ComboBoxItem Content="15"></ComboBoxItem>
-                                    <ComboBoxItem Content="16"></ComboBoxItem>
-                                    <ComboBoxItem Content="17"></ComboBoxItem>
-                                    <ComboBoxItem Content="18"></ComboBoxItem>
-                                    <ComboBoxItem Content="19"></ComboBoxItem>
-                                    <ComboBoxItem Content="20"></ComboBoxItem>
-                                    <ComboBoxItem Content="21"></ComboBoxItem>
-                                    <ComboBoxItem Content="22"></ComboBoxItem>
-                                    <ComboBoxItem Content="23"></ComboBoxItem>
-                                    <ComboBoxItem Content="24"></ComboBoxItem>
-                                </ComboBox>
-                                <ComboBox x:Name="comboBoxStartMin" Margin="20,10,0,10" Padding="10,10,10,10" Width="150" IsEditable="True" IsReadOnly="False" Text="Start Minutes" SelectionChanged="comboBoxStartMins_SelectionChanged" SelectedValuePath="Content">
-                                    <ComboBoxItem Content="00"></ComboBoxItem>
-                                    <ComboBoxItem Content="30"></ComboBoxItem>
-                                </ComboBox>
-                                <ComboBox x:Name="comboBoxEndHour" Margin="20,10,0,10" Padding="10,10,10,10" Width="150" IsEditable="True" IsReadOnly="False" Text="End Hour" SelectionChanged="comboBoxEndHours_SelectionChanged" SelectedValuePath="Content">
-                                    <ComboBoxItem Content="0"></ComboBoxItem>
-                                    <ComboBoxItem Content="1"></ComboBoxItem>
-                                    <ComboBoxItem Content="2"></ComboBoxItem>
-                                    <ComboBoxItem Content="3"></ComboBoxItem>
-                                    <ComboBoxItem Content="4"></ComboBoxItem>
-                                    <ComboBoxItem Content="5"></ComboBoxItem>
-                                    <ComboBoxItem Content="6"></ComboBoxItem>
-                                    <ComboBoxItem Content="7"></ComboBoxItem>
-                                    <ComboBoxItem Content="8"></ComboBoxItem>
-                                    <ComboBoxItem Content="9"></ComboBoxItem>
-                                    <ComboBoxItem Content="10"></ComboBoxItem>
-                                    <ComboBoxItem Content="11"></ComboBoxItem>
-                                    <ComboBoxItem Content="12"></ComboBoxItem>
-                                    <ComboBoxItem Content="13"></ComboBoxItem>
-                                    <ComboBoxItem Content="14"></ComboBoxItem>
-                                    <ComboBoxItem Content="15"></ComboBoxItem>
-                                    <ComboBoxItem Content="16"></ComboBoxItem>
-                                    <ComboBoxItem Content="17"></ComboBoxItem>
-                                    <ComboBoxItem Content="18"></ComboBoxItem>
-                                    <ComboBoxItem Content="19"></ComboBoxItem>
-                                    <ComboBoxItem Content="20"></ComboBoxItem>
-                                    <ComboBoxItem Content="21"></ComboBoxItem>
-                                    <ComboBoxItem Content="22"></ComboBoxItem>
-                                    <ComboBoxItem Content="23"></ComboBoxItem>
-                                    <ComboBoxItem Content="24"></ComboBoxItem>
-                                </ComboBox>
-                                <ComboBox x:Name="comboBoxEndMin" Margin="20,10,0,10" Padding="10,10,10,10" Width="150" IsEditable="True" IsReadOnly="False" Text="End Minutes" SelectionChanged="comboBoxEndMins_SelectionChanged" SelectedValuePath="Content">
-                                    <ComboBoxItem Content="00"></ComboBoxItem>
-                                    <ComboBoxItem Content="30"></ComboBoxItem>
-                                </ComboBox>
-                            </StackPanel>
-                        </StackPanel>
+                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,0,10,10"  Grid.Row="3">
+                        <StackPanel Orientation="Vertical" Name="daysStackPanel"/>
                     </Border>
                 </Grid>
-                <Border BorderBrush="Gray" BorderThickness="1,0,1,1" Margin="10,0,10,0">
+                <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,0,10,0">
                     <Grid>
-                        <Label Content="Preferred Time Slot" Margin="20,10,0,10" />
+                        <Label Content="Preferred Time Slot" Margin="20,10,0,0" />
                         <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="250" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
                             <ComboBoxItem Content="30 mins"></ComboBoxItem>
                             <ComboBoxItem Content="1 hour"></ComboBoxItem>
