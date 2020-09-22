@@ -333,10 +333,33 @@ namespace TimetableManager.WPF.Controls
             }
         }
 
-        //private void createDayTimeCodes()
-        //{
+        private void createDayTimeCodes()
+        {
+            List<string> dayTimeCodeList = new List<string>();
+            foreach (var item in theDaysList)
+            {
+                //MO TU WE TH FR SA
+                //day part
+                string day = item.DayName.Substring(0, 2);
 
-        //}
+                //breaking the day into slots of desired timeslot
+                for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour); hourTime++)
+                {
+
+                    if (Int32.Parse(item.endMin) == 30)
+                    {
+                        //60 - 30 = 30
+
+                    }
+                    else
+                    {
+                        //30 - 60 = -30
+
+                    }
+                    Trace.WriteLine(day + hourTime);
+                }
+            }
+        }
         private void createStackPanelBorder()
         {
             if (!stackPanelBorderCreated)
