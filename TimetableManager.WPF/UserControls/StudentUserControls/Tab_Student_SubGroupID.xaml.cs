@@ -25,6 +25,7 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         SubGroupId grpid = new SubGroupId();
         public ObservableCollection<SubGroupId> SubGroupIdDataList { get; private set; }
         public List<SubGroupId> SubGroupIdList { get; private set; }
+        SubGroupIdDataService groupIdDataService1 = new SubGroupIdDataService(new EntityFramework.TimetableManagerDbContext());
 
         public Tab_Student_SubGroupID()
         {
@@ -113,8 +114,13 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 });
             });
 
-            GeneratedList.ForEach(e =>
+            GeneratedList.ForEach(async e =>
             {
+                _ = await groupIdDataService1.AddSubGroupId(new SubGroupId
+                {
+                    SubGroupID = e
+                });
+
                 SubGroupIdDataList.Add(new SubGroupId
                 {
                     SubGroupID = e
@@ -125,6 +131,8 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
         private void btnSubGrpIDs_Click(object sender, RoutedEventArgs e)
         {
             SubGroupIdDataList.Clear();
+            _ = groupIdDataService1.DeleteAllSubGroupId();
+
             _ = this.LoadDataForGenerate();
         }
     }

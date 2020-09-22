@@ -62,12 +62,16 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
 
         private void btnGrpID_Click(object sender, RoutedEventArgs e)
         {
+            GroupIdDataService groupIdDataService = new GroupIdDataService(new EntityFramework.TimetableManagerDbContext());
             GroupIdDataList.Clear();
+            _ = groupIdDataService.DeleteAllGroupId();
             _ = LoadDataForGenerate();
         }
 
         private async Task LoadDataForGenerate()
         {
+            var groupIdDataService = new GroupIdDataService(new EntityFramework.TimetableManagerDbContext());
+
             Year_SemesterDataService year_SemesterDataService = new Year_SemesterDataService(new EntityFramework.TimetableManagerDbContext());
             List<Year_Semester> YsList = await year_SemesterDataService.GetYs();
             List<string> YearNameList = new List<string>();
@@ -106,8 +110,13 @@ namespace TimetableManager.WPF.UserControls.StudentUserControls
                 });
             });
 
-            GeneratedList.ForEach(e =>
+            GeneratedList.ForEach(async e =>
             {
+                _ = await groupIdDataService.AddGroupId(new GroupId
+                {
+                    GroupID = e
+                });
+
                 GroupIdDataList.Add(new GroupId
                 {
                     GroupID = e
