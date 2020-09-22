@@ -49,6 +49,9 @@ namespace TimetableManager.WPF.Controls
                 theDaysList = new ObservableCollection<Day>(timetableManagerDbContext.Days);
                 selectedDaysList = new ObservableCollection<string>();
 
+                //the DataService for Days table
+                DayDataService dayDataService = new DayDataService(new EntityFramework.TimetableManagerDbContext());
+
                 //setting the rest of the saved data
                 daysAndHours = timetableManagerDbContext.DaysAndHours.FirstOrDefault<DaysAndHours>();
 
@@ -123,6 +126,7 @@ namespace TimetableManager.WPF.Controls
             }
         }
 
+        //no need of this method
         private void comboBoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //this is not a combo box 
@@ -130,23 +134,59 @@ namespace TimetableManager.WPF.Controls
         }
         private void comboBoxStartHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selection = (sender as ComboBox).SelectedItem as string;
-            Trace.WriteLine(selection);
+            //get the parent
+            StackPanel sp = VisualTreeHelper.GetParent(sender as ComboBox) as StackPanel;
+            //get the sibling through parent
+            Label label = sp.Children[0] as Label;
+
+            //getting the day from the DB
+            Day day = theDaysList.Where(predicate: d => d.DayName == (string)label.Content).FirstOrDefault();
+
+            day.startHour = (sender as ComboBox).SelectedItem as string;
+            timetableManagerDbContext.Days.Update(day);
+            timetableManagerDbContext.SaveChanges();
         }
         private void comboBoxStartMins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selection = (sender as ComboBox).SelectedItem as string;
-            Trace.WriteLine(selection);
+            //get the parent
+            StackPanel sp = VisualTreeHelper.GetParent(sender as ComboBox) as StackPanel;
+            //get the sibling through parent
+            Label label = sp.Children[0] as Label;
+
+            //getting the day from the DB
+            Day day = theDaysList.Where(predicate: d => d.DayName == (string)label.Content).FirstOrDefault();
+
+            day.startMin = (sender as ComboBox).SelectedItem as string;
+            timetableManagerDbContext.Days.Update(day);
+            timetableManagerDbContext.SaveChanges();
         }
         private void comboBoxEndHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selection = (sender as ComboBox).SelectedItem as string;
-            Trace.WriteLine(selection);
+            //get the parent
+            StackPanel sp = VisualTreeHelper.GetParent(sender as ComboBox) as StackPanel;
+            //get the sibling through parent
+            Label label = sp.Children[0] as Label;
+
+            //getting the day from the DB
+            Day day = theDaysList.Where(predicate: d => d.DayName == (string)label.Content).FirstOrDefault();
+
+            day.endHour = (sender as ComboBox).SelectedItem as string;
+            timetableManagerDbContext.Days.Update(day);
+            timetableManagerDbContext.SaveChanges();
         }
         private void comboBoxEndMins_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selection = (sender as ComboBox).SelectedItem as string;
-            Trace.WriteLine(selection);
+            //get the parent
+            StackPanel sp = VisualTreeHelper.GetParent(sender as ComboBox) as StackPanel;
+            //get the sibling through parent
+            Label label = sp.Children[0] as Label;
+
+            //getting the day from the DB
+            Day day = theDaysList.Where(predicate: d => d.DayName == (string)label.Content).FirstOrDefault();
+
+            day.endMin = (sender as ComboBox).SelectedItem as string;
+            timetableManagerDbContext.Days.Update(day);
+            timetableManagerDbContext.SaveChanges();
         }
 
         private void comboBoxNoOfDays_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -205,7 +245,6 @@ namespace TimetableManager.WPF.Controls
                 //Adding the daysAndHours object to the DB
                 try
                 {
-
                     if (daysAndHours != null)
                     {
                         daysAndHours.NoOfDays = noOfDays;
@@ -225,6 +264,10 @@ namespace TimetableManager.WPF.Controls
 
                         timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
                     }
+
+                    //theDaysList is already created (will always be not null)
+
+
                     timetableManagerDbContext.SaveChanges();
                     MessageBox.Show("Changes saved");
                 }
@@ -247,7 +290,7 @@ namespace TimetableManager.WPF.Controls
         {
             selectedNoOfDays = 0;
 
-            //the selected no of days days
+            //the selected no of days
             foreach (var item in theDaysList)
             {
 
@@ -278,7 +321,8 @@ namespace TimetableManager.WPF.Controls
         }
         private void createStackPanel(string dayName)
         {
-            List<string> hourList = new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            List<string> hourList = new List<string>() { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+
             List<string> minList = new List<string>() { "00", "30" };
 
             StackPanel sp = new StackPanel
@@ -313,7 +357,6 @@ namespace TimetableManager.WPF.Controls
                 Text = "Start Hour",
             };
             comboBoxStartHour.SelectionChanged += comboBoxStartHours_SelectionChanged;
-            comboBoxStartHour.SelectedValuePath = "Content";
             comboBoxStartHour.ItemsSource = hourList;
 
 
@@ -329,7 +372,6 @@ namespace TimetableManager.WPF.Controls
                 Text = "Start Minutes",
             };
             comboBoxStartMin.SelectionChanged += comboBoxStartMins_SelectionChanged;
-            comboBoxStartMin.SelectedValuePath = "Content";
             comboBoxStartMin.ItemsSource = minList;
 
 
@@ -345,7 +387,6 @@ namespace TimetableManager.WPF.Controls
                 Text = "End Hour",
             };
             comboBoxEndHour.SelectionChanged += comboBoxEndHours_SelectionChanged;
-            comboBoxEndHour.SelectedValuePath = "Content";
             comboBoxEndHour.ItemsSource = hourList;
 
             //comboBoxEndMin
@@ -360,7 +401,6 @@ namespace TimetableManager.WPF.Controls
                 Text = "End Minutes",
             };
             comboBoxEndMin.SelectionChanged += comboBoxEndMins_SelectionChanged;
-            comboBoxEndMin.SelectedValuePath = "Content";
             comboBoxEndMin.ItemsSource = minList;
 
 

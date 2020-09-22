@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TimetableManager.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
-
+    <ScrollViewer>
     <Border BorderBrush="Gray" BorderThickness="1,0,1,1">
         <Grid Background="White">
             <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <StackPanel Background="White" Grid.Column="1" Grid.Row="1">
                 <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,10,10,0">
-                    <ComboBox x:Name="comboBoxNoOfDays" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="260" IsEditable="True" IsReadOnly="False" Text="No of Working Days" SelectionChanged="comboBoxNoOfDays_SelectionChanged" SelectedValuePath="Content">
+                    <ComboBox x:Name="comboBoxNoOfDays" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="240" IsEditable="True" IsReadOnly="False" Text="No of Working Days" SelectionChanged="comboBoxNoOfDays_SelectionChanged" SelectedValuePath="Content">
                         <ComboBoxItem Content="0" ></ComboBoxItem>
                         <ComboBoxItem Content="1" ></ComboBoxItem>
                         <ComboBoxItem Content="2"></ComboBoxItem>
@@ -104,7 +104,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,0,10,0">
                     <Grid>
                         <Label Content="Preferred Time Slot" Margin="20,10,0,0" />
-                        <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="250" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
+                        <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="240" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
                             <ComboBoxItem Content="30 mins"></ComboBoxItem>
                             <ComboBoxItem Content="1 hour"></ComboBoxItem>
                         </ComboBox>
@@ -126,4 +126,5 @@
             </StackPanel>
         </Grid>
     </Border>
+    </ScrollViewer>
 </UserControl>
