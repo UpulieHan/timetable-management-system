@@ -52,8 +52,16 @@
                         </Border>
                     </Grid>
                 </Border>
-
-                <Grid>
+                    <Border BorderBrush="Gray" BorderThickness="1,0,1,1" Margin="10,0,10,0">
+                        <Grid>
+                            <Label Content="Preferred Time Slot" Margin="20,10,0,0" />
+                            <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="240" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
+                                <ComboBoxItem Content="30 mins"></ComboBoxItem>
+                                <ComboBoxItem Content="1 hour"></ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
@@ -101,15 +109,7 @@
                         <StackPanel Orientation="Vertical" Name="daysStackPanel"/>
                     </Border>
                 </Grid>
-                <Border BorderBrush="Gray" BorderThickness="1,1,1,1" Margin="10,0,10,0">
-                    <Grid>
-                        <Label Content="Preferred Time Slot" Margin="20,10,0,0" />
-                        <ComboBox x:Name="comboBoxDuration" Margin="20,10,0,10" Padding="10,10,10,10" HorizontalAlignment="Left" Width="240" IsEditable="True" IsReadOnly="False" Text="Preferred Time Slot" SelectionChanged="comboBoxDuration_SelectionChanged" SelectedValuePath="Content">
-                            <ComboBoxItem Content="30 mins"></ComboBoxItem>
-                            <ComboBoxItem Content="1 hour"></ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                </Border>
+
                 <Border Margin="0,10,10,0">
                     <Grid>
                         <Image x:Name="tickImage"  Width="25" HorizontalAlignment="Right" Margin="0,0,120,0" />

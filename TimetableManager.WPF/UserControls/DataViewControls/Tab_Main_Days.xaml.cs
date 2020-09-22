@@ -269,6 +269,10 @@ namespace TimetableManager.WPF.Controls
 
 
                     timetableManagerDbContext.SaveChanges();
+
+                    //creating the dayTimeCodes
+                    //createDayTimeCodes();
+
                     MessageBox.Show("Changes saved");
                 }
                 catch (Exception ex)
@@ -297,7 +301,25 @@ namespace TimetableManager.WPF.Controls
                 if (item.IsSelected)
                 {
                     selectedNoOfDays++;
+
+                    //checking if the duration matches the start and end times of the days
+                    int modifiedEndHour = Int32.Parse(item.endHour);
+                    if (Int32.Parse(item.endMin) - Int32.Parse(item.startMin) < 0)
+                    {
+                        modifiedEndHour = (Int32.Parse(item.endHour) - 1);
+                    }
+                    if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
+                    {
+
+                        return false;
+                    }
                 }
+            }
+
+            //if time slot is 60 mins and working duration is a multiplication of 30 mins
+            if (timeSlot == 60 && mins == 30)
+            {
+                return false;
             }
 
             //the number of days
@@ -310,6 +332,11 @@ namespace TimetableManager.WPF.Controls
                 return false;
             }
         }
+
+        //private void createDayTimeCodes()
+        //{
+
+        //}
         private void createStackPanelBorder()
         {
             if (!stackPanelBorderCreated)
@@ -436,3 +463,4 @@ namespace TimetableManager.WPF.Controls
         }
     }
 }
+//loopholes, if the user closes the window after entering a not matching value, it's stored in the table (but an error will occur once the user tries to save again)
