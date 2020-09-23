@@ -33,7 +33,7 @@ namespace TimetableManager.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=database-1.cmxg05ztpr3u.us-east-1.rds.amazonaws.com,1433;Database=timetableDb;User Id=admin;Password=test1234;");
-            optionsBuilder.UseSqlite("Filename=D:/Developement/uni-projects/timetable-management-system/TimetableManager.EntityFramework/Timetable.db");
+            optionsBuilder.UseSqlite("Filename=C:/Users/iresh/source/repos/timetable-management-system/TimetableManager.EntityFramework/Timetable.db");
             base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,6 +60,12 @@ namespace TimetableManager.EntityFramework
             modelBuilder.Entity<Faculty>().HasData(GetFacultyList());
 
             //upulies
+            modelBuilder.Entity<Day>(entity =>
+            {
+                entity.HasKey(e => e.DayId);
+                entity.HasAlternateKey(e => e.DayName);
+            });
+
             modelBuilder.Entity<Day>().HasData(GetDayList());
 
             modelBuilder.Entity<DaysAndHours>(entity =>
@@ -111,13 +117,14 @@ namespace TimetableManager.EntityFramework
         {
             return new Day[]
             {
-                new Day { DayId= 1, DayName = "Monday",IsSelected = false},
-                new Day { DayId= 2, DayName = "Tuesday",IsSelected = false},
-                new Day { DayId= 3, DayName = "Wednesday",IsSelected = false},
-                new Day { DayId= 4, DayName = "Thursday",IsSelected = false},
-                new Day { DayId= 5, DayName = "Friday",IsSelected = false},
-                new Day { DayId= 6, DayName = "Saturday",IsSelected = false},
-                new Day { DayId= 7, DayName = "Sunday",IsSelected = false}
+                new Day { DayId= 1, DayName = "Monday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 2, DayName = "Tuesday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 3, DayName = "Wednesday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 4, DayName = "Thursday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 5, DayName = "Friday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 6, DayName = "Saturday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null},
+                new Day { DayId= 7, DayName = "Sunday",IsSelected = false,startHour=null,startMin=null,endHour=null,endMin=null}
+
             };
         }
     }
