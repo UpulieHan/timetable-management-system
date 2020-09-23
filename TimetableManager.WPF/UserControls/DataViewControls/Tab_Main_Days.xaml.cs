@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework;
 using TimetableManager.EntityFramework.Services;
+using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF.Controls
 {
@@ -267,15 +269,15 @@ namespace TimetableManager.WPF.Controls
 
                     timetableManagerDbContext.SaveChanges();
 
-                    //creating the dayTimeCodes
-                    createDayTimeCodes();
+                    //popup to set the interval time
+                    openTimetablePopup();
 
                     MessageBox.Show("Changes saved");
                 }
                 catch (Exception ex)
                 {
                     //in case if the connection to the DB is lost
-                    MessageBox.Show("second error" + ex.Message);
+                    MessageBox.Show("Error! " + ex.Message);
                 }
             }
             else
@@ -287,6 +289,11 @@ namespace TimetableManager.WPF.Controls
 
         }
 
+        private void openTimetablePopup()
+        {
+            TimetablePopup timetablePopup = new TimetablePopup(createDayTimeCodes());
+            timetablePopup.ShowDialog();
+        }
         private bool checkDateValidity()
         {
             selectedNoOfDays = 0;
@@ -341,7 +348,7 @@ namespace TimetableManager.WPF.Controls
             }
         }
 
-        private void createDayTimeCodes()
+        private List<string> createDayTimeCodes()
         {
             List<string> dayTimeCodeList = new List<string>();
 
@@ -399,12 +406,7 @@ namespace TimetableManager.WPF.Controls
                     }
                 }
             }
-
-            //save the list on the DB?
-            foreach (string dayTimeCode in dayTimeCodeList)
-            {
-                Trace.WriteLine(dayTimeCode);
-            }
+            return dayTimeCodeList;
         }
         private void createStackPanelBorder()
         {
@@ -532,4 +534,3 @@ namespace TimetableManager.WPF.Controls
         }
     }
 }
-//loopholes, if the user closes the window after entering a not matching value, it's stored in the table (but an error will occur once the user tries to save again)
