@@ -265,13 +265,10 @@ namespace TimetableManager.WPF.Controls
                         timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
                     }
 
-                    //theDaysList is already created (will always be not null)
-
-
                     timetableManagerDbContext.SaveChanges();
 
                     //creating the dayTimeCodes
-                    //createDayTimeCodes();
+                    createDayTimeCodes();
 
                     MessageBox.Show("Changes saved");
                 }
@@ -308,10 +305,21 @@ namespace TimetableManager.WPF.Controls
                     {
                         modifiedEndHour = (Int32.Parse(item.endHour) - 1);
                     }
+                    if (mins == 60)
+                    {
+                        mins = 0;
+                    }
                     if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
                     {
-
+                        if (mins == 0)
+                        {
+                            mins = 60;
+                        }
                         return false;
+                    }
+                    if (mins == 0)
+                    {
+                        mins = 60;
                     }
                 }
             }
@@ -336,28 +344,66 @@ namespace TimetableManager.WPF.Controls
         private void createDayTimeCodes()
         {
             List<string> dayTimeCodeList = new List<string>();
+
             foreach (var item in theDaysList)
             {
-                //MO TU WE TH FR SA
-                //day part
-                string day = item.DayName.Substring(0, 2);
-
-                //breaking the day into slots of desired timeslot
-                for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour); hourTime++)
+                if (item.IsSelected == true)
                 {
+                    //MO TU WE TH FR SA
+                    //day part
+                    string day = item.DayName.Substring(0, 2).ToUpper();
 
-                    if (Int32.Parse(item.endMin) == 30)
+                    //breaking the day into slots of desired timeslot
+                    int minTime = Int32.Parse(item.startMin);
+                    if (timeSlot.Equals(30))
                     {
-                        //60 - 30 = 30
+                        //break by 30 min slots
+                        for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour);)
+                        {
+                            if (minTime == 00)
+                            {
+                                dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "00" + (hourTime).ToString().PadLeft(2, '0') + "30");
+                                minTime = 30;
+                            }
+                            if (minTime == 30)
+                            {
+                                dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "30" + (hourTime + 1).ToString().PadLeft(2, '0') + "00");
+                                minTime = 00;
+                                hourTime++;
+
+                                //when endMin is 30
+                                if (hourTime == Int32.Parse(item.endHour) && Int32.Parse(item.endMin) == 30)
+                                {
+                                    dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "00" + (hourTime).ToString().PadLeft(2, '0') + "30");
+                                }
+                            }
+                        }
+
 
                     }
                     else
                     {
-                        //30 - 60 = -30
-
+                        //break by 60 min slots
+                        for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour); hourTime++)
+                        {
+                            //if startMin is 30 (both startMin and endMin become 30 here)
+                            if (Int32.Parse(item.startMin) == 30)
+                            {
+                                dayTimeCodeList.Add(day + hourTime.ToString().PadLeft(2, '0') + "30" + (hourTime + 1).ToString().PadLeft(2, '0') + "30");
+                            }
+                            else
+                            {
+                                dayTimeCodeList.Add(day + hourTime.ToString().PadLeft(2, '0') + "00" + (hourTime + 1).ToString().PadLeft(2, '0') + "00");
+                            }
+                        }
                     }
-                    Trace.WriteLine(day + hourTime);
                 }
+            }
+
+            //save the list on the DB?
+            foreach (string dayTimeCode in dayTimeCodeList)
+            {
+                Trace.WriteLine(dayTimeCode);
             }
         }
         private void createStackPanelBorder()
