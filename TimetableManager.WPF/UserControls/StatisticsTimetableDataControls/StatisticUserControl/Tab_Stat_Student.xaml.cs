@@ -34,6 +34,11 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
             dataGridstd.ItemsSource = std;
 
         }
+
+        private void button_Click_std(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     internal class Std

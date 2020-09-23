@@ -1,15 +1,12 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Numerics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TimetableManager.Domain.Models;
+using TimetableManager.EntityFramework.Services;
 
 namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserControl
 {
@@ -18,50 +15,58 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
     /// </summary>
     public partial class Tab_Stat_lecturer : UserControl
     {
+        public List<Lecturer> LecturesList { get; private set; }
+        public Hashtable HashTable = new Hashtable();
+        public List<LecturerStatGrid> LecturerStatList = new List<LecturerStatGrid>();
+
         public Tab_Stat_lecturer()
         {
             InitializeComponent();
-            List<Lec> lec = new List<Lec>();
 
-            lec.Add(new Lec() { rank = "Prof", number =2 });
-            lec.Add(new Lec() { rank = "Senior Lec", number = 4 });
-            lec.Add(new Lec() { rank = "Hod", number = 5 });
-            lec.Add(new Lec() { rank = "Lecturer", number = 30 });
-            lec.Add(new Lec() { rank = "Assistant", number = 40 });
-            dataGrid.ItemsSource = lec;
+            HashTable.Add("Professor", 0);
+            HashTable.Add("Assistant Professor", 0);
+            HashTable.Add("Senior Lecturer(HG)", 0);
+            HashTable.Add("Senior Lecturer", 0);
+            HashTable.Add("Lecturer", 0);
+            HashTable.Add("Assistant Lecturer", 0);
+            HashTable.Add("Instructors", 0);
+
+            _ = this.LoadLecturerData();
+
+            dataGrid.ItemsSource = LecturerStatList;
+        }
+
+        private async Task LoadLecturerData()
+        {
+            LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
+
+            LecturesList = await lecturerDataService.GetLecturersAsync();
+
+            LecturesList.ForEach(e =>
+            {
+                HashTable[e.Level.LevelName] = (int)HashTable[e.Level.LevelName] + 1;
+            });
+
+            foreach(DictionaryEntry entry in HashTable)
+            {
+                LecturerStatList.Add(new LecturerStatGrid { Rank = (string)entry.Key, Count = (int)entry.Value });
+            }
+        }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
 
-
-       /* public class lec
+        private void dataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            public string rank { get; set; }
 
-            public int number { get; set; }
-
-            public string Details { get {
-
-                    return String.Format("", rank, number);
-                
-                } }
-
-        }*/
+        }
     }
 
-    internal class Lec
+    public class LecturerStatGrid
     {
-        public string rank { get; set; }
-
-        public int number { get; set; }
-
-     /*   public string Details
-        {
-            get
-            {
-
-                return String.Format( rank, number);
-
-            }
-        }*/
+        public string Rank { get; set; }
+        public int Count { get; set; }
     }
 }

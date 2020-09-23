@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TimetableManager.WPF.UserControls.RoomConfigViewControl.RoomUserControls.Tab_Room_SetARoom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TimetableManager.WPF.UserControls.RoomConfigViewControl.RoomUserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="57" Margin="49,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="707"/>
+        <Button x:Name="button" Content="Search" HorizontalAlignment="Left" Height="27" Margin="611,72,0,0" VerticalAlignment="Top" Width="113"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="27" Margin="68,77,0,0" VerticalAlignment="Top" Width="152"/>
+        <ComboBox x:Name="comboBox_Copy" HorizontalAlignment="Left" Height="27" Margin="250,77,0,0" VerticalAlignment="Top" Width="152"/>
+        <Rectangle HorizontalAlignment="Left" Height="176" Margin="56,152,0,0" Stroke="Black" VerticalAlignment="Top" Width="700"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="91" Margin="68,167,0,0" Text="Here display the all sessions done by a particular Lecture if search by" TextWrapping="Wrap" VerticalAlignment="Top" Width="688"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Height="33" Margin="68,282,0,0" VerticalAlignment="Top" Width="332"/>
+        <Rectangle HorizontalAlignment="Left" Height="107" Margin="56,333,0,0" Stroke="Black" VerticalAlignment="Top" Width="700"/>
+        <Label x:Name="label" Content="Rooms" HorizontalAlignment="Left" Height="26" Margin="68,346,0,0" VerticalAlignment="Top" Width="109"/>
+        <Rectangle HorizontalAlignment="Left" Height="42" Margin="68,386,0,0" Stroke="Black" VerticalAlignment="Top" Width="675"/>
+
+
+
+    </Grid>
+</UserControl>

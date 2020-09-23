@@ -29,6 +29,11 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
             sub.Add(new Sub() { module = "DS", hours = 25 });
             dataGridstd.ItemsSource = sub;
         }
+
+        private void button_Click_sub(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     internal class Sub
