@@ -10,12 +10,12 @@
         <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" Margin="10">
             <TabItem Header="Set">
                 <Grid>
-                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="50,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="600"/>
+                    <Rectangle HorizontalAlignment="Left" Height="40" Margin="50,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="550"/>
 
                     <ComboBox
                             x:Name="comboBoxDay"
                             HorizontalAlignment="Left" 
-                            Margin="300,18,0,0" 
+                            Margin="70,16,0,0" 
                             VerticalAlignment="Top"
                             Width="150" 
                             IsEditable="True" 
@@ -25,9 +25,7 @@
                     </ComboBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="View">
-
-            </TabItem>
+            
         </TabControl>
 
     </Grid>
