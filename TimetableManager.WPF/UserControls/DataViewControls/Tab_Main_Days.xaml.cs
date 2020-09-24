@@ -465,6 +465,7 @@ namespace TimetableManager.WPF.Controls
             }
             return dayTimeCodeList;
         }
+        
         private void createStackPanelBorder()
         {
             if (!stackPanelBorderCreated)
