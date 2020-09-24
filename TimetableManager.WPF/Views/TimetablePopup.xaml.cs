@@ -135,7 +135,7 @@ namespace TimetableManager.WPF.Views
                     Name = "comboBoxInterval" + list[0].Substring(0, 2),
                     Margin = new Thickness(10, 0, 0, 0),
                     Padding = new Thickness(10),
-                    Width = 230,
+                    Width = 250,
                     IsEditable = true,
                     IsReadOnly = false,
                     Text = list[0].Substring(0, 2),

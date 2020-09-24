@@ -17,12 +17,13 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <Label Content="Enter the interval time slot for each day" Grid.Row="0" Grid.Column="1"/>
         <StackPanel Name="comboboxSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/>
         <Button Content="Save" Width="100" Height="35" Grid.Row="3"  Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
             <Button.Resources>
