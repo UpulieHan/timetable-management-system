@@ -127,13 +127,6 @@ namespace TimetableManager.WPF.Controls
                 UnregisterName(sp.Name);
             }
         }
-
-        //no need of this method
-        private void comboBoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //this is not a combo box 
-            Trace.WriteLine("comboBoxDay_SelectionChanged");
-        }
         private void comboBoxStartHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //get the parent
@@ -301,32 +294,38 @@ namespace TimetableManager.WPF.Controls
             //the selected no of days
             foreach (var item in theDaysList)
             {
-
                 if (item.IsSelected)
                 {
                     selectedNoOfDays++;
 
-                    //checking if the duration matches the start and end times of the days
-                    int modifiedEndHour = Int32.Parse(item.endHour);
-                    if (Int32.Parse(item.endMin) - Int32.Parse(item.startMin) < 0)
+                    if (item.startHour != null && item.startMin != null && item.endHour != null && item.endMin != null)
                     {
-                        modifiedEndHour = (Int32.Parse(item.endHour) - 1);
-                    }
-                    if (mins == 60)
-                    {
-                        mins = 0;
-                    }
-                    if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
-                    {
+                        //checking if the duration matches the start and end times of the days
+                        int modifiedEndHour = Int32.Parse(item.endHour);
+                        if (Int32.Parse(item.endMin) - Int32.Parse(item.startMin) < 0)
+                        {
+                            modifiedEndHour = (Int32.Parse(item.endHour) - 1);
+                        }
+                        if (mins == 60)
+                        {
+                            mins = 0;
+                        }
+                        if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
+                        {
+                            if (mins == 0)
+                            {
+                                mins = 60;
+                            }
+                            return false;
+                        }
                         if (mins == 0)
                         {
                             mins = 60;
                         }
-                        return false;
                     }
-                    if (mins == 0)
+                    else
                     {
-                        mins = 60;
+                        return false;
                     }
                 }
             }
@@ -405,6 +404,50 @@ namespace TimetableManager.WPF.Controls
                         }
                     }
                 }
+            }
+
+            //saving the dayTimeCodeList in the DB
+
+            //clear all previous
+            timetableManagerDbContext.TimeSlots.RemoveRange(timetableManagerDbContext.TimeSlots);
+            timetableManagerDbContext.SaveChanges();
+
+            TimeSlot t = new TimeSlot();
+            foreach (string slot in dayTimeCodeList)
+            {
+                if (slot.Substring(0, 2) == "MO")
+                {
+                    t.DayName = "Monday";
+                }
+                else if (slot.Substring(0, 2) == "TU")
+                {
+                    t.DayName = "Tuesday";
+                }
+                else if (slot.Substring(0, 2) == "WE")
+                {
+                    t.DayName = "Wednesday";
+                }
+                else if (slot.Substring(0, 2) == "TH")
+                {
+                    t.DayName = "Thursday";
+                }
+                else if (slot.Substring(0, 2) == "FR")
+                {
+                    t.DayName = "Friday";
+                }
+                else if (slot.Substring(0, 2) == "SA")
+                {
+                    t.DayName = "Saturday";
+                }
+                else
+                {
+                    t.DayName = "Sunday";
+                }
+                t.CodeId = slot;
+                t.startTime = slot.Substring(2, 4);
+                t.endTime = slot.Substring(6, 4);
+                timetableManagerDbContext.TimeSlots.Add(t);
+                timetableManagerDbContext.SaveChanges();
             }
             return dayTimeCodeList;
         }

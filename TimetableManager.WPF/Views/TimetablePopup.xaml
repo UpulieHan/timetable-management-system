@@ -23,10 +23,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-            <ComboBox x:Name="comboBoxIntervalSlot" Margin="10,10,0,10" Padding="10,10,10,10" Width="120" IsEditable="True" IsReadOnly="False" Text="Time Slot" ItemsSource="{Binding DayTimeList}" SelectionChanged="comboBoxIntervalSlot_SelectionChanged" SelectedValuePath="Content"/>
-        </StackPanel>
-        <Button Content="Save" Width="100" Height="35" Grid.Row="3" Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
+        <StackPanel Name="comboboxSP" Orientation="Horizontal" Grid.Row="1" Grid.Column="1"/>
+                <Button Content="Save" Width="100" Height="35" Grid.Row="3" Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
