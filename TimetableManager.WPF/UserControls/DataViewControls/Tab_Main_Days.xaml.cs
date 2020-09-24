@@ -29,6 +29,7 @@ namespace TimetableManager.WPF.Controls
     {
         public ObservableCollection<Day> theDaysList { get; set; }
         public ObservableCollection<string> selectedDaysList { get; set; }
+        private List<string> intervalList;
         private DaysAndHours daysAndHours;
         private int noOfDays = 0;
         private int selectedNoOfDays;
@@ -284,7 +285,7 @@ namespace TimetableManager.WPF.Controls
 
         private void openTimetablePopup()
         {
-            TimetablePopup timetablePopup = new TimetablePopup(createDayTimeCodes());
+            TimetablePopup timetablePopup = new TimetablePopup(createDayTimeCodes(), intervalList);
             timetablePopup.ShowDialog();
         }
         private bool checkDateValidity()
@@ -406,7 +407,20 @@ namespace TimetableManager.WPF.Controls
                 }
             }
 
-            //saving the dayTimeCodeList in the DB
+            //getting the previous interval timeslots
+            ObservableCollection<TimeSlot> theTimeSlotList = new ObservableCollection<TimeSlot>(timetableManagerDbContext.TimeSlots);
+            intervalList = new List<string>();
+
+            foreach (TimeSlot timeSlot in theTimeSlotList)
+            {
+                if (timeSlot.sessionId != null)
+                {
+                    if (timeSlot.sessionId == "INTERVAL")
+                    {
+                        intervalList.Add(timeSlot.CodeId);
+                    }
+                }
+            }
 
             //clear all previous
             timetableManagerDbContext.TimeSlots.RemoveRange(timetableManagerDbContext.TimeSlots);

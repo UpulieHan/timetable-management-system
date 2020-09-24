@@ -8,23 +8,23 @@
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
-        Title="Please Select a time slot for the Interval" Height="200" Width="600" FontFamily="Bahnschrift Light">
+        Title="Please Select a time slot for the Interval" Height="auto" Width="auto" FontFamily="Bahnschrift Light" ResizeMode="NoResize" WindowStyle="None">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <StackPanel Name="comboboxSP" Orientation="Horizontal" Grid.Row="1" Grid.Column="1"/>
-                <Button Content="Save" Width="100" Height="35" Grid.Row="3" Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
+        <StackPanel Name="comboboxSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Save" Width="100" Height="35" Grid.Row="3"  Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

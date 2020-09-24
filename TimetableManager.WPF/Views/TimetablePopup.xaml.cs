@@ -1,7 +1,9 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,9 +32,11 @@ namespace TimetableManager.WPF.Views
         public ObservableCollection<string> SaturdayTimeList { get; set; }
         public ObservableCollection<string> SundayTimeList { get; set; }
         public string selectedTimeSlot;
+        private List<string> intervalList;
         private TimetableManagerDbContext timetableManagerDbContext = new TimetableManagerDbContext();
-        public TimetablePopup(List<string> dayTimeList)
+        public TimetablePopup(List<string> dayTimeList, List<string> intervalList)
         {
+            this.intervalList = intervalList;
             InitializeComponent();
             List<ObservableCollection<string>> allLists = new List<ObservableCollection<string>>();
             MondayTimeList = new ObservableCollection<string>();
@@ -130,15 +134,31 @@ namespace TimetableManager.WPF.Views
                 ComboBox comboBoxInterval = new ComboBox
                 {
                     Name = "comboBoxInterval" + list[0].Substring(0, 2),
-                    Margin = new Thickness(20, 10, 0, 10),
+                    Margin = new Thickness(10, 0, 0, 0),
                     Padding = new Thickness(10),
-                    Width = 130,
+                    Width = 230,
                     IsEditable = true,
                     IsReadOnly = false,
                     Text = list[0].Substring(0, 2),
                 };
                 comboBoxInterval.ItemsSource = list;
+
+
+                foreach (string dayTimeCode in list)
+                {
+                    foreach (string interval in intervalList)
+                    {
+                        var words = dayTimeCode.Split(' ');
+                        if (words[0].Substring(0, 2).ToUpper() + words[2] + words[4] == interval)
+                        {
+                            comboBoxInterval.Text = dayTimeCode;
+                        }
+
+                    }
+                }
                 comboboxSP.Children.Add(comboBoxInterval);
+
+
             }
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)
