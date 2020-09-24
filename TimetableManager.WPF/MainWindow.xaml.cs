@@ -41,6 +41,8 @@ namespace TimetableManager.WPF
         private void OpenSessionsWindow(object sender, RoutedEventArgs e)
         {
             //interation logic for Sessions Window
+            SessionsWindow sessionsWindow = new SessionsWindow();
+            sessionsWindow.Show();
         }
         private void OpenSessionConfigWindow(object sender, RoutedEventArgs e)
         {
