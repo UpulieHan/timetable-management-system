@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace TimetableManager.Domain.Models
+{
+    public class TimeSlot
+    {
+        public string CodeId { get; set; }
+        public string DayName { get; set; }
+        public string startTime { get; set; }
+        public string endTime { get; set; }
+        public string sessionId { get; set; }
+    }
+}

@@ -28,6 +28,8 @@ namespace TimetableManager.EntityFramework
         public DbSet<SubGroupId> SubGroupIds { get; set; }
 
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<TimeSlot> TimeSlots { get; set; }
+
         public DbSet<Session> Sessions { get; set; }
         public TimetableManagerDbContext() { }
 
@@ -76,6 +78,15 @@ namespace TimetableManager.EntityFramework
                 entity.Property(e => e.Hours);
                 entity.Property(e => e.Mins);
                 entity.Property(e => e.TimeSlot);
+            });
+
+            modelBuilder.Entity<TimeSlot>(entity =>
+            {
+                entity.HasKey(e => e.CodeId);
+                entity.Property(e => e.DayName);
+                entity.Property(e => e.startTime);
+                entity.Property(e => e.endTime);
+                entity.Property(e => e.sessionId);
             });
 
             base.OnModelCreating(modelBuilder);

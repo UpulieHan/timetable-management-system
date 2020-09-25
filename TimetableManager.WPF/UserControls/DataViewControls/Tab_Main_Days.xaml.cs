@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework;
 using TimetableManager.EntityFramework.Services;
+using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF.Controls
 {
@@ -27,6 +29,7 @@ namespace TimetableManager.WPF.Controls
     {
         public ObservableCollection<Day> theDaysList { get; set; }
         public ObservableCollection<string> selectedDaysList { get; set; }
+        private List<string> intervalList;
         private DaysAndHours daysAndHours;
         private int noOfDays = 0;
         private int selectedNoOfDays;
@@ -124,13 +127,6 @@ namespace TimetableManager.WPF.Controls
                 //need to unregister the name so i can use it again later
                 UnregisterName(sp.Name);
             }
-        }
-
-        //no need of this method
-        private void comboBoxDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //this is not a combo box 
-            Trace.WriteLine("comboBoxDay_SelectionChanged");
         }
         private void comboBoxStartHours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -265,20 +261,17 @@ namespace TimetableManager.WPF.Controls
                         timetableManagerDbContext.DaysAndHours.Add(daysAndHours);
                     }
 
-                    //theDaysList is already created (will always be not null)
-
-
                     timetableManagerDbContext.SaveChanges();
 
-                    //creating the dayTimeCodes
-                    //createDayTimeCodes();
+                    //popup to set the interval time
+                    openTimetablePopup();
 
                     MessageBox.Show("Changes saved");
                 }
                 catch (Exception ex)
                 {
                     //in case if the connection to the DB is lost
-                    MessageBox.Show("second error" + ex.Message);
+                    MessageBox.Show("Error! " + ex.Message);
                 }
             }
             else
@@ -290,6 +283,11 @@ namespace TimetableManager.WPF.Controls
 
         }
 
+        private void openTimetablePopup()
+        {
+            TimetablePopup timetablePopup = new TimetablePopup(createDayTimeCodes(), intervalList);
+            timetablePopup.ShowDialog();
+        }
         private bool checkDateValidity()
         {
             selectedNoOfDays = 0;
@@ -297,20 +295,37 @@ namespace TimetableManager.WPF.Controls
             //the selected no of days
             foreach (var item in theDaysList)
             {
-
                 if (item.IsSelected)
                 {
                     selectedNoOfDays++;
 
-                    //checking if the duration matches the start and end times of the days
-                    int modifiedEndHour = Int32.Parse(item.endHour);
-                    if (Int32.Parse(item.endMin) - Int32.Parse(item.startMin) < 0)
+                    if (item.startHour != null && item.startMin != null && item.endHour != null && item.endMin != null)
                     {
-                        modifiedEndHour = (Int32.Parse(item.endHour) - 1);
+                        //checking if the duration matches the start and end times of the days
+                        int modifiedEndHour = Int32.Parse(item.endHour);
+                        if (Int32.Parse(item.endMin) - Int32.Parse(item.startMin) < 0)
+                        {
+                            modifiedEndHour = (Int32.Parse(item.endHour) - 1);
+                        }
+                        if (mins == 60)
+                        {
+                            mins = 0;
+                        }
+                        if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
+                        {
+                            if (mins == 0)
+                            {
+                                mins = 60;
+                            }
+                            return false;
+                        }
+                        if (mins == 0)
+                        {
+                            mins = 60;
+                        }
                     }
-                    if ((hours != (modifiedEndHour - Int32.Parse(item.startHour))) || (mins != Math.Abs(Int32.Parse(item.endMin) - Int32.Parse(item.startMin))))
+                    else
                     {
-
                         return false;
                     }
                 }
@@ -333,33 +348,124 @@ namespace TimetableManager.WPF.Controls
             }
         }
 
-        private void createDayTimeCodes()
+        private List<string> createDayTimeCodes()
         {
             List<string> dayTimeCodeList = new List<string>();
+
             foreach (var item in theDaysList)
             {
-                //MO TU WE TH FR SA
-                //day part
-                string day = item.DayName.Substring(0, 2);
-
-                //breaking the day into slots of desired timeslot
-                for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour); hourTime++)
+                if (item.IsSelected == true)
                 {
-                    // To Upulie => Added a multiline comment(line 349 - 358) to resolve SonarQube test fail. Uncomment this when you start working again.
-                    /*if (Int32.Parse(item.endMin) == 30)
+                    //MO TU WE TH FR SA
+                    //day part
+                    string day = item.DayName.Substring(0, 2).ToUpper();
+
+                    //breaking the day into slots of desired timeslot
+                    int minTime = Int32.Parse(item.startMin);
+                    if (timeSlot.Equals(30))
                     {
-                        //60 - 30 = 30
+                        //break by 30 min slots
+                        for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour);)
+                        {
+                            if (minTime == 00)
+                            {
+                                dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "00" + (hourTime).ToString().PadLeft(2, '0') + "30");
+                                minTime = 30;
+                            }
+                            if (minTime == 30)
+                            {
+                                dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "30" + (hourTime + 1).ToString().PadLeft(2, '0') + "00");
+                                minTime = 00;
+                                hourTime++;
+
+                                //when endMin is 30
+                                if (hourTime == Int32.Parse(item.endHour) && Int32.Parse(item.endMin) == 30)
+                                {
+                                    dayTimeCodeList.Add(day + (hourTime).ToString().PadLeft(2, '0') + "00" + (hourTime).ToString().PadLeft(2, '0') + "30");
+                                }
+                            }
+                        }
+
 
                     }
                     else
                     {
-                        //30 - 60 = -30
-
-                    }*/
-                    Trace.WriteLine(day + hourTime);
+                        //break by 60 min slots
+                        for (int hourTime = Int32.Parse(item.startHour); hourTime < Int32.Parse(item.endHour); hourTime++)
+                        {
+                            //if startMin is 30 (both startMin and endMin become 30 here)
+                            if (Int32.Parse(item.startMin) == 30)
+                            {
+                                dayTimeCodeList.Add(day + hourTime.ToString().PadLeft(2, '0') + "30" + (hourTime + 1).ToString().PadLeft(2, '0') + "30");
+                            }
+                            else
+                            {
+                                dayTimeCodeList.Add(day + hourTime.ToString().PadLeft(2, '0') + "00" + (hourTime + 1).ToString().PadLeft(2, '0') + "00");
+                            }
+                        }
+                    }
                 }
             }
+
+            //getting the previous interval timeslots
+            ObservableCollection<TimeSlot> theTimeSlotList = new ObservableCollection<TimeSlot>(timetableManagerDbContext.TimeSlots);
+            intervalList = new List<string>();
+
+            foreach (TimeSlot timeSlot in theTimeSlotList)
+            {
+                if (timeSlot.sessionId != null)
+                {
+                    if (timeSlot.sessionId == "INTERVAL")
+                    {
+                        intervalList.Add(timeSlot.CodeId);
+                    }
+                }
+            }
+
+            //clear all previous
+            timetableManagerDbContext.TimeSlots.RemoveRange(timetableManagerDbContext.TimeSlots);
+            timetableManagerDbContext.SaveChanges();
+
+            TimeSlot t = new TimeSlot();
+            foreach (string slot in dayTimeCodeList)
+            {
+                if (slot.Substring(0, 2) == "MO")
+                {
+                    t.DayName = "Monday";
+                }
+                else if (slot.Substring(0, 2) == "TU")
+                {
+                    t.DayName = "Tuesday";
+                }
+                else if (slot.Substring(0, 2) == "WE")
+                {
+                    t.DayName = "Wednesday";
+                }
+                else if (slot.Substring(0, 2) == "TH")
+                {
+                    t.DayName = "Thursday";
+                }
+                else if (slot.Substring(0, 2) == "FR")
+                {
+                    t.DayName = "Friday";
+                }
+                else if (slot.Substring(0, 2) == "SA")
+                {
+                    t.DayName = "Saturday";
+                }
+                else
+                {
+                    t.DayName = "Sunday";
+                }
+                t.CodeId = slot;
+                t.startTime = slot.Substring(2, 4);
+                t.endTime = slot.Substring(6, 4);
+                timetableManagerDbContext.TimeSlots.Add(t);
+                timetableManagerDbContext.SaveChanges();
+            }
+            return dayTimeCodeList;
         }
+        
         private void createStackPanelBorder()
         {
             if (!stackPanelBorderCreated)
@@ -486,4 +592,3 @@ namespace TimetableManager.WPF.Controls
         }
     }
 }
-//loopholes, if the user closes the window after entering a not matching value, it's stored in the table (but an error will occur once the user tries to save again)
