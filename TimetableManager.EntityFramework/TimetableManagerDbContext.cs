@@ -89,6 +89,19 @@ namespace TimetableManager.EntityFramework
                 entity.Property(e => e.sessionId);
             });
 
+            modelBuilder.Entity<LecturerSession>()
+                .HasKey(t => new { t.LecturerId, t.SessionId });
+
+            modelBuilder.Entity<LecturerSession>()
+                .HasOne(ls => ls.Lecturer)
+                .WithMany(l => l.LecturerSessions)
+                .HasForeignKey(ls => ls.LecturerId);
+
+            modelBuilder.Entity<LecturerSession>()
+                .HasOne(ls => ls.Session)
+                .WithMany(s => s.LecturerSessions)
+                .HasForeignKey(ls => ls.SessionId);
+
             base.OnModelCreating(modelBuilder);
         }
 

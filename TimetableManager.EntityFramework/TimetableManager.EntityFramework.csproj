@@ -51,6 +51,10 @@
     <Compile Remove="Migrations\20200904151852_Refactor1.0.Designer.cs" />
     <Compile Remove="Migrations\20200905050435_v1.1.cs" />
     <Compile Remove="Migrations\20200905050435_v1.1.Designer.cs" />
+    <Compile Remove="Migrations\20200925110717_v1.cs" />
+    <Compile Remove="Migrations\20200925110717_v1.Designer.cs" />
+    <Compile Remove="Migrations\20200925113221_v2.cs" />
+    <Compile Remove="Migrations\20200925113221_v2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
