@@ -113,7 +113,7 @@
                     <TextBox x:Name="GroupsTextBox" Grid.Column="1" Grid.Row="2" />
                     <TextBox x:Name="SubjectsTextBox" Grid.Column="1" Grid.Row="3" />
                     <TextBox x:Name="StudentsNumberTextBox" Grid.Column="1" Grid.Row="4" />
-                    <TextBox x:Name="DuratonText" Grid.Column="1" Grid.Row="5" />
+                    <TextBox x:Name="DurationTextBox" Grid.Column="1" Grid.Row="5" />
                     <Button x:Name="LecturerLoadButton" Click="LecturerLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="0" />
                     <Button x:Name="TagLoadButton" Click="TagLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="1" />
                     <Button x:Name="GroupLoadButton" Click="GroupLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="2" />

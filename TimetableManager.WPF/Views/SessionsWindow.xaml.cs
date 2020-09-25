@@ -206,7 +206,16 @@ namespace TimetableManager.WPF.Views
         {
             SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
 
+            int studentCount = Int32.Parse(StudentsNumberTextBox.Text.Trim());
+            int duration = Int32.Parse(DurationTextBox.Text.Trim());
 
+            Session session = new Session
+            {
+                StudentCount = studentCount,
+                Duration = duration
+            };
+
+            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList);
         }
     }
 
