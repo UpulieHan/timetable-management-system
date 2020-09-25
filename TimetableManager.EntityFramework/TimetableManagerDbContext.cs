@@ -28,6 +28,7 @@ namespace TimetableManager.EntityFramework
         public DbSet<SubGroupId> SubGroupIds { get; set; }
 
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Session> Sessions { get; set; }
         public TimetableManagerDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
