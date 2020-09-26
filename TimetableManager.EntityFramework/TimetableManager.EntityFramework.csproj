@@ -55,6 +55,8 @@
     <Compile Remove="Migrations\20200925110717_v1.Designer.cs" />
     <Compile Remove="Migrations\20200925113221_v2.cs" />
     <Compile Remove="Migrations\20200925113221_v2.Designer.cs" />
+    <Compile Remove="Migrations\20200925113328_v2.cs" />
+    <Compile Remove="Migrations\20200925113328_v2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

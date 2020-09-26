@@ -26,13 +26,17 @@ namespace TimetableManager.WPF.Views
         List<Lecturer> LecturersList { get; set; }
         List<Tag> TagsList { get; set; }
         List<GroupId> GroupIdsList { get; set; }
+        List<SubGroupId> SubGroupIdsList { get; set; }
         List<Subject> SubjectsList { get; set; }
 
         List<Lecturer> SelectedLecturerList { get; set; }
         List<Tag> SelectedTagList { get; set; }
         List<GroupId> SelectedGroupIdList { get; set; }
+        List<SubGroupId> SelectedSubGroupIdList { get; set; }
         List<Subject> SelectedSubjectList { get; set; }
 
+        public List<Session> SessionList { get; set; }
+        public ObservableCollection<SessionDataGridModel> SessionDataGridList { get; set; }
         public SessionsWindow()
         {
             InitializeComponent();
@@ -41,9 +45,30 @@ namespace TimetableManager.WPF.Views
             SelectedLecturerList = new List<Lecturer>();
             SelectedTagList = new List<Tag>();
             SelectedGroupIdList = new List<GroupId>();
+            SelectedSubGroupIdList = new List<SubGroupId>();
             SelectedSubjectList = new List<Subject>();
 
             DataGrid.ItemsSource = DataCollection;
+
+            SessionDataGridList = new ObservableCollection<SessionDataGridModel>();
+            LoadSessionData();
+            SessionDataGrid.ItemsSource = SessionDataGridList;
+        }
+
+        private async void LoadSessionData()
+        {
+            SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
+
+            SessionList = await sessionDataService.GetListAsync();
+
+            SessionList.ForEach(e =>
+            {
+                SessionDataGridList.Add(new SessionDataGridModel
+                {
+                    SessionId = e.SessionId,
+                    Subject = e.Subject.SubjectName
+                });
+            });
         }
 
         private void ChangeToLoadTab()
@@ -73,8 +98,18 @@ namespace TimetableManager.WPF.Views
 
         private void GroupLoadButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadType = "GroupId";
-            LoadGroupIdData();
+            ComboBoxItem item = (ComboBoxItem)GroupComboBox.SelectedItem;
+            if(item.Content.ToString() == "Groups")
+            {
+                LoadType = "GroupId";
+                LoadGroupIdData();
+            } 
+            else if(item.Content.ToString() == "Sub Groups")
+            {
+                LoadType = "SubGroups";
+                LoadSubGroupIdData();
+            }
+
             ChangeToLoadTab();
         }
 
@@ -117,6 +152,19 @@ namespace TimetableManager.WPF.Views
             });
         }
 
+        private async void LoadSubGroupIdData()
+        {
+            SubGroupIdDataService subGroupIdDataService = new SubGroupIdDataService(new EntityFramework.TimetableManagerDbContext());
+
+            SubGroupIdsList = await subGroupIdDataService.GetSubGroupId();
+
+            DataCollection.Clear();
+            SubGroupIdsList.ForEach(e =>
+            {
+                DataCollection.Add(new LoadDataGridModel { Id = e.Id, ItemName = e.SubGroupID });
+            });
+        }
+
         private async void LoadSubjectData()
         {
             SubjectDataService subjectDataService = new SubjectDataService(new EntityFramework.TimetableManagerDbContext());
@@ -148,6 +196,11 @@ namespace TimetableManager.WPF.Views
                 SelectedGroupIdList.Add(GroupIdsList.Find(e => e.Id == item.Id));
                 SetGroupIdTextBox();
             } 
+            else if(LoadType == "SubGroups")
+            {
+                SelectedSubGroupIdList.Add(SubGroupIdsList.Find(e => e.Id == item.Id));
+                SetSubGroupIdTextBox();
+            }    
             else if(LoadType == "Subject")
             {
                 SelectedSubjectList.Add(SubjectsList.Find(e => e.Id == item.Id));
@@ -189,7 +242,18 @@ namespace TimetableManager.WPF.Views
             });
 
             GroupsTextBox.Text = s;
-        }        
+        }    
+        private void SetSubGroupIdTextBox()
+        {
+            string s = "";
+
+            SelectedSubGroupIdList.ForEach(e =>
+            {
+                s = s + e.SubGroupID + " ,";
+            });
+
+            GroupsTextBox.Text = s;
+        }
         private void SetSubjectsTextBox()
         {
             string s = "";
@@ -215,7 +279,31 @@ namespace TimetableManager.WPF.Views
                 Duration = duration
             };
 
-            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList);
+            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList, SelectedTagList[0], SelectedSubjectList[0]);
+        }
+
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            SessionDataGridModel item = (SessionDataGridModel)SessionDataGrid.SelectedItem;
+
+            Session selectedSession = SessionList.Single(e => e.SessionId == item.SessionId);
+
+            SetSessionLabel(selectedSession);
+        }
+
+        private void SetSessionLabel(Session session)
+        {
+            var lNames = "";
+            session.LecturerSessions.ForEach(e =>
+            {
+                lNames += e.Lecturer.EmployeeName + " ,";
+            });
+
+            CardLecturerName.Content = lNames;
+            CardSubjectName.Content = session.Subject.SubjectName;
+            CardTagName.Content = session.Tag.TagName;
+            //CardGroupName.Content 
+            CardCount.Content = session.StudentCount + "(" + session.Duration + ")";
         }
     }
 
@@ -223,5 +311,11 @@ namespace TimetableManager.WPF.Views
     {
         public int Id { get; set; }
         public string ItemName { get; set; }
+    }
+
+    public class SessionDataGridModel
+    {
+        public int SessionId { get; set; }
+        public string Subject { get; set; }
     }
 }

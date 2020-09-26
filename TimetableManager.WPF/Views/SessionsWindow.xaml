@@ -85,6 +85,49 @@
 
         <TabControl x:Name="SessionTabControl" TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#008CFF" Width="auto" Height="auto">
             <TabItem Header="View Sessions" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="SessionDataGrid" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Session ID" Binding="{Binding SessionId}" />
+                            <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Button x:Name="ViewButton" Content="View" Click="ViewButton_Click" Grid.Column="0" Grid.Row="0"></Button>
+                                            <Button x:Name="DeleteButton" Content="Delete" Grid.Column="1" Grid.Row="0"></Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Grid.Column="1">
+                        <StackPanel Orientation="Vertical">
+                             <Label x:Name="CardLecturerName" Content="Dr.Nuwan Kodagoda" Width="auto" />
+                             <Label x:Name="CardSubjectName" Content="OOC" />
+                             <Label x:Name="CardTagName" Content="Tutorial" />
+                             <Label x:Name="CardGroupName" Content="Y1.S2.IT.01" />
+                             <Label x:Name="CardCount" Content="120(2)" />
+                        </StackPanel>
+                    </TextBlock>
+                </Grid>
             </TabItem>
             <TabItem Header="Create Sessions" >
                 <Grid>
@@ -104,7 +147,10 @@
                     </Grid.RowDefinitions>
                     <Label Content="Lecture/s" Grid.Column="0" Grid.Row="0"/>
                     <Label Content="Tags" Grid.Column="0" Grid.Row="1"/>
-                    <Label Content="Groups / Sub Groups" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox x:Name="GroupComboBox"  Grid.Column="0" Grid.Row="2" SelectedIndex="0">
+                        <ComboBoxItem>Groups</ComboBoxItem>
+                        <ComboBoxItem>Sub Groups</ComboBoxItem>
+                    </ComboBox>
                     <Label Content="Subjects" Grid.Column="0" Grid.Row="3"/>
                     <Label Content="Students Count" Grid.Column="0" Grid.Row="4"/>
                     <Label Content="Duration" Grid.Column="0" Grid.Row="5"/>
