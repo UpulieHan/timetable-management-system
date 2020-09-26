@@ -128,6 +128,19 @@ namespace TimetableManager.EntityFramework
                 .WithMany(s => s.SubGroupIdSessions)
                 .HasForeignKey(gs => gs.SessionId);
 
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasKey(e => new { e.LecturerId, e.TimeSlotId });
+
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasOne(l => l.Lecturer)
+                .WithMany(t => t.LecturerUnavailableTimeSlots)
+                .HasForeignKey(ts => ts.LecturerId);
+
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(t => t.LecturerUnavailableTimeSlots)
+                .HasForeignKey(ts => ts.TimeSlotId);
+
             base.OnModelCreating(modelBuilder);
         }
 

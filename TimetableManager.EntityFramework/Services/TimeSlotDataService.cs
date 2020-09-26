@@ -17,7 +17,10 @@ namespace TimetableManager.EntityFramework.Services
         }
         public async Task<List<TimeSlot>> GetTimeSlotsAsync()
         {
-            return await _context.TimeSlots.ToListAsync();
+            return await _context.TimeSlots
+                    .Include(e => e.LecturerUnavailableTimeSlots)
+                    .ThenInclude(e => e.Lecturer)
+                    .ToListAsync();
         }
     }
 }

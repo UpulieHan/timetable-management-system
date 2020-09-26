@@ -182,5 +182,23 @@ namespace TimetableManager.WPF.Views
                 CardCount.Content = "";
             }
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            object v = comboBoxSelectRes.SelectedValue;
+            string value = v.ToString();
+            string timeSlot = (string)comboBoxDay.SelectedItem;
+            TimeSlot selectedTimeSlot = TimeSlotList.Single(e => e.CodeId == timeSlot);
+
+            if (value == "lecturer")
+            {
+                string lecturer = (string)comboBoxResVal.SelectedItem;
+                Lecturer selectedLecturer = LecturersList.Single(e => e.EmployeeName == lecturer);
+
+                LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
+
+                _ = lecturerDataService.SetUnAvailable(selectedLecturer, selectedTimeSlot);
+            }
+        }
     }
 }

@@ -129,7 +129,7 @@
                             ItemsSource="{Binding NameList}"
                             SelectionChanged="comboBoxResVal_SelectionChanged">
                         </ComboBox>
-                        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="500,132,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White"/>
+                        <Button x:Name="btnSave" Content="save" HorizontalAlignment="Left" Margin="500,132,0,0" VerticalAlignment="Top" Height="34" Width="105" Background="Blue" Foreground="White" Click="btnSave_Click" />
                         <TextBlock Margin="0,190,0,0">
                             <StackPanel Orientation="Vertical">
                                  <Label x:Name="CardLecturerName" Width="auto" />
