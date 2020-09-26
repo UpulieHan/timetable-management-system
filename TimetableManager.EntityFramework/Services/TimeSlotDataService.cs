@@ -7,7 +7,7 @@ using TimetableManager.Domain.Models;
 
 namespace TimetableManager.EntityFramework.Services
 {
-    class TimeSlotDataService
+    public class TimeSlotDataService
     {
         private readonly TimetableManagerDbContext _context;
 
