@@ -8,5 +8,6 @@ namespace TimetableManager.Domain.Models
     {
         public int Id { get; set; }
         public string SubGroupID { get; set; }
+        public List<SubGroupIdSession> SubGroupIdSessions { get; set; }
     }
 }

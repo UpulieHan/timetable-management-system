@@ -17,7 +17,7 @@ namespace TimetableManager.EntityFramework.Services
             _context = context;
         }
 
-        public Task<int> AddSession(Session session, List<Lecturer> lecturers, List<GroupId> groups, Tag tag, Subject subject)
+        public Task<int> AddSession(Session session, List<Lecturer> lecturers, List<GroupId> groups, List<SubGroupId> subGroups, Tag tag, Subject subject)
         {
             var t = _context.Tags.Include(e => e.Sessions).Single(e => e.TagId == tag.TagId);
             t.Sessions.Add(session);
@@ -31,6 +31,22 @@ namespace TimetableManager.EntityFramework.Services
                 _context.Set<LecturerSession>().Add(new LecturerSession { Lecturer = lecturer, Session = session });
             });
 
+            if(groups.Count != 0)
+            {
+                groups.ForEach(e =>
+                {
+                    var g = _context.GroupIds.Single(i => i.Id == e.Id);
+                    _context.Set<GroupIdSession>().Add(new GroupIdSession { Group = g, Session = session });
+                });
+            }
+            else if(subGroups.Count != 0)
+            {
+                subGroups.ForEach(e =>
+                {
+                    var g = _context.SubGroupIds.Single(i => i.Id == e.Id);
+                    _context.Set<SubGroupIdSession>().Add(new SubGroupIdSession { SubGroup = g, Session = session });
+                });
+            }
            
 
             return _context.SaveChangesAsync();
@@ -43,6 +59,10 @@ namespace TimetableManager.EntityFramework.Services
                 .ThenInclude(e => e.Lecturer)
                 .Include(s => s.Subject)
                 .Include(t => t.Tag)
+                .Include(g => g.GroupIdSessions)
+                .ThenInclude(gs => gs.Group)
+                .Include(sg => sg.SubGroupIdSessions)
+                .ThenInclude(sgs => sgs.SubGroup)
                 .ToListAsync();
         }
     }

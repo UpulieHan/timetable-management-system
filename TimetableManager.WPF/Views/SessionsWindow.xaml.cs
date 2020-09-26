@@ -279,7 +279,7 @@ namespace TimetableManager.WPF.Views
                 Duration = duration
             };
 
-            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList, SelectedTagList[0], SelectedSubjectList[0]);
+            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList, SelectedSubGroupIdList, SelectedTagList[0], SelectedSubjectList[0]);
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
@@ -299,11 +299,28 @@ namespace TimetableManager.WPF.Views
                 lNames += e.Lecturer.EmployeeName + " ,";
             });
 
+            var gNames = "";
+            if (session.GroupIdSessions.Count != 0)
+            {
+                session.GroupIdSessions.ForEach(e =>
+                {
+                    gNames += e.Group.GroupID + " ,";
+                });
+            }
+            else if (session.SubGroupIdSessions.Count != 0)
+            {
+                session.SubGroupIdSessions.ForEach(e =>
+                {
+                    gNames += e.SubGroup.SubGroupID + " ,";
+                });
+            }
+
             CardLecturerName.Content = lNames;
             CardSubjectName.Content = session.Subject.SubjectName;
             CardTagName.Content = session.Tag.TagName;
-            //CardGroupName.Content 
+            CardGroupName.Content = gNames; 
             CardCount.Content = session.StudentCount + "(" + session.Duration + ")";
+
         }
     }
 

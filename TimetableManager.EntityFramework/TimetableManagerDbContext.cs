@@ -102,6 +102,32 @@ namespace TimetableManager.EntityFramework
                 .WithMany(s => s.LecturerSessions)
                 .HasForeignKey(ls => ls.SessionId);
 
+            modelBuilder.Entity<GroupIdSession>()
+                .HasKey(e => new { e.GroupId, e.SessionId });
+
+            modelBuilder.Entity<GroupIdSession>()
+                .HasOne(gs => gs.Group)
+                .WithMany(g => g.GroupIdSessions)
+                .HasForeignKey(gs => gs.GroupId);
+
+            modelBuilder.Entity<GroupIdSession>()
+                .HasOne(gs => gs.Session)
+                .WithMany(s => s.GroupIdSessions)
+                .HasForeignKey(gs => gs.SessionId);
+            
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasKey(e => new { e.SubGroupId, e.SessionId });
+
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasOne(gs => gs.SubGroup)
+                .WithMany(g => g.SubGroupIdSessions)
+                .HasForeignKey(gs => gs.SubGroupId);
+
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasOne(gs => gs.Session)
+                .WithMany(s => s.SubGroupIdSessions)
+                .HasForeignKey(gs => gs.SessionId);
+
             base.OnModelCreating(modelBuilder);
         }
 
