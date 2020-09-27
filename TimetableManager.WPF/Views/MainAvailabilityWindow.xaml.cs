@@ -199,6 +199,15 @@ namespace TimetableManager.WPF.Views
 
                 _ = lecturerDataService.SetUnAvailable(selectedLecturer, selectedTimeSlot);
             }
+            else if(value == "session")
+            {
+                string session = (string)comboBoxResVal.SelectedItem;
+                Session selectedSession = SessionList.Single(e => e.SessionId == Int32.Parse(session));
+
+                SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
+
+                _ = sessionDataService.SetUnavailable(selectedSession, selectedTimeSlot);
+            }
         }
     }
 }

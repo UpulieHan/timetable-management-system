@@ -63,7 +63,19 @@ namespace TimetableManager.EntityFramework.Services
                 .ThenInclude(gs => gs.Group)
                 .Include(sg => sg.SubGroupIdSessions)
                 .ThenInclude(sgs => sgs.SubGroup)
+                .Include(ts => ts.SessionUnavailableTimeSlots)
+                .ThenInclude(sts => sts.TimeSlot)
                 .ToListAsync();
+        }
+
+        public async Task<int> SetUnavailable(Session session, TimeSlot timeSlot)
+        {
+            var s = _context.Sessions.Single(e => e.SessionId == session.SessionId);
+            var t = _context.TimeSlots.Single(e => e.CodeId == timeSlot.CodeId);
+
+            _context.Set<SessionUnavailableTimeSlot>().Add(new SessionUnavailableTimeSlot { Session = s, TimeSlot = t });
+
+            return await _context.SaveChangesAsync();
         }
     }
 }

@@ -14,5 +14,6 @@ namespace TimetableManager.Domain.Models
         public List<LecturerSession> LecturerSessions { get; set; }
         public List<GroupIdSession> GroupIdSessions { get; set; }
         public List<SubGroupIdSession> SubGroupIdSessions { get; set; }
+        public List<SessionUnavailableTimeSlot> SessionUnavailableTimeSlots { get; set; }
     }
 }

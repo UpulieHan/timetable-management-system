@@ -20,6 +20,8 @@ namespace TimetableManager.EntityFramework.Services
             return await _context.TimeSlots
                     .Include(e => e.LecturerUnavailableTimeSlots)
                     .ThenInclude(e => e.Lecturer)
+                    .Include(e => e.SessionUnavailableTimeSlots)
+                    .ThenInclude(e => e.Session)
                     .ToListAsync();
         }
     }
