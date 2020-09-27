@@ -9,5 +9,6 @@ namespace TimetableManager.Domain.Models
         public int Id { get; set; }
         public string GroupID { get; set; }
         public List<GroupIdSession> GroupIdSessions { get; set; }
+        public List<GroupIdUnavailableTimeSlot> GroupIdUnavailableTimeSlots { get; set; }
     }
 }

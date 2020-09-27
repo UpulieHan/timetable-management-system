@@ -13,5 +13,6 @@ namespace TimetableManager.Domain.Models
         public string sessionId { get; set; }
         public List<LecturerUnavailableTimeSlot> LecturerUnavailableTimeSlots { get; set; }
         public List<SessionUnavailableTimeSlot> SessionUnavailableTimeSlots { get; set; }
+        public List<GroupIdUnavailableTimeSlot> GroupIdUnavailableTimeSlots { get; set; }
     }
 }
