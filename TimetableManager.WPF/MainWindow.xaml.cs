@@ -45,8 +45,8 @@ namespace TimetableManager.WPF
         }
         private void OpenSessionConfigWindow(object sender, RoutedEventArgs e)
         {
-            MainSessionConfigWindow mainDataWindow = new MainSessionConfigWindow();
-            mainDataWindow.Show();
+            SessionConfigWindow sessionConfigWindow = new SessionConfigWindow();
+            sessionConfigWindow.Show();
         }
         private void OpenRoomConfigWindow(object sender, RoutedEventArgs e)
         {
