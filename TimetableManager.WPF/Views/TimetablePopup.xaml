@@ -8,29 +8,12 @@
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
-        Title="Please Select a time slot for the Interval" Height="auto" Width="auto" FontFamily="Bahnschrift Light" ResizeMode="NoResize" WindowStyle="None">
+        Title="Generated Timetable" Height="auto" Width="auto" FontFamily="Bahnschrift Light">
+    <!--the amount of columns/rows depends on the number of days/timeslots per day-->
+    
+    <!--StackPanel Name="containerSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/-->
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <StackPanel Name="comboboxSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/>
-        <Button Content="Save" Width="100" Height="35" Grid.Row="3"  Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                    <Setter Property="Padding" Value="10,5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+    <Grid Name="timetableGrid" Width="1024" Height="700" ShowGridLines="True" Background="AliceBlue">
+        
     </Grid>
 </Window>

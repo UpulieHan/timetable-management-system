@@ -285,8 +285,8 @@ namespace TimetableManager.WPF.Controls
 
         private void openTimetablePopup()
         {
-            TimetablePopup timetablePopup = new TimetablePopup(createDayTimeCodes(), intervalList);
-            timetablePopup.ShowDialog();
+            IntervalTimePopup intervalTimePopup = new IntervalTimePopup(createDayTimeCodes(), intervalList);
+            intervalTimePopup.ShowDialog();
         }
         private bool checkDateValidity()
         {
@@ -465,7 +465,7 @@ namespace TimetableManager.WPF.Controls
             }
             return dayTimeCodeList;
         }
-        
+
         private void createStackPanelBorder()
         {
             if (!stackPanelBorderCreated)

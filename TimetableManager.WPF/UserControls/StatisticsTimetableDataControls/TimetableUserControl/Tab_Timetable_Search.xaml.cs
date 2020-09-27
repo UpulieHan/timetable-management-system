@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserControl
 {
@@ -34,12 +35,14 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
         private void viewButton_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("view Button clicked");
-
+            TimetablePopup timetablePopup = new TimetablePopup();
+            timetablePopup.Show();
         }
 
         private void printButton_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("print Button clicked");
+
         }
     }
 }
