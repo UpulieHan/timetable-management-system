@@ -29,7 +29,10 @@ namespace TimetableManager.EntityFramework.Services
         }
         public async Task<List<SubGroupId>> GetSubGroupId()
         {
-            return await _context.SubGroupIds.ToListAsync();
+            return await _context.SubGroupIds
+                    .Include(e => e.SubGroupIdUnavailableTimeSlots)
+                    .ThenInclude(e => e.TimeSlot)
+                    .ToListAsync();
         }
         public async Task<int> DeleteSubGroupId(int id)
         {
@@ -47,6 +50,16 @@ namespace TimetableManager.EntityFramework.Services
                 _context.SubGroupIds.Attach(entity);
                 _context.SubGroupIds.Remove(entity);
             }
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetUnavailable(SubGroupId subGroup, TimeSlot timeslot)
+        {
+            var s = _context.SubGroupIds.Single(e => e.Id == subGroup.Id);
+            var t = _context.TimeSlots.Single(e => e.CodeId == timeslot.CodeId);
+
+            _context.Set<SubGroupIdUnavailableTimeSlot>().Add(new SubGroupIdUnavailableTimeSlot { SubGroup = s, TimeSlot = t });
 
             return await _context.SaveChangesAsync();
         }

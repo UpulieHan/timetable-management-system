@@ -215,6 +215,14 @@ namespace TimetableManager.WPF.Views
                 GroupIdDataService groupIdDataService = new GroupIdDataService(new EntityFramework.TimetableManagerDbContext());
 
                 _ = groupIdDataService.SetUnavailable(selectedGroupId, selectedTimeSlot);
+            } else
+            {
+                string subgroupid = (string)comboBoxResVal.SelectedItem;
+                SubGroupId selectedSubGroupId = SubGroupIdList.Single(e => e.SubGroupID == subgroupid);
+
+                SubGroupIdDataService subGroupIdDataService = new SubGroupIdDataService(new EntityFramework.TimetableManagerDbContext());
+
+                _ = subGroupIdDataService.SetUnavailable(selectedSubGroupId, selectedTimeSlot);
             }
         }
     }

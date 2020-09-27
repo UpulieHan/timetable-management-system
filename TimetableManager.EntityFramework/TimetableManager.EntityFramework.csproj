@@ -65,6 +65,8 @@
     <Compile Remove="Migrations\20200926155540_v6.Designer.cs" />
     <Compile Remove="Migrations\20200927021933_v7.cs" />
     <Compile Remove="Migrations\20200927021933_v7.Designer.cs" />
+    <Compile Remove="Migrations\20200927024926_v8.cs" />
+    <Compile Remove="Migrations\20200927024926_v8.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

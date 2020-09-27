@@ -165,7 +165,20 @@ namespace TimetableManager.EntityFramework
             modelBuilder.Entity<GroupIdUnavailableTimeSlot>()
                 .HasOne(t => t.TimeSlot)
                 .WithMany(ts => ts.GroupIdUnavailableTimeSlots)
-                .HasForeignKey(gts => gts.TimeSlotId);
+                .HasForeignKey(gts => gts.TimeSlotId);  
+            
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasKey(e => new { e.SubGroupId, e.TimeSlotId });
+
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasOne(sg => sg.SubGroup)
+                .WithMany(t => t.SubGroupIdUnavailableTimeSlots)
+                .HasForeignKey(sgts => sgts.SubGroupId);
+
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(ts => ts.SubGroupIdUnavailableTimeSlots)
+                .HasForeignKey(sgts => sgts.TimeSlotId);
 
             base.OnModelCreating(modelBuilder);
         }

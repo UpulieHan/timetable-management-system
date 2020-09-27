@@ -24,6 +24,8 @@ namespace TimetableManager.EntityFramework.Services
                     .ThenInclude(e => e.Session)
                     .Include(e => e.GroupIdUnavailableTimeSlots)
                     .ThenInclude(e => e.Group)
+                    .Include(e => e.SubGroupIdUnavailableTimeSlots)
+                    .ThenInclude(e => e.SubGroup)
                     .ToListAsync();
         }
     }

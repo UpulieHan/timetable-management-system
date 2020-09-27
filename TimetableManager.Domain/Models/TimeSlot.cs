@@ -14,5 +14,6 @@ namespace TimetableManager.Domain.Models
         public List<LecturerUnavailableTimeSlot> LecturerUnavailableTimeSlots { get; set; }
         public List<SessionUnavailableTimeSlot> SessionUnavailableTimeSlots { get; set; }
         public List<GroupIdUnavailableTimeSlot> GroupIdUnavailableTimeSlots { get; set; }
+        public List<SubGroupIdUnavailableTimeSlot> SubGroupIdUnavailableTimeSlots { get; set; }
     }
 }
