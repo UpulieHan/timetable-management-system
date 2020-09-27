@@ -93,7 +93,7 @@
                     <ComboBox x:Name="ValueListComboBox" HorizontalAlignment="Left" Margin="474,32,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="ValueListComboBox_SelectionChanged" />
                     <Label Content="Rooms" HorizontalAlignment="Left" Margin="48,86,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="RoomTextBox" HorizontalAlignment="Left" Margin="162,94,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="308" Height="73"/>
-                    <Button x:Name="LoadRoomButton" Content="Load Room" HorizontalAlignment="Left" Margin="517,117,0,0" VerticalAlignment="Top" Click="LoadRoomButton_Click"/>
+                    <Button x:Name="LoadRoomButton" Content="Load Room" HorizontalAlignment="Left" Margin="522,92,0,0" VerticalAlignment="Top" Click="LoadRoomButton_Click"/>
                     <TextBlock Margin="0,190,0,0">
                             <StackPanel Orientation="Vertical">
                                  <Label x:Name="CardLecturerName" Width="auto" />
@@ -103,6 +103,7 @@
                                  <Label x:Name="CardCount" />
                             </StackPanel>
                     </TextBlock>
+                    <Button x:Name="SaveButton" Content="Save" Click="SaveButton_Click" HorizontalAlignment="Left" Margin="522,139,0,0" VerticalAlignment="Top" Width="95"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Unavailability">

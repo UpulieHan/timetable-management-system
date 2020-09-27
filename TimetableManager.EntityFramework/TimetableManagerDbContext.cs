@@ -180,6 +180,19 @@ namespace TimetableManager.EntityFramework
                 .WithMany(ts => ts.SubGroupIdUnavailableTimeSlots)
                 .HasForeignKey(sgts => sgts.TimeSlotId);
 
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasKey(e => new { e.TagId, e.RoomId });
+
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasOne(e => e.Tag)
+                .WithMany(e => e.TagPreferredRooms)
+                .HasForeignKey(e => e.TagId);
+
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.TagPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
+
             base.OnModelCreating(modelBuilder);
         }
 

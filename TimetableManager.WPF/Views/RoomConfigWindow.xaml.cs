@@ -273,6 +273,24 @@ namespace TimetableManager.WPF.Views
 
             RoomTextBox.Text = s;
         }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem selected = (ComboBoxItem)TypeComboBox.SelectedItem;
+            string value = selected.Content.ToString();
+
+            string v = (string)ValueListComboBox.SelectedItem;
+            if (value == "Tag")
+            {
+                Tag selectedTag = TagList.Single(e => e.TagName == v);
+                TagDataService tagDataService = new TagDataService(new EntityFramework.TimetableManagerDbContext());
+                
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = tagDataService.SetPrefferedRoom(selectedTag, e);
+                });
+            }
+        }
     }
 
     public class LoadRoomDataGridModel {

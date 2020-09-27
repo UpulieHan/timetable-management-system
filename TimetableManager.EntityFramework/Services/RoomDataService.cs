@@ -34,8 +34,12 @@ namespace TimetableManager.EntityFramework.Services
         
         public async Task<List<Room>> GetRoomAsync()
         {
-            return await _context.Rooms.Include(e => e.Center)
-                                    .Include(f => f.Building).ToListAsync();
+            return await _context.Rooms
+                    .Include(e => e.Center)
+                    .Include(f => f.Building)
+                    .Include(e => e.TagPreferredRooms)
+                    .ThenInclude(e => e.Tag)
+                    .ToListAsync();
         }
 
         public async Task<Room> GetRoomById(int id)
