@@ -52,8 +52,8 @@ namespace TimetableManager.WPF
         private void OpenRoomConfigWindow(object sender, RoutedEventArgs e)
         {
             //interation logic for Room Config Window
-            Tab_Main_Room tabMainRoom = new Tab_Main_Room();
-            tabMainRoom.Show();
+            RoomConfigWindow roomConfigWindow = new RoomConfigWindow();
+            roomConfigWindow.Show();
         }
         private void OpenTimetablesWindow(object sender, RoutedEventArgs e)
         {
