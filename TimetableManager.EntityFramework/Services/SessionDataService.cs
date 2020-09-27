@@ -65,6 +65,7 @@ namespace TimetableManager.EntityFramework.Services
                 .ThenInclude(sgs => sgs.SubGroup)
                 .Include(ts => ts.SessionUnavailableTimeSlots)
                 .ThenInclude(sts => sts.TimeSlot)
+                .Include(e => e.ConsecutiveSession)
                 .ToListAsync();
         }
 
@@ -74,6 +75,17 @@ namespace TimetableManager.EntityFramework.Services
             var t = _context.TimeSlots.Single(e => e.CodeId == timeSlot.CodeId);
 
             _context.Set<SessionUnavailableTimeSlot>().Add(new SessionUnavailableTimeSlot { Session = s, TimeSlot = t });
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetConsecutiveSessions(Session one, Session two)
+        {
+            var s1 = _context.Sessions.Single(e => e.SessionId == one.SessionId);
+            var s2 = _context.Sessions.Single(e => e.SessionId == two.SessionId);
+
+            s1.ConsecutiveSession = s2;
+            s2.ConsecutiveSession = s1;
 
             return await _context.SaveChangesAsync();
         }

@@ -117,7 +117,15 @@ namespace TimetableManager.WPF.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            string oneId = (string)SessionOneComboBox.SelectedItem;
+            string twoId = (string)SessionTwoComboBox.SelectedItem;
 
+            Session one = SessionList.Single(e => e.SessionId == Int32.Parse(oneId));
+            Session two = SessionList.Single(e => e.SessionId == Int32.Parse(twoId));
+
+            SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
+
+            _ = sessionDataService.SetConsecutiveSessions(one, two);
         }
     }
 }

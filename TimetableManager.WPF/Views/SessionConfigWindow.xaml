@@ -98,20 +98,20 @@
                     </StackPanel>
                     <TextBlock Grid.Row="1" Grid.Column="0">
                         <StackPanel Orientation="Vertical">
-                             <Label x:Name="CardLecturerName1" Content="Dr.Nuwan Kodagoda" Width="auto" />
-                             <Label x:Name="CardSubjectName1" Content="OOC" />
-                             <Label x:Name="CardTagName1" Content="Tutorial" />
-                             <Label x:Name="CardGroupName1" Content="Y1.S2.IT.01" />
-                             <Label x:Name="CardCount1" Content="120(2)" />
+                             <Label x:Name="CardLecturerName1" Width="auto" />
+                             <Label x:Name="CardSubjectName1"  />
+                             <Label x:Name="CardTagName1" />
+                             <Label x:Name="CardGroupName1" />
+                             <Label x:Name="CardCount1" />
                         </StackPanel>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1">
                         <StackPanel Orientation="Vertical">
-                             <Label x:Name="CardLecturerName2" Content="Dr.Nuwan Kodagoda" Width="auto" />
-                             <Label x:Name="CardSubjectName2" Content="OOC" />
-                             <Label x:Name="CardTagName2" Content="Tutorial" />
-                             <Label x:Name="CardGroupName2" Content="Y1.S2.IT.01" />
-                             <Label x:Name="CardCount2" Content="120(2)" />
+                             <Label x:Name="CardLecturerName2" Width="auto" />
+                             <Label x:Name="CardSubjectName2" />
+                             <Label x:Name="CardTagName2" />
+                             <Label x:Name="CardGroupName2" />
+                             <Label x:Name="CardCount2" />
                         </StackPanel>
                     </TextBlock>
                     <Button x:Name="SaveButton" Content="Save as Consecutive" Click="SaveButton_Click" HorizontalAlignment="Left" Margin="261,210,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Grid.ColumnSpan="2"/>
