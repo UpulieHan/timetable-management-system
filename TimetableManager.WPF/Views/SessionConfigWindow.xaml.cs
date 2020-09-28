@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -117,6 +118,16 @@ namespace TimetableManager.WPF.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            _ = SetConsecutive();
+        }
+
+        private void ParallelSaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            _ = SetConsecutive();
+        }
+
+        private async Task<int> SetConsecutive()
+        {
             string oneId = (string)SessionOneComboBox.SelectedItem;
             string twoId = (string)SessionTwoComboBox.SelectedItem;
 
@@ -125,7 +136,7 @@ namespace TimetableManager.WPF.Views
 
             SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
 
-            _ = sessionDataService.SetConsecutiveSessions(one, two);
+            return await  sessionDataService.SetConsecutiveSessions(one, two);
         }
     }
 }

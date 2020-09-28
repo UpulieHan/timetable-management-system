@@ -78,25 +78,27 @@
         </Border>
 
         <TabControl x:Name="RoomConfigTabControl" TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#008CFF" Width="auto" Height="auto">
-            <TabItem Header="Consecutive Sessions">
+            <TabItem Header="Consecutive / Parallel Sessions">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="247*" />
+                        <ColumnDefinition Width="42*"/>
+                        <ColumnDefinition Width="64*"/>
+                        <ColumnDefinition Width="353*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="3" Margin="0,0,0,238" Grid.RowSpan="2" >
                         <Label Content="Session 1" />
                         <ComboBox x:Name="SessionOneComboBox" SelectionChanged="SessionOneComboBox_SelectionChanged" Width="100" />
                     </StackPanel>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Margin="0,0,0,238" Grid.RowSpan="2" >
                         <Label Content="Session 2" />
                         <ComboBox x:Name="SessionTwoComboBox" SelectionChanged="SessionTwoComboBox_SelectionChanged" Width="100" />
                     </StackPanel>
-                    <TextBlock Grid.Row="1" Grid.Column="0">
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
                         <StackPanel Orientation="Vertical">
                              <Label x:Name="CardLecturerName1" Width="auto" />
                              <Label x:Name="CardSubjectName1"  />
@@ -105,7 +107,7 @@
                              <Label x:Name="CardCount1" />
                         </StackPanel>
                     </TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="1">
+                    <TextBlock Grid.Row="1" Grid.Column="3">
                         <StackPanel Orientation="Vertical">
                              <Label x:Name="CardLecturerName2" Width="auto" />
                              <Label x:Name="CardSubjectName2" />
@@ -114,10 +116,9 @@
                              <Label x:Name="CardCount2" />
                         </StackPanel>
                     </TextBlock>
-                    <Button x:Name="SaveButton" Content="Save as Consecutive" Click="SaveButton_Click" HorizontalAlignment="Left" Margin="261,210,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Grid.ColumnSpan="2"/>
+                    <Button x:Name="SaveButton" Content="Save as Consecutive" Click="SaveButton_Click" HorizontalAlignment="Left" Margin="84,210,0,0" Grid.Row="1" VerticalAlignment="Top" Width="184" Grid.ColumnSpan="2"/>
+                    <Button x:Name="ParallelSaveButton" Content="Save as Parallel" Click="ParallelSaveButton_Click" Grid.Column="3" HorizontalAlignment="Left" Margin="70,210,0,0" Grid.Row="1" VerticalAlignment="Top" Width="207"/>
                 </Grid>
-            </TabItem>
-            <TabItem Header="Parallel Sessions">
             </TabItem>
         </TabControl>
     </Grid>
