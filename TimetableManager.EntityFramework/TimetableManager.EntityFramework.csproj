@@ -51,6 +51,28 @@
     <Compile Remove="Migrations\20200904151852_Refactor1.0.Designer.cs" />
     <Compile Remove="Migrations\20200905050435_v1.1.cs" />
     <Compile Remove="Migrations\20200905050435_v1.1.Designer.cs" />
+    <Compile Remove="Migrations\20200925110717_v1.cs" />
+    <Compile Remove="Migrations\20200925110717_v1.Designer.cs" />
+    <Compile Remove="Migrations\20200925113221_v2.cs" />
+    <Compile Remove="Migrations\20200925113221_v2.Designer.cs" />
+    <Compile Remove="Migrations\20200925113328_v2.cs" />
+    <Compile Remove="Migrations\20200925113328_v2.Designer.cs" />
+    <Compile Remove="Migrations\20200926071856_v3.cs" />
+    <Compile Remove="Migrations\20200926071856_v3.Designer.cs" />
+    <Compile Remove="Migrations\20200926102743_v4.cs" />
+    <Compile Remove="Migrations\20200926102743_v4.Designer.cs" />
+    <Compile Remove="Migrations\20200926155540_v6.cs" />
+    <Compile Remove="Migrations\20200926155540_v6.Designer.cs" />
+    <Compile Remove="Migrations\20200927021933_v7.cs" />
+    <Compile Remove="Migrations\20200927021933_v7.Designer.cs" />
+    <Compile Remove="Migrations\20200927024926_v8.cs" />
+    <Compile Remove="Migrations\20200927024926_v8.Designer.cs" />
+    <Compile Remove="Migrations\20200927040521_v9.cs" />
+    <Compile Remove="Migrations\20200927040521_v9.Designer.cs" />
+    <Compile Remove="Migrations\20200927094205_v10.cs" />
+    <Compile Remove="Migrations\20200927094205_v10.Designer.cs" />
+    <Compile Remove="Migrations\20200927131527_v11.cs" />
+    <Compile Remove="Migrations\20200927131527_v11.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

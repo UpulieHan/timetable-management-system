@@ -29,7 +29,10 @@ namespace TimetableManager.EntityFramework.Services
         }
         public async Task<List<Tag>> GetTags()
         {
-            return await _context.Tags.ToListAsync();
+            return await _context.Tags
+                    .Include(e => e.TagPreferredRooms)
+                    .ThenInclude(e => e.Room)
+                    .ToListAsync();
         }
         public async Task<int> DeleteTag(int id)
         {
@@ -47,6 +50,16 @@ namespace TimetableManager.EntityFramework.Services
         {
             Tag t = await _context.Tags.Where(e => e.TagId == id).FirstAsync();
             t.TagName = tag.TagName;
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetPrefferedRoom(Tag tag, Room room)
+        {
+            var t = _context.Tags.Single(e => e.TagId == tag.TagId);
+            var r = _context.Rooms.Single(e => e.RoomId == room.RoomId);
+
+            _context.Set<TagPreferredRoom>().Add(new TagPreferredRoom { Tag = t, Room = r });
+
             return await _context.SaveChangesAsync();
         }
     }

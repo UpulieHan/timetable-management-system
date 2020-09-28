@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TimetableManager.WPF.UserControls.RoomConfigViewControl;
 using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF
@@ -46,14 +45,14 @@ namespace TimetableManager.WPF
         }
         private void OpenSessionConfigWindow(object sender, RoutedEventArgs e)
         {
-            MainSessionConfigWindow mainDataWindow = new MainSessionConfigWindow();
-            mainDataWindow.Show();
+            SessionConfigWindow sessionConfigWindow = new SessionConfigWindow();
+            sessionConfigWindow.Show();
         }
         private void OpenRoomConfigWindow(object sender, RoutedEventArgs e)
         {
             //interation logic for Room Config Window
-            Tab_Main_Room tabMainRoom = new Tab_Main_Room();
-            tabMainRoom.Show();
+            RoomConfigWindow roomConfigWindow = new RoomConfigWindow();
+            roomConfigWindow.Show();
         }
         private void OpenTimetablesWindow(object sender, RoutedEventArgs e)
         {

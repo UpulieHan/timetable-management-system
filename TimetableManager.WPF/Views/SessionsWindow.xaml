@@ -83,13 +83,56 @@
             </StackPanel>
         </Border>
 
-        <TabControl TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#008CFF" Width="auto" Height="auto">
+        <TabControl x:Name="SessionTabControl" TabStripPlacement="Top"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#008CFF" Width="auto" Height="auto">
             <TabItem Header="View Sessions" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="SessionDataGrid" AlternatingRowBackground="AliceBlue" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Session ID" Binding="{Binding SessionId}" />
+                            <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Button x:Name="ViewButton" Content="View" Click="ViewButton_Click" Grid.Column="0" Grid.Row="0"></Button>
+                                            <Button x:Name="DeleteButton" Content="Delete" Grid.Column="1" Grid.Row="0"></Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBlock Grid.Column="1">
+                        <StackPanel Orientation="Vertical">
+                             <Label x:Name="CardLecturerName" Content="Dr.Nuwan Kodagoda" Width="auto" />
+                             <Label x:Name="CardSubjectName" Content="OOC" />
+                             <Label x:Name="CardTagName" Content="Tutorial" />
+                             <Label x:Name="CardGroupName" Content="Y1.S2.IT.01" />
+                             <Label x:Name="CardCount" Content="120(2)" />
+                        </StackPanel>
+                    </TextBlock>
+                </Grid>
             </TabItem>
             <TabItem Header="Create Sessions" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="80" />
                     </Grid.ColumnDefinitions>
@@ -98,8 +141,55 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+                    <Label Content="Lecture/s" Grid.Column="0" Grid.Row="0"/>
+                    <Label Content="Tags" Grid.Column="0" Grid.Row="1"/>
+                    <ComboBox x:Name="GroupComboBox"  Grid.Column="0" Grid.Row="2" SelectedIndex="0">
+                        <ComboBoxItem>Groups</ComboBoxItem>
+                        <ComboBoxItem>Sub Groups</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Subjects" Grid.Column="0" Grid.Row="3"/>
+                    <Label Content="Students Count" Grid.Column="0" Grid.Row="4"/>
+                    <Label Content="Duration" Grid.Column="0" Grid.Row="5"/>
+                    <TextBox x:Name="LecturersTextBox" Grid.Column="1" Grid.Row="0" />
+                    <TextBox x:Name="TagsTextBox" Grid.Column="1" Grid.Row="1" />
+                    <TextBox x:Name="GroupsTextBox" Grid.Column="1" Grid.Row="2" />
+                    <TextBox x:Name="SubjectsTextBox" Grid.Column="1" Grid.Row="3" />
+                    <TextBox x:Name="StudentsNumberTextBox" Grid.Column="1" Grid.Row="4" />
+                    <TextBox x:Name="DurationTextBox" Grid.Column="1" Grid.Row="5" />
+                    <Button x:Name="LecturerLoadButton" Click="LecturerLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="0" />
+                    <Button x:Name="TagLoadButton" Click="TagLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="1" />
+                    <Button x:Name="GroupLoadButton" Click="GroupLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="2" />
+                    <Button x:Name="SubjectLoadButton" Click="SubjectLoadButton_Click" Content="Load" Grid.Column="2" Grid.Row="3" />
+                    <Button x:Name="AddSessionButton" Click="AddSessionButton_Click" Content="Add Session" Grid.Column="1" Grid.Row="6" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Load Data">
+                <Grid>
+                    <StackPanel>
+                        <DataGrid x:Name="DataGrid" AutoGenerateColumns="False" CanUserAddRows="False" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                                <DataGridTextColumn Header="Select Item" Binding="{Binding ItemName}" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="AddButton" Content="Add" Click="AddButton_Click" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="LoadButton" Content="Load Selected" />
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

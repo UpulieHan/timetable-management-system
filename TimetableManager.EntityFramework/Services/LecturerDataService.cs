@@ -52,6 +52,8 @@ namespace TimetableManager.EntityFramework.Services
                                 .Include(c => c.Center)
                                 .Include(b => b.Building)
                                 .Include(l => l.Level)
+                                .Include(t => t.LecturerUnavailableTimeSlots)
+                                .ThenInclude(t => t.TimeSlot)
                                 .ToListAsync();
         }
 
@@ -80,6 +82,15 @@ namespace TimetableManager.EntityFramework.Services
             await this.DeleteLecturer(lecturer.EmployeeId);
 
             SetLectureFields(lecturer, fName, dName, cName, bName, lName);
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetUnAvailable(Lecturer lecturer, TimeSlot timeSlot)
+        {
+            var lec = _context.Lecturers.Single(l => l.EmployeeId == lecturer.EmployeeId);
+            var ts = _context.TimeSlots.Single(t => t.CodeId == timeSlot.CodeId);
+            _context.Set<LecturerUnavailableTimeSlot>().Add(new LecturerUnavailableTimeSlot { Lecturer = lec, TimeSlot = ts});
 
             return await _context.SaveChangesAsync();
         }

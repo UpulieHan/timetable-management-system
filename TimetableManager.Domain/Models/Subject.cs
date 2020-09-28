@@ -15,5 +15,7 @@ namespace TimetableManager.Domain.Models
         public int EvaluationHours { get; set; }
         // OfferedYearSemester can be changed to a Year_Semester type instead of string
         public string OfferedYearSemester { get; set; }
+
+        public List<Session> Sessions { get; set; }
     }
 }

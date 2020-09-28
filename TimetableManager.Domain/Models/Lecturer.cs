@@ -15,5 +15,7 @@ namespace TimetableManager.Domain.Models
         public Building Building { get; set; }
         public Level Level { get; set; }
         public float Rank { get; set; }
+        public List<LecturerSession> LecturerSessions { get; set; }
+        public List<LecturerUnavailableTimeSlot> LecturerUnavailableTimeSlots { get; set; }
     }
 }

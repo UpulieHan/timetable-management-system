@@ -30,6 +30,7 @@ namespace TimetableManager.EntityFramework
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<TimeSlot> TimeSlots { get; set; }
 
+        public DbSet<Session> Sessions { get; set; }
         public TimetableManagerDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -87,6 +88,110 @@ namespace TimetableManager.EntityFramework
                 entity.Property(e => e.endTime);
                 entity.Property(e => e.sessionId);
             });
+
+            modelBuilder.Entity<LecturerSession>()
+                .HasKey(t => new { t.LecturerId, t.SessionId });
+
+            modelBuilder.Entity<LecturerSession>()
+                .HasOne(ls => ls.Lecturer)
+                .WithMany(l => l.LecturerSessions)
+                .HasForeignKey(ls => ls.LecturerId);
+
+            modelBuilder.Entity<LecturerSession>()
+                .HasOne(ls => ls.Session)
+                .WithMany(s => s.LecturerSessions)
+                .HasForeignKey(ls => ls.SessionId);
+
+            modelBuilder.Entity<GroupIdSession>()
+                .HasKey(e => new { e.GroupId, e.SessionId });
+
+            modelBuilder.Entity<GroupIdSession>()
+                .HasOne(gs => gs.Group)
+                .WithMany(g => g.GroupIdSessions)
+                .HasForeignKey(gs => gs.GroupId);
+
+            modelBuilder.Entity<GroupIdSession>()
+                .HasOne(gs => gs.Session)
+                .WithMany(s => s.GroupIdSessions)
+                .HasForeignKey(gs => gs.SessionId);
+            
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasKey(e => new { e.SubGroupId, e.SessionId });
+
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasOne(gs => gs.SubGroup)
+                .WithMany(g => g.SubGroupIdSessions)
+                .HasForeignKey(gs => gs.SubGroupId);
+
+            modelBuilder.Entity<SubGroupIdSession>()
+                .HasOne(gs => gs.Session)
+                .WithMany(s => s.SubGroupIdSessions)
+                .HasForeignKey(gs => gs.SessionId);
+
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasKey(e => new { e.LecturerId, e.TimeSlotId });
+
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasOne(l => l.Lecturer)
+                .WithMany(t => t.LecturerUnavailableTimeSlots)
+                .HasForeignKey(ts => ts.LecturerId);
+
+            modelBuilder.Entity<LecturerUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(t => t.LecturerUnavailableTimeSlots)
+                .HasForeignKey(ts => ts.TimeSlotId);
+
+            modelBuilder.Entity<SessionUnavailableTimeSlot>()
+                .HasKey(e => new { e.SessionId, e.TimeSlotId });
+
+            modelBuilder.Entity<SessionUnavailableTimeSlot>()
+                .HasOne(s => s.Session)
+                .WithMany(t => t.SessionUnavailableTimeSlots)
+                .HasForeignKey(sts => sts.SessionId);
+
+            modelBuilder.Entity<SessionUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(ts => ts.SessionUnavailableTimeSlots)
+                .HasForeignKey(sts => sts.TimeSlotId);
+
+            modelBuilder.Entity<GroupIdUnavailableTimeSlot>()
+                .HasKey(e => new { e.GroupId, e.TimeSlotId });
+
+            modelBuilder.Entity<GroupIdUnavailableTimeSlot>()
+                .HasOne(g => g.Group)
+                .WithMany(t => t.GroupIdUnavailableTimeSlots)
+                .HasForeignKey(gts => gts.GroupId);
+
+            modelBuilder.Entity<GroupIdUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(ts => ts.GroupIdUnavailableTimeSlots)
+                .HasForeignKey(gts => gts.TimeSlotId);  
+            
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasKey(e => new { e.SubGroupId, e.TimeSlotId });
+
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasOne(sg => sg.SubGroup)
+                .WithMany(t => t.SubGroupIdUnavailableTimeSlots)
+                .HasForeignKey(sgts => sgts.SubGroupId);
+
+            modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
+                .HasOne(t => t.TimeSlot)
+                .WithMany(ts => ts.SubGroupIdUnavailableTimeSlots)
+                .HasForeignKey(sgts => sgts.TimeSlotId);
+
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasKey(e => new { e.TagId, e.RoomId });
+
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasOne(e => e.Tag)
+                .WithMany(e => e.TagPreferredRooms)
+                .HasForeignKey(e => e.TagId);
+
+            modelBuilder.Entity<TagPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.TagPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
 
             base.OnModelCreating(modelBuilder);
         }
