@@ -289,6 +289,56 @@ namespace TimetableManager.WPF.Views
                 {
                     _ = tagDataService.SetPrefferedRoom(selectedTag, e);
                 });
+            } 
+            else if(value == "Subject")
+            {
+                Subject selectedSubject = SubjectList.Single(e => e.SubjectName == v);
+                SubjectDataService subjectDataService = new SubjectDataService(new EntityFramework.TimetableManagerDbContext());
+
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = subjectDataService.SetPrefferedRoom(selectedSubject, e);
+                });
+            }
+            else if(value == "Lecturer")
+            {
+                Lecturer selectedLecturer = LecturerList.Single(e => e.EmployeeName == v);
+                LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
+
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = lecturerDataService.SetPrefferedRoom(selectedLecturer, e);
+                });
+            }
+            else if(value == "Session")
+            {
+                Session selectedSession = SessionList.Single(e => e.SessionId == Int32.Parse(v));
+                SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
+
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = sessionDataService.SetPrefferedRoom(selectedSession, e);
+                });
+            }
+            else if(value == "Group")
+            {
+                GroupId selectedGroup = GroupList.Single(e => e.GroupID == v);
+                GroupIdDataService groupIdDataService = new GroupIdDataService(new EntityFramework.TimetableManagerDbContext());
+
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = groupIdDataService.SetPrefferedRoom(selectedGroup, e);
+                });
+            }
+            else if(value == "Sub Group")
+            {
+                SubGroupId selectedSubGroup = SubGroupList.Single(e => e.SubGroupID == v);
+                SubGroupIdDataService subGroupIdDataService = new SubGroupIdDataService(new EntityFramework.TimetableManagerDbContext());
+
+                SelectedRoomList.ForEach(e =>
+                {
+                    _ = subGroupIdDataService.SetPrefferedRoom(selectedSubGroup, e);
+                });
             }
         }
     }

@@ -17,5 +17,6 @@ namespace TimetableManager.Domain.Models
         public float Rank { get; set; }
         public List<LecturerSession> LecturerSessions { get; set; }
         public List<LecturerUnavailableTimeSlot> LecturerUnavailableTimeSlots { get; set; }
+        public List<LecturerPreferredRoom> LecturerPreferredRooms { get; set; }
     }
 }

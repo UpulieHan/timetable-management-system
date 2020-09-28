@@ -66,6 +66,8 @@ namespace TimetableManager.EntityFramework.Services
                 .Include(ts => ts.SessionUnavailableTimeSlots)
                 .ThenInclude(sts => sts.TimeSlot)
                 .Include(e => e.ConsecutiveSession)
+                .Include(e => e.SessionPreferredRooms)
+                .ThenInclude(e => e.Room)
                 .ToListAsync();
         }
 
@@ -86,6 +88,16 @@ namespace TimetableManager.EntityFramework.Services
 
             s1.ConsecutiveSession = s2;
             s2.ConsecutiveSession = s1;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetPrefferedRoom(Session session, Room room)
+        {
+            var s = _context.Sessions.Single(e => e.SessionId == session.SessionId );
+            var r = _context.Rooms.Single(e => e.RoomId == room.RoomId);
+
+            _context.Set<SessionPreferredRoom>().Add(new SessionPreferredRoom { Session = s, Room = r });
 
             return await _context.SaveChangesAsync();
         }

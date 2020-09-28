@@ -73,6 +73,8 @@
     <Compile Remove="Migrations\20200927094205_v10.Designer.cs" />
     <Compile Remove="Migrations\20200927131527_v11.cs" />
     <Compile Remove="Migrations\20200927131527_v11.Designer.cs" />
+    <Compile Remove="Migrations\20200927165023_v12.cs" />
+    <Compile Remove="Migrations\20200927165023_v12.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

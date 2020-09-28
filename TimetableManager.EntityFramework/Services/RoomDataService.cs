@@ -12,7 +12,6 @@ namespace TimetableManager.EntityFramework.Services
     {
         private readonly TimetableManagerDbContext _context;
 
-
         public RoomDataService(TimetableManagerDbContext context)
         {
             _context = context;
@@ -21,7 +20,6 @@ namespace TimetableManager.EntityFramework.Services
 
         public Task<int> AddRooms(Room rooms, string cName, string buildName)
         {
-
            var center = _context.Centers.Include(e => e.Rooms).Single(e => e.CenterName == cName);
             center.Rooms.Add(rooms);
 
@@ -39,6 +37,16 @@ namespace TimetableManager.EntityFramework.Services
                     .Include(f => f.Building)
                     .Include(e => e.TagPreferredRooms)
                     .ThenInclude(e => e.Tag)
+                    .Include(e => e.SubjectPreferredRooms)
+                    .ThenInclude(e => e.Subject)
+                    .Include(e => e.LecturerPreferredRooms)
+                    .ThenInclude(e => e.Lectuer)
+                    .Include(e => e.SessionPreferredRooms)
+                    .ThenInclude(e => e.Session)
+                    .Include(e => e.GroupIdPreferredRooms)
+                    .ThenInclude(e => e.Group)
+                    .Include(e => e.SubGroupIdPrefferedRooms)
+                    .ThenInclude(e => e.SubGroup)
                     .ToListAsync();
         }
 
@@ -65,8 +73,5 @@ namespace TimetableManager.EntityFramework.Services
 
             return await _context.SaveChangesAsync();
         }
-
     }
-
-
 }

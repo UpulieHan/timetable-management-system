@@ -193,6 +193,71 @@ namespace TimetableManager.EntityFramework
                 .WithMany(e => e.TagPreferredRooms)
                 .HasForeignKey(e => e.RoomId);
 
+            modelBuilder.Entity<SubjectPreferredRoom>()
+                .HasKey(e => new { e.SubjectId, e.RoomId });
+
+            modelBuilder.Entity<SubjectPreferredRoom>()
+                .HasOne(e => e.Subject)
+                .WithMany(e => e.SubjectPreferredRooms)
+                .HasForeignKey(e => e.SubjectId);
+
+            modelBuilder.Entity<SubjectPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.SubjectPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
+
+            modelBuilder.Entity<LecturerPreferredRoom>()
+                .HasKey(e => new { e.LectuererId, e.RoomId });
+
+            modelBuilder.Entity<LecturerPreferredRoom>()
+                .HasOne(e => e.Lectuer)
+                .WithMany(e => e.LecturerPreferredRooms)
+                .HasForeignKey(e => e.LectuererId);
+
+            modelBuilder.Entity<LecturerPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.LecturerPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
+
+            modelBuilder.Entity<SessionPreferredRoom>()
+                .HasKey(e => new { e.SessionId, e.RoomId });
+
+            modelBuilder.Entity<SessionPreferredRoom>()
+                .HasOne(e => e.Session)
+                .WithMany(e => e.SessionPreferredRooms)
+                .HasForeignKey(e => e.SessionId);
+
+            modelBuilder.Entity<SessionPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.SessionPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
+
+            modelBuilder.Entity<GroupIdPreferredRoom>()
+                .HasKey(e => new { e.GroupId, e.RoomId });
+
+            modelBuilder.Entity<GroupIdPreferredRoom>()
+                .HasOne(e => e.Group)
+                .WithMany(e => e.GroupIdPreferredRooms)
+                .HasForeignKey(e => e.GroupId);
+
+            modelBuilder.Entity<GroupIdPreferredRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.GroupIdPreferredRooms)
+                .HasForeignKey(e => e.RoomId);
+
+            modelBuilder.Entity<SubGroupIdPrefferedRoom>()
+                .HasKey(e => new { e.SubGroupId, e.RoomId });
+
+            modelBuilder.Entity<SubGroupIdPrefferedRoom>()
+                .HasOne(e => e.SubGroup)
+                .WithMany(e => e.SubGroupIdPrefferedRooms)
+                .HasForeignKey(e => e.SubGroupId);
+
+            modelBuilder.Entity<SubGroupIdPrefferedRoom>()
+                .HasOne(e => e.Room)
+                .WithMany(e => e.SubGroupIdPrefferedRooms)
+                .HasForeignKey(e => e.RoomId);
+
             base.OnModelCreating(modelBuilder);
         }
 

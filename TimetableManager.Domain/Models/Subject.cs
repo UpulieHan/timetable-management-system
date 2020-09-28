@@ -17,5 +17,6 @@ namespace TimetableManager.Domain.Models
         public string OfferedYearSemester { get; set; }
 
         public List<Session> Sessions { get; set; }
+        public List<SubjectPreferredRoom> SubjectPreferredRooms { get; set; }
     }
 }

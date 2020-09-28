@@ -25,7 +25,10 @@ namespace TimetableManager.EntityFramework.Services
 
         public async Task<List<Subject>> GetSubjectsAsync()
         {
-            return await _context.Subjects.ToListAsync();
+            return await _context.Subjects
+                    .Include(e => e.SubjectPreferredRooms)
+                    .ThenInclude(e => e.Room)
+                    .ToListAsync();
         }
 
         public async Task<int> DeleteSubject(int id)
@@ -44,6 +47,16 @@ namespace TimetableManager.EntityFramework.Services
             subject.LabHours = s.LabHours;
             subject.EvaluationHours = s.EvaluationHours;
             subject.OfferedYearSemester = s.OfferedYearSemester;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetPrefferedRoom(Subject subject, Room room)
+        {
+            var s = _context.Subjects.Single(e => e.Id == subject.Id);
+            var r = _context.Rooms.Single(e => e.RoomId == room.RoomId);
+
+            _context.Set<SubjectPreferredRoom>().Add(new SubjectPreferredRoom { Subject = s, Room = r });
 
             return await _context.SaveChangesAsync();
         }

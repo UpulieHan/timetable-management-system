@@ -15,6 +15,7 @@ namespace TimetableManager.Domain.Models
         public List<GroupIdSession> GroupIdSessions { get; set; }
         public List<SubGroupIdSession> SubGroupIdSessions { get; set; }
         public List<SessionUnavailableTimeSlot> SessionUnavailableTimeSlots { get; set; }
+        public List<SessionPreferredRoom> SessionPreferredRooms { get; set; }
         public Session ConsecutiveSession { get; set; }
     }
 }
