@@ -54,6 +54,8 @@ namespace TimetableManager.EntityFramework.Services
                                 .Include(l => l.Level)
                                 .Include(t => t.LecturerUnavailableTimeSlots)
                                 .ThenInclude(t => t.TimeSlot)
+                                .Include(e => e.LecturerPreferredRooms)
+                                .ThenInclude(e => e.Room)
                                 .ToListAsync();
         }
 
@@ -91,6 +93,16 @@ namespace TimetableManager.EntityFramework.Services
             var lec = _context.Lecturers.Single(l => l.EmployeeId == lecturer.EmployeeId);
             var ts = _context.TimeSlots.Single(t => t.CodeId == timeSlot.CodeId);
             _context.Set<LecturerUnavailableTimeSlot>().Add(new LecturerUnavailableTimeSlot { Lecturer = lec, TimeSlot = ts});
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetPrefferedRoom(Lecturer lecturer, Room room)
+        {
+            var l = _context.Lecturers.Single(e => e.Id == lecturer.Id);
+            var r = _context.Rooms.Single(e => e.RoomId == room.RoomId);
+
+            _context.Set<LecturerPreferredRoom>().Add(new LecturerPreferredRoom { Lectuer = l, Room = r });
 
             return await _context.SaveChangesAsync();
         }

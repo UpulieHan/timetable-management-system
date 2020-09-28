@@ -32,6 +32,8 @@ namespace TimetableManager.EntityFramework.Services
             return await _context.SubGroupIds
                     .Include(e => e.SubGroupIdUnavailableTimeSlots)
                     .ThenInclude(e => e.TimeSlot)
+                    .Include(e => e.SubGroupIdPrefferedRooms)
+                    .ThenInclude(e => e.Room)
                     .ToListAsync();
         }
         public async Task<int> DeleteSubGroupId(int id)
@@ -60,6 +62,16 @@ namespace TimetableManager.EntityFramework.Services
             var t = _context.TimeSlots.Single(e => e.CodeId == timeslot.CodeId);
 
             _context.Set<SubGroupIdUnavailableTimeSlot>().Add(new SubGroupIdUnavailableTimeSlot { SubGroup = s, TimeSlot = t });
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> SetPrefferedRoom(SubGroupId subGroup, Room room)
+        {
+            var sg = _context.SubGroupIds.Single(e => e.Id == subGroup.Id);
+            var r = _context.Rooms.Single(e => e.RoomId == room.RoomId);
+
+            _context.Set<SubGroupIdPrefferedRoom>().Add(new SubGroupIdPrefferedRoom { SubGroup = sg, Room = r });
 
             return await _context.SaveChangesAsync();
         }
