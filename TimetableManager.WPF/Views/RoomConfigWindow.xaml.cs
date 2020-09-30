@@ -260,6 +260,8 @@ namespace TimetableManager.WPF.Views
 
             SelectedRoomList.Add(RoomList.Find(e => e.RoomId == room.Id));
             SetRoomTextBox();
+            RoomConfigTabControl.SelectedIndex = 0;
+
         }
 
         private void SetRoomTextBox()
@@ -273,7 +275,10 @@ namespace TimetableManager.WPF.Views
 
             RoomTextBox.Text = s;
         }
-
+        private void clear()
+        {
+            RoomTextBox.Text = "";
+        }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem selected = (ComboBoxItem)TypeComboBox.SelectedItem;
@@ -287,7 +292,19 @@ namespace TimetableManager.WPF.Views
                 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = tagDataService.SetPrefferedRoom(selectedTag, e);
+                    _ = tagDataService.SetPrefferedRoom(selectedTag, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             } 
             else if(value == "Subject")
@@ -297,7 +314,19 @@ namespace TimetableManager.WPF.Views
 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = subjectDataService.SetPrefferedRoom(selectedSubject, e);
+                    _ = subjectDataService.SetPrefferedRoom(selectedSubject, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             }
             else if(value == "Lecturer")
@@ -307,7 +336,19 @@ namespace TimetableManager.WPF.Views
 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = lecturerDataService.SetPrefferedRoom(selectedLecturer, e);
+                    _ = lecturerDataService.SetPrefferedRoom(selectedLecturer, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             }
             else if(value == "Session")
@@ -317,7 +358,19 @@ namespace TimetableManager.WPF.Views
 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = sessionDataService.SetPrefferedRoom(selectedSession, e);
+                    _ = sessionDataService.SetPrefferedRoom(selectedSession, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             }
             else if(value == "Group")
@@ -327,7 +380,19 @@ namespace TimetableManager.WPF.Views
 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = groupIdDataService.SetPrefferedRoom(selectedGroup, e);
+                    _ = groupIdDataService.SetPrefferedRoom(selectedGroup, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             }
             else if(value == "Sub Group")
@@ -337,7 +402,19 @@ namespace TimetableManager.WPF.Views
 
                 SelectedRoomList.ForEach(e =>
                 {
-                    _ = subGroupIdDataService.SetPrefferedRoom(selectedSubGroup, e);
+                    _ = subGroupIdDataService.SetPrefferedRoom(selectedSubGroup, e).ContinueWith(result =>
+                    {
+                        if (result != null)
+                        {
+                            MessageBox.Show("Added Successfully!", "Success");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Error occured!", "Error");
+                        }
+                    });
+                    clear();
+
                 });
             }
         }

@@ -115,15 +115,54 @@ namespace TimetableManager.WPF.Views
             }
 
         }
-
+        private void ClearCard1()
+        {
+            CardLecturerName1.Content = "";
+            CardSubjectName1.Content = "";
+            CardTagName1.Content = "";
+            CardGroupName1.Content = "";
+            CardCount1.Content = "";
+        }
+        private void ClearCard2()
+        {
+            CardLecturerName2.Content = "";
+            CardSubjectName2.Content = "";
+            CardTagName2.Content = "";
+            CardGroupName2.Content = "";
+            CardCount2.Content = "";
+        }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            _ = SetConsecutive();
+            _ = SetConsecutive().ContinueWith(result =>
+            {
+                if (result != null)
+                {
+                    MessageBox.Show("Consecutive session Added!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
+            ClearCard1();
+            ClearCard2();
         }
 
         private void ParallelSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            _ = SetConsecutive();
+            _ = SetConsecutive().ContinueWith(result =>
+            {
+                if (result != null)
+                {
+                    MessageBox.Show("Parallel session Added!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
+            ClearCard1();
+            ClearCard2();
         }
 
         private async Task<int> SetConsecutive()

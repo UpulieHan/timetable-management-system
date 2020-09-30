@@ -197,7 +197,17 @@ namespace TimetableManager.WPF.Views
 
                 LecturerDataService lecturerDataService = new LecturerDataService(new EntityFramework.TimetableManagerDbContext());
 
-                _ = lecturerDataService.SetUnAvailable(selectedLecturer, selectedTimeSlot);
+                _ = lecturerDataService.SetUnAvailable(selectedLecturer, selectedTimeSlot).ContinueWith(result =>
+                {
+                    if (result != null)
+                    {
+                        MessageBox.Show("Set Unavailable Lecture!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Error occured!", "Error");
+                    }
+                });
             }
             else if(value == "session")
             {
@@ -206,7 +216,17 @@ namespace TimetableManager.WPF.Views
 
                 SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
 
-                _ = sessionDataService.SetUnavailable(selectedSession, selectedTimeSlot);
+                _ = sessionDataService.SetUnavailable(selectedSession, selectedTimeSlot).ContinueWith(result =>
+                {
+                    if (result != null)
+                    {
+                        MessageBox.Show("Set Unavailable Session!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Error occured!", "Error");
+                    }
+                });
             } else if(value == "group")
             {
                 string groupid = (string)comboBoxResVal.SelectedItem;
@@ -214,7 +234,17 @@ namespace TimetableManager.WPF.Views
 
                 GroupIdDataService groupIdDataService = new GroupIdDataService(new EntityFramework.TimetableManagerDbContext());
 
-                _ = groupIdDataService.SetUnavailable(selectedGroupId, selectedTimeSlot);
+                _ = groupIdDataService.SetUnavailable(selectedGroupId, selectedTimeSlot).ContinueWith(result =>
+                {
+                    if (result != null)
+                    {
+                        MessageBox.Show("Set Unavailable Group!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Error occured!", "Error");
+                    }
+                });
             } else
             {
                 string subgroupid = (string)comboBoxResVal.SelectedItem;
@@ -222,7 +252,17 @@ namespace TimetableManager.WPF.Views
 
                 SubGroupIdDataService subGroupIdDataService = new SubGroupIdDataService(new EntityFramework.TimetableManagerDbContext());
 
-                _ = subGroupIdDataService.SetUnavailable(selectedSubGroupId, selectedTimeSlot);
+                _ = subGroupIdDataService.SetUnavailable(selectedSubGroupId, selectedTimeSlot).ContinueWith(result =>
+                {
+                    if (result != null)
+                    {
+                        MessageBox.Show("Set Unavailable Sub Group!", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Error occured!", "Error");
+                    }
+                });
             }
         }
     }

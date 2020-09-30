@@ -75,6 +75,10 @@ namespace TimetableManager.WPF.Views
         {
             SessionTabControl.SelectedIndex = 2;
         }
+        private void ChangeToSessionTab()
+        {
+            SessionTabControl.SelectedIndex = 1;
+        }
         private void LecturerLoadButton_Click(object sender, RoutedEventArgs e)
         {
             LoadType = "Lecturer";
@@ -185,26 +189,35 @@ namespace TimetableManager.WPF.Views
             {
                 SelectedLecturerList.Add(LecturersList.Find(e => e.EmployeeId == item.Id));
                 SetLecturerTextBox();
+                ChangeToSessionTab();
             }
             else if(LoadType == "Tag")
             {
                 SelectedTagList.Add(TagsList.Find(e => e.TagId == item.Id));
                 SetTagsTextBox();
+                ChangeToSessionTab();
+
             }
             else if(LoadType == "GroupId")
             {
                 SelectedGroupIdList.Add(GroupIdsList.Find(e => e.Id == item.Id));
                 SetGroupIdTextBox();
-            } 
+                ChangeToSessionTab();
+
+            }
             else if(LoadType == "SubGroups")
             {
                 SelectedSubGroupIdList.Add(SubGroupIdsList.Find(e => e.Id == item.Id));
                 SetSubGroupIdTextBox();
-            }    
+                ChangeToSessionTab();
+
+            }
             else if(LoadType == "Subject")
             {
                 SelectedSubjectList.Add(SubjectsList.Find(e => e.Id == item.Id));
                 SetSubjectsTextBox();
+                ChangeToSessionTab();
+
             }
         }
 
@@ -279,7 +292,18 @@ namespace TimetableManager.WPF.Views
                 Duration = duration
             };
 
-            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList, SelectedSubGroupIdList, SelectedTagList[0], SelectedSubjectList[0]);
+            sessionDataService.AddSession(session, SelectedLecturerList, SelectedGroupIdList, SelectedSubGroupIdList, SelectedTagList[0], SelectedSubjectList[0]).ContinueWith(result =>
+            {
+                if (result != null)
+                {
+                    MessageBox.Show("Session Added Successfully!", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry! Error occured!", "Error");
+                }
+            });
+            clear();
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
@@ -322,6 +346,15 @@ namespace TimetableManager.WPF.Views
             CardCount.Content = session.StudentCount + "(" + session.Duration + ")";
 
         }
+        private void clear()
+        {
+            LecturersTextBox.Text = "";
+            TagsTextBox.Text = "";
+            GroupsTextBox.Text = "";
+            SubjectsTextBox.Text = "";
+            StudentsNumberTextBox.Text = "";
+            DurationTextBox.Text = "";
+    }
     }
 
     public class LoadDataGridModel
@@ -335,4 +368,5 @@ namespace TimetableManager.WPF.Views
         public int SessionId { get; set; }
         public string Subject { get; set; }
     }
+   
 }
