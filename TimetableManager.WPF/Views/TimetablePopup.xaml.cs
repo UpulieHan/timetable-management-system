@@ -57,6 +57,9 @@ namespace TimetableManager.WPF.Views
             timetableGrid.Children.Add(txtBlock1);
 
 
+            //find the particular timetable and display it
+
+
         }
 
         private void printButton_Click(object sender, RoutedEventArgs e)
