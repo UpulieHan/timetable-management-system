@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:TimetableManager.WPF.Controls"
         mc:Ignorable="d"
         FontSize="16"
+        WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         Title="Please Select a time slot for the Interval" Height="auto" Width="auto" FontFamily="Bahnschrift Light" ResizeMode="NoResize" WindowStyle="None">
 

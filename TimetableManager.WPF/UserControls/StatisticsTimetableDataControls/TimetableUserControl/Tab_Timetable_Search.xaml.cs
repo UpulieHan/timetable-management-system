@@ -98,11 +98,5 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
             TimetablePopup timetablePopup = new TimetablePopup();
             timetablePopup.Show();
         }
-
-        private void printButton_Click(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine("print Button clicked");
-
-        }
     }
 }

@@ -58,6 +58,24 @@ namespace TimetableManager.WPF.Views
 
 
         }
+
+        private void printButton_Click(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine("print Button clicked");
+            try
+            {
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    printDialog.PrintVisual(timetableGrid, "Timetable");
+                }
+            }
+            finally
+            {
+                this.IsEnabled = true;
+            }
+        }
     }
 }
 

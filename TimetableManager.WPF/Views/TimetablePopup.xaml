@@ -5,15 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimetableManager.WPF.Views"
         xmlns:controls="clr-namespace:TimetableManager.WPF.Controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
         Title="Generated Timetable" Height="auto" Width="auto" FontFamily="Bahnschrift Light">
     <!--the amount of columns/rows depends on the number of days/timeslots per day-->
-    
+
     <!--StackPanel Name="containerSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/-->
 
     <Grid Name="timetableGrid" Width="1024" Height="700" ShowGridLines="True" Background="AliceBlue">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="130"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="1" Content="Print" Width="100" HorizontalAlignment="Right" Height="35" Margin="0,0,20,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="printButton_Click" Cursor="Hand" Padding="0,0,30,0">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Image Source="/Resources/print.png" Grid.Row="0" x:Name="printImage"  Width="25" HorizontalAlignment="Right" Margin="0,5,30,5" />
     </Grid>
 </Window>
