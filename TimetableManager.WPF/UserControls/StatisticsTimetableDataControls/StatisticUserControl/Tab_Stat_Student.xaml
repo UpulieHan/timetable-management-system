@@ -9,14 +9,14 @@
     <Grid>
         <DataGrid x:Name="dataGridstd" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Margin="0,0,0,225">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Programme" Binding="{Binding programme}" />
-                <DataGridTextColumn Header="Year" Binding="{Binding year}" />
-                <DataGridTextColumn Header="Number of sub groups" Binding="{Binding subgroups}" />
+                <DataGridTextColumn Header="Year 1 Groups" Binding="{Binding Year1}" />
+                <DataGridTextColumn Header="Year 2 Groups" Binding="{Binding Year2}" />
+                <DataGridTextColumn Header="Year 3 Groups" Binding="{Binding Year3}" />
+                <DataGridTextColumn Header="Year 4 Groups" Binding="{Binding Year4}" />
             </DataGrid.Columns>
 
 
         </DataGrid>
 
-        <Button x:Name="button_std_load" Content="Load Tables" HorizontalAlignment="Left" Height="28" Margin="318,248,0,0" VerticalAlignment="Top" Width="114" Click="button_Click_std"/>
     </Grid>
 </UserControl>

@@ -4,18 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserControl"
-             mc:Ignorable="d" d:DesignWidth="800" Height="515">
+             mc:Ignorable="d" d:DesignWidth="800" Height="450">
     <Grid>
-        <DataGrid x:Name="dataGridstd" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Margin="0,0,0,257">
+        <DataGrid x:Name="dataGridstd" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" RenderTransformOrigin="0.504,0.523" Margin="0,0,0,225">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Module" Binding="{Binding module}" />
-                <DataGridTextColumn Header="Hours" Binding="{Binding hours}" />
+                <DataGridTextColumn Header="Total Hours" Binding="{Binding count}" />
             </DataGrid.Columns>
 
 
         </DataGrid>
 
-        <Button x:Name="button_sub_load" Content="Load Tables" HorizontalAlignment="Left" Height="28" Margin="308,263,0,0" VerticalAlignment="Top" Width="114" Click="button_Click_sub"/>
 
     </Grid>
 </UserControl>
