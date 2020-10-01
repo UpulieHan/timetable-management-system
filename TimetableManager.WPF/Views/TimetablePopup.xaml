@@ -10,12 +10,13 @@
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
-        Title="Generated Timetable" Height="auto" Width="auto" FontFamily="Bahnschrift Light">
+        Title="{Binding WindowTitle}"
+        Height="auto" Width="auto" FontFamily="Bahnschrift Light">
     <!--the amount of columns/rows depends on the number of days/timeslots per day-->
 
     <!--StackPanel Name="containerSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/-->
-
-    <Grid Name="timetableGrid" Width="1024" Height="700" ShowGridLines="True" Background="AliceBlue">
+    <ScrollViewer>
+    <Grid Name="timetableGrid" Width="auto" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="130"/>
@@ -34,6 +35,11 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Image Source="/Resources/print.png" Grid.Row="0" x:Name="printImage"  Width="25" HorizontalAlignment="Right" Margin="0,5,30,5" />
+        <Image Source="/Resources/print.png" Grid.Row="0" Grid.Column="1" x:Name="printImage"  Width="25" HorizontalAlignment="Right" Margin="0,0,30,0" />
+        <Grid x:Name="mainGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" Background="AliceBlue">
+            
+            
+        </Grid>
     </Grid>
+    </ScrollViewer>
 </Window>
