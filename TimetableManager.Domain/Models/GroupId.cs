@@ -1,4 +1,5 @@
-﻿namespace TimetableManager.Domain.Models
+﻿using System.Collections.Generic;
+namespace TimetableManager.Domain.Models
 {
     public class GroupId
     {
