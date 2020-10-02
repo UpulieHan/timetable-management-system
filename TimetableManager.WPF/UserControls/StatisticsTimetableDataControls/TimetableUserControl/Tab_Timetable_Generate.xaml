@@ -35,7 +35,7 @@
                     Please make sure you've added all the necessary data before proceeding. 
                     This may take a while and you might get conflicts in the middle
                 </TextBlock>
-                <Button Grid.Row="1" Grid.Column="3" Content="Generate" Width="auto" Height="35" HorizontalAlignment="Right" Margin="20,0,20,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="generateButton_Click" Padding="10,0,30,0">
+                <Button Grid.Row="1" Grid.Column="3" Content="Generate" Width="auto" Height="35" HorizontalAlignment="Right" Margin="20,0,20,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="generateButton_Click" Cursor="Hand" Padding="10,0,30,0">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>

@@ -19,178 +19,162 @@ namespace TimetableManager.WPF.Views
 {
     /// <summary>
     /// Interaction logic for TimetablePopup.xaml
-    /// </summary>
+
     public partial class TimetablePopup : Window
     {
-        public ObservableCollection<TimeSlot> theTimeSlotList { get; set; }
-        public ObservableCollection<string> MondayTimeList { get; set; }
-        public ObservableCollection<string> TuesdayTimeList { get; set; }
-        public ObservableCollection<string> WednesdayTimeList { get; set; }
-        public ObservableCollection<string> ThursdayTimeList { get; set; }
-        public ObservableCollection<string> FridayTimeList { get; set; }
-        public ObservableCollection<string> SaturdayTimeList { get; set; }
-        public ObservableCollection<string> SundayTimeList { get; set; }
-        public string selectedTimeSlot;
-        private List<string> intervalList;
         private TimetableManagerDbContext timetableManagerDbContext = new TimetableManagerDbContext();
-        public TimetablePopup(List<string> dayTimeList, List<string> intervalList)
+        private DaysAndHours theDaysAndHours { get; set; }
+        private ObservableCollection<TimeSlot> timeSlotList { get; set; }
+        private ObservableCollection<Day> daysList { get; set; }
+        public string WindowTitle { get; }
+
+        public TimetablePopup()
         {
-            this.intervalList = intervalList;
             InitializeComponent();
-            List<ObservableCollection<string>> allLists = new List<ObservableCollection<string>>();
-            MondayTimeList = new ObservableCollection<string>();
-            TuesdayTimeList = new ObservableCollection<string>();
-            WednesdayTimeList = new ObservableCollection<string>();
-            ThursdayTimeList = new ObservableCollection<string>();
-            FridayTimeList = new ObservableCollection<string>();
-            SaturdayTimeList = new ObservableCollection<string>();
-            SundayTimeList = new ObservableCollection<string>();
 
-            string day;
-            string startTime;
-            string endTime;
-            foreach (string slot in dayTimeList)
-            {
-                startTime = slot.Substring(2, 4);
-                endTime = slot.Substring(6, 4);
+            theDaysAndHours = timetableManagerDbContext.DaysAndHours.FirstOrDefault<DaysAndHours>();
+            timeSlotList = new ObservableCollection<TimeSlot>(timetableManagerDbContext.TimeSlots);
+            daysList = new ObservableCollection<Day>(timetableManagerDbContext.Days);
 
-                //adding to the according list accordingly
-                if (slot.Substring(0, 2) == "MO")
-                {
-                    day = "Monday";
-                    MondayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else if (slot.Substring(0, 2) == "TU")
-                {
-                    day = "Tuesday";
-                    TuesdayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else if (slot.Substring(0, 2) == "WE")
-                {
-                    day = "Wednesday";
-                    WednesdayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else if (slot.Substring(0, 2) == "TH")
-                {
-                    day = "Thursday";
-                    ThursdayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else if (slot.Substring(0, 2) == "FR")
-                {
-                    day = "Friday";
-                    FridayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else if (slot.Substring(0, 2) == "SA")
-                {
-                    day = "Saturday";
-                    SaturdayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-                else
-                {
-                    day = "Sunday";
-                    SundayTimeList.Add(day + " from " + startTime + " to " + endTime);
-                }
-            }
-            //creating a list of lists
-            if (MondayTimeList.Count > 0)
-            {
-                allLists.Add(MondayTimeList);
-            }
-            if (TuesdayTimeList.Count > 0)
-            {
-                allLists.Add(TuesdayTimeList);
-            }
-            if (WednesdayTimeList.Count > 0)
-            {
-                allLists.Add(WednesdayTimeList);
-            }
-            if (ThursdayTimeList.Count > 0)
-            {
-                allLists.Add(ThursdayTimeList);
-            }
-            if (FridayTimeList.Count > 0)
-            {
-                allLists.Add(FridayTimeList);
-            }
-            if (SaturdayTimeList.Count > 0)
-            {
-                allLists.Add(SaturdayTimeList);
-            }
-            if (SundayTimeList.Count > 0)
-            {
-                allLists.Add(SundayTimeList);
-            }
-            createComboBox(allLists);
-            this.DataContext = this;
-        }
+            //adding row headers
+            IEnumerable<string> distinctTimeSlots = timeSlotList.Select(x => x.startTime).Distinct().OrderBy(o => o);
 
+            int noOfRows = distinctTimeSlots.Count();
 
-        private void createComboBox(List<ObservableCollection<string>> allLists)
-        {
-            foreach (ObservableCollection<string> list in allLists)
+            //set this
+            WindowTitle = "Dr. Nuwan Kodagoda";
+
+            //adding rows
+            for (int i = 0; i < noOfRows + 1; i++)
             {
-                //comboBoxInterval
-                ComboBox comboBoxInterval = new ComboBox
+                RowDefinition gridRow = new RowDefinition();
+                gridRow.Height = new GridLength(30);
+                mainGrid.RowDefinitions.Add(gridRow);
+            }
+
+            //adding cols
+            for (int i = 0; i < 8; i++)
+            {
+                ColumnDefinition gridCols = new ColumnDefinition();
+                gridCols.Width = new GridLength(130);
+                mainGrid.ColumnDefinitions.Add(gridCols);
+            }
+
+            // Add column headers
+            foreach (Day d in daysList)
+            {
+                Label day = new Label
                 {
-                    Name = "comboBoxInterval" + list[0].Substring(0, 2),
-                    Margin = new Thickness(10, 0, 0, 0),
-                    Padding = new Thickness(10),
-                    Width = 230,
-                    IsEditable = true,
-                    IsReadOnly = false,
-                    Text = list[0].Substring(0, 2),
+                    Name = d.DayName,
+                    Content = d.DayName,
+                    Margin = new Thickness(0, 3, 0, 3),
+                    FontSize = 11,
                 };
-                comboBoxInterval.ItemsSource = list;
+                day.FontWeight = FontWeights.Bold;
 
+                Grid.SetRow(day, 0);
+                Grid.SetColumn(day, d.DayId);
 
-                foreach (string dayTimeCode in list)
+                mainGrid.Children.Add(day);
+            }
+
+            int count = 0;
+            foreach (string s in distinctTimeSlots)
+            {
+                Trace.WriteLine(s);
+                Label time = new Label
                 {
-                    foreach (string interval in intervalList)
+                    Name = "Time" + s,
+                    Content = s,
+                    Margin = new Thickness(0, 3, 0, 3),
+                    FontSize = 11,
+                };
+                time.FontWeight = FontWeights.Bold;
+                count++;
+                Grid.SetRow(time, count);
+                Grid.SetColumn(time, 0);
+                mainGrid.Children.Add(time);
+            }
+
+            for (int c = 1; c < 9; c++)
+            {
+                for (int r = 1; r < noOfRows + 1; r++)
+                {
+                    //set these
+                    string subjectName = "IT2030 - OOP";
+                    string groupName = "Y2S1.03(IT)";
+                    string locationName = "A507";
+
+                    StackPanel sp = new StackPanel
                     {
-                        var words = dayTimeCode.Split(' ');
-                        if (words[0].Substring(0, 2).ToUpper() + words[2] + words[4] == interval)
-                        {
-                            comboBoxInterval.Text = dayTimeCode;
-                        }
+                        Name = "sp" + c + r,
+                        Orientation = Orientation.Vertical,
+                    };
 
-                    }
+                    //need to register the control so i can find it by name
+                    RegisterName(sp.Name, sp);
+
+                    Label subject = new Label
+                    {
+                        Name = "subject",
+                        Content = subjectName,
+                        Margin = new Thickness(0, -2, 0, -5),
+                        FontSize = 8,
+                    };
+
+                    Label group = new Label
+                    {
+                        Name = "group",
+                        Content = groupName,
+                        Margin = new Thickness(0, -5, 0, -5),
+                        FontSize = 8,
+                    };
+
+                    Label location = new Label
+                    {
+                        Name = "location",
+                        Content = locationName,
+                        Margin = new Thickness(0, -5, 0, -2),
+                        FontSize = 8,
+                    };
+
+                    sp.Children.Add(subject);
+                    sp.Children.Add(group);
+                    sp.Children.Add(location);
+
+                    Grid.SetRow(sp, r);
+                    Grid.SetColumn(sp, c);
+
+                    mainGrid.Children.Add(sp);
                 }
-                comboboxSP.Children.Add(comboBoxInterval);
-
-
             }
+
+
+            this.DataContext = this;
+
+            //find the particular timetable and display it
+
+
         }
-        private void saveButton_Click(object sender, RoutedEventArgs e)
+
+        private void printButton_Click(object sender, RoutedEventArgs e)
         {
-            //retrieve values from the db
-            theTimeSlotList = new ObservableCollection<TimeSlot>(timetableManagerDbContext.TimeSlots);
-
-            bool selected = true;
-            //retrieving the values from all the combo boxes
-            foreach (ComboBox comboBox in comboboxSP.Children)
+            try
             {
-                if (comboBox.SelectedIndex == -1)
+                this.IsEnabled = false;
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
                 {
-                    MessageBox.Show("Please fill all the fields");
-                    selected = false;
-                    break;
+                    printDialog.PrintVisual(timetableGrid, "Timetable");
                 }
-                else
-                {
-                    var words = comboBox.Text.Split(' ');
-                    TimeSlot matchedTimeSlot = timetableManagerDbContext.TimeSlots.Find(words[0].Substring(0, 2).ToUpper() + words[2] + words[4]);
-                    //could change the name INTERVAL to something else in the future if needed.
-                    matchedTimeSlot.sessionId = "INTERVAL";
-                    timetableManagerDbContext.TimeSlots.Update(matchedTimeSlot);
-                    timetableManagerDbContext.SaveChanges();
-                }
-
             }
-            if (selected)
+            finally
             {
-                //need to save this value somewhere
-                this.Close();
+                this.IsEnabled = true;
             }
         }
     }
 }
+
+
+

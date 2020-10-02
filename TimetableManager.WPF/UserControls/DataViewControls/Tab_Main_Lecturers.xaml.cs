@@ -113,7 +113,7 @@ namespace TimetableManager.WPF.Controls
 
             lecturerDataService.DeleteLecturer(lecturer.EmployeeId).ContinueWith(result =>
             {
-                if(result == null)
+                if (result == null)
                 {
                     MessageBox.Show("Sorry! Error occured", "Error");
                 }
@@ -207,11 +207,11 @@ namespace TimetableManager.WPF.Controls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (EmployeeIdTextBox.Text.Trim() == "" || EmployeeNameTextBox.Text.Trim() == "" || RankTextBox.Text.Trim() == "" || FacutlyComboBox.SelectedItem == null || DepartmentComboBox.SelectedItem == null || CenterComboBox.SelectedItem == null || BuildingComboBox.SelectedItem == null || LevelComboBox.SelectedItem == null) 
+            if (EmployeeIdTextBox.Text.Trim() == "" || EmployeeNameTextBox.Text.Trim() == "" || RankTextBox.Text.Trim() == "" || FacutlyComboBox.SelectedItem == null || DepartmentComboBox.SelectedItem == null || CenterComboBox.SelectedItem == null || BuildingComboBox.SelectedItem == null || LevelComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
                 return;
-            } 
+            }
             Lecturer lecturer = new Lecturer
             {
                 EmployeeId = Int32.Parse(EmployeeIdTextBox.Text.Trim()),
@@ -242,7 +242,8 @@ namespace TimetableManager.WPF.Controls
                         MessageBox.Show("Sorry! Error occured!", "Error");
                     }
                 });
-            } else
+            }
+            else
             {
                 lecturerDataService.AddLecturer(lecturer, facultyName, departmentName, centerName, buildingName, levelName).ContinueWith(result =>
                 {

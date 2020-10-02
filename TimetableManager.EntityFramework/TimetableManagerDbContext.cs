@@ -31,6 +31,9 @@ namespace TimetableManager.EntityFramework
         public DbSet<TimeSlot> TimeSlots { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<LecturerTimetable> LecturerTTs { get; set; }
+        public DbSet<GroupTimetable> GroupTTs { get; set; }
+        public DbSet<RoomTimetable> RoomTTs { get; set; }
         public TimetableManagerDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -89,6 +92,36 @@ namespace TimetableManager.EntityFramework
                 entity.Property(e => e.sessionId);
             });
 
+            modelBuilder.Entity<LecturerTimetable>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.lecturer);
+                entity.Property(e => e.TimeSlot);
+                entity.Property(e => e.subjectName);
+                entity.Property(e => e.groupId);
+                entity.Property(e => e.room);
+            });
+
+            modelBuilder.Entity<GroupTimetable>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.groupId);
+                entity.Property(e => e.timeSlot);
+                entity.Property(e => e.subject);
+                entity.Property(e => e.lecturer);
+                entity.Property(e => e.room);
+            });
+
+            modelBuilder.Entity<RoomTimetable>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.roomName);
+                entity.Property(e => e.timeSlot);
+                entity.Property(e => e.subject);
+                entity.Property(e => e.groupId);
+                entity.Property(e => e.lecturer);
+            });
+
             modelBuilder.Entity<LecturerSession>()
                 .HasKey(t => new { t.LecturerId, t.SessionId });
 
@@ -114,7 +147,7 @@ namespace TimetableManager.EntityFramework
                 .HasOne(gs => gs.Session)
                 .WithMany(s => s.GroupIdSessions)
                 .HasForeignKey(gs => gs.SessionId);
-            
+
             modelBuilder.Entity<SubGroupIdSession>()
                 .HasKey(e => new { e.SubGroupId, e.SessionId });
 
@@ -165,8 +198,8 @@ namespace TimetableManager.EntityFramework
             modelBuilder.Entity<GroupIdUnavailableTimeSlot>()
                 .HasOne(t => t.TimeSlot)
                 .WithMany(ts => ts.GroupIdUnavailableTimeSlots)
-                .HasForeignKey(gts => gts.TimeSlotId);  
-            
+                .HasForeignKey(gts => gts.TimeSlotId);
+
             modelBuilder.Entity<SubGroupIdUnavailableTimeSlot>()
                 .HasKey(e => new { e.SubGroupId, e.TimeSlotId });
 

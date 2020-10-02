@@ -5,26 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimetableManager.WPF.Views"
         xmlns:controls="clr-namespace:TimetableManager.WPF.Controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         FontSize="16"
         SizeToContent="WidthAndHeight"
-        Title="Please Select a time slot for the Interval" Height="auto" Width="auto" FontFamily="Bahnschrift Light" ResizeMode="NoResize" WindowStyle="None">
+        Title="{Binding WindowTitle}"
+        Height="auto" Width="auto" FontFamily="Bahnschrift Light">
+    <!--the amount of columns/rows depends on the number of days/timeslots per day-->
 
-    <Grid>
+    <!--StackPanel Name="containerSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/-->
+    <ScrollViewer>
+    <Grid Name="timetableGrid" Width="auto" Height="auto">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="130"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Name="comboboxSP" Orientation="Vertical" Grid.Row="1" Grid.Column="1"/>
-        <Button Content="Save" Width="100" Height="35" Grid.Row="3"  Grid.Column="1" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="saveButton_Click">
+
+        <Button Grid.Row="0" Grid.Column="1" Content="Print" Width="100" HorizontalAlignment="Right" Height="35" Margin="0,0,20,0" Background="#008CFF" Foreground="White" BorderBrush="{x:Null}" Click="printButton_Click" Cursor="Hand" Padding="0,0,30,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -32,5 +35,11 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Image Source="/Resources/print.png" Grid.Row="0" Grid.Column="1" x:Name="printImage"  Width="25" HorizontalAlignment="Right" Margin="0,0,30,0" />
+        <Grid x:Name="mainGrid" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ShowGridLines="True" Background="AliceBlue">
+            
+            
+        </Grid>
     </Grid>
+    </ScrollViewer>
 </Window>
