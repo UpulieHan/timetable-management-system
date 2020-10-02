@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-
-namespace TimetableManager.Domain.Models
+﻿namespace TimetableManager.Domain.Models
 {
     public class DaysAndHours
     {

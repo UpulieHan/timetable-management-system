@@ -1,6 +1,9 @@
+
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimetableManager.Domain.Models;
+using TimetableManager.EntityFramework.Services;
+
 
 namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserControl
 {
@@ -18,16 +24,33 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
     /// </summary>
     public partial class Tab_Stat_subject : UserControl
     {
+
+        public List<Subject> SubjectList { get; private set; }
+      
+        public List<SubStatGrid> SubStatList = new List<SubStatGrid>();
+
         public Tab_Stat_subject()
         {
             InitializeComponent();
-            List<Sub> sub = new List<Sub>();
+         
+            _ = this.LoadSubjectData();
+            dataGridstd.ItemsSource = SubStatList;
+        }
 
-            sub.Add(new Sub() { module = "AF", hours = 25 });
-            sub.Add(new Sub() { module = "CN", hours = 30 });
-            sub.Add(new Sub() { module = "SA", hours = 30 });
-            sub.Add(new Sub() { module = "DS", hours = 25 });
-            dataGridstd.ItemsSource = sub;
+        private async Task LoadSubjectData()
+        {
+            SubjectDataService subjectDataService = new SubjectDataService(new EntityFramework.TimetableManagerDbContext());
+
+            SubjectList = await subjectDataService.GetSubjectsAsync();
+
+            SubjectList.ForEach(f =>
+            {
+                int sum = f.LectureHours + f.EvaluationHours + f.TutorialHours + f.LabHours;
+                SubStatList.Add(new SubStatGrid { module = f.SubjectName, count = sum });
+                
+            });
+
+            
         }
 
         private void button_Click_sub(object sender, RoutedEventArgs e)
@@ -36,11 +59,11 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.StatisticUserCont
         }
     }
 
-    internal class Sub
+    public class SubStatGrid
     {
         public string module { get; set; }
 
-        public int hours { get; set; }
+        public int count { get; set; }
 
     }
 }

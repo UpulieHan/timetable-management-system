@@ -1,12 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using TimetableManager.Domain.Models;
-
-namespace TimetableManager.EntityFramework.Services
+﻿namespace TimetableManager.EntityFramework.Services
 {
     public class StatDataService
     {
