@@ -188,7 +188,6 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button x:Name="LoadButton" Content="Load Selected" />
                     </StackPanel>
                 </Grid>
             </TabItem>
