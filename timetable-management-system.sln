@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimetableManager.WPF", "TimetableManager.WPF\TimetableManager.WPF.csproj", "{05C55A8A-8DF0-42B7-BECA-605698DA6D1F}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NewSetupProject", "NewSetupProject\NewSetupProject.vdproj", "{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +27,6 @@ Global
 		{05C55A8A-8DF0-42B7-BECA-605698DA6D1F}.Release|x64.Build.0 = Release|x64
 		{05C55A8A-8DF0-42B7-BECA-605698DA6D1F}.Release|x86.ActiveCfg = Release|x86
 		{05C55A8A-8DF0-42B7-BECA-605698DA6D1F}.Release|x86.Build.0 = Release|x86
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Debug|Any CPU.ActiveCfg = Debug
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Debug|x64.ActiveCfg = Debug
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Debug|x86.ActiveCfg = Debug
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Release|Any CPU.ActiveCfg = Release
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Release|x64.ActiveCfg = Release
-		{F09B5CCB-202E-4038-AC49-F1E1339E2DC0}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
