@@ -133,6 +133,12 @@ namespace TimetableManager.WPF.Views
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if(SessionOneComboBox.SelectedItem == null || SessionTwoComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            }
+
             _ = SetConsecutive().ContinueWith(result =>
             {
                 if (result != null)
@@ -150,6 +156,12 @@ namespace TimetableManager.WPF.Views
 
         private void ParallelSaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (SessionOneComboBox.SelectedItem == null || SessionTwoComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            }
+
             _ = SetConsecutive().ContinueWith(result =>
             {
                 if (result != null)
