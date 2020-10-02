@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimetableManager.Domain.Models;
 using TimetableManager.EntityFramework;
+using TimetableManager.WPF.Views;
 
 namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserControl
 {
@@ -61,14 +62,12 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
             DirectoryInfo groupDir = timetablesDir.CreateSubdirectory("groupDir");
             DirectoryInfo RoomDir = timetablesDir.CreateSubdirectory("RoomDir");
 
-
-
-
             //a binary field to say if the timetable is being made for all 3 types
 
             //lecturers
             foreach (Lecturer l in theLecturerList)
             {
+                TimetableSketch timetableSketch = new TimetableSketch("Lecturer", l.EmployeeName);
                 Trace.WriteLine(l.EmployeeName);
             }
 
@@ -76,22 +75,22 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
             //locations
             foreach (Room r in theRoomList)
             {
+                TimetableSketch timetableSketch = new TimetableSketch("Room", r.RoomName);
                 Trace.WriteLine(r.RoomName);
             }
 
             //groups
             foreach (GroupId g in theGroupList)
             {
+                TimetableSketch timetableSketch = new TimetableSketch("Group", g.GroupID);
                 Trace.WriteLine(g.GroupID);
             }
 
             foreach (SubGroupId s in theSubGroupList)
             {
+                TimetableSketch timetableSketch = new TimetableSketch("Subgroup", s.SubGroupID);
                 Trace.WriteLine(s.SubGroupID);
             }
-
-            //set the title, cols (days), rows(timeslots)
-
         }
     }
 }

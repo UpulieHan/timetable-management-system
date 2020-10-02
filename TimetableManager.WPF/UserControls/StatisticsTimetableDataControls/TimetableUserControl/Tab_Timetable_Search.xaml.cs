@@ -50,6 +50,7 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
 
         private void comboBoxTimetableType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            comboBoxSpecificName.ItemsSource = null;
             string selectedValue = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
 
             //set comboBocValueList accordingly
@@ -87,14 +88,16 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
         }
         private void comboBoxSpecificName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedValue = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
-            Trace.WriteLine(selectedValue);
+            if (comboBoxSpecificName.ItemsSource != null)
+            {
+                string selectedValue = comboBoxSpecificName.SelectedItem.ToString();
+                //Trace.WriteLine(selectedValue);
+            }
         }
 
 
         private void viewButton_Click(object sender, RoutedEventArgs e)
         {
-            Trace.WriteLine("view Button clicked");
             TimetablePopup timetablePopup = new TimetablePopup();
             timetablePopup.Show();
         }

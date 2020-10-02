@@ -156,8 +156,6 @@ namespace TimetableManager.WPF.Views
                     }
                 }
                 comboboxSP.Children.Add(comboBoxInterval);
-
-
             }
         }
         private void saveButton_Click(object sender, RoutedEventArgs e)
