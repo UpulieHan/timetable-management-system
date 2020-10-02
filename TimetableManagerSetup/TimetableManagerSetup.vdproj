@@ -37,6 +37,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -91,6 +99,16 @@
         {
             "LaunchCondition"
             {
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_3B74FB35373E49D782AF67CBCDD43067"
+                {
+                "Name" = "8:.NET Core"
+                "Message" = "8:[VSDNETCOREMSG]"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "IsNETCore" = "11:TRUE"
+                "Architecture" = "2:0"
+                "Runtime" = "2:0"
+                }
             }
         }
         "File"
@@ -152,7 +170,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimetableManagerSetup"
         "ProductCode" = "8:{9D23CE96-5C2D-4BC4-A962-D4BE065AA27D}"
-        "PackageCode" = "8:{E7798A0E-7EAB-44A8-948C-A0358966B6DF}"
+        "PackageCode" = "8:{FB5EC327-AAD5-420D-B19D-1DC9976B07DE}"
         "UpgradeCode" = "8:{E1A0C1A1-24FE-4746-9C64-0B83B54E639F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -272,9 +290,9 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3F16E7F4415C49DCA8A6B8FCB3C5F9F7"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5C7A9788C1954E2785EA40D8ADD834A6"
             {
-            "Name" = "8:Timetable Manager"
+            "Name" = "8:Shortcut to Publish Items from TimetableManager.WPF (Active)"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -687,7 +705,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_459BB46B0CC44CB1B6BAA4859BB0ACAD"
             {
-            "SourcePath" = "8:..\\TimetableManager.WPF\\obj\\x86\\Release\\netcoreapp3.1\\TimetableManager.WPF.exe"
+            "SourcePath" = "8:..\\TimetableManager.WPF\\obj\\x86\\Release\\netcoreapp3.1\\win-x86\\TimetableManager.WPF.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_DA1AA599E9F649F497A6CEFAC8DAD358"
