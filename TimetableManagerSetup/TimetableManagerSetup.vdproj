@@ -19,6 +19,12 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_4DEFCF51B2B14847A4CA511367F1B661"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -113,6 +119,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4DEFCF51B2B14847A4CA511367F1B661"
+            {
+            "SourcePath" = "8:C:\\Users\\amith\\Downloads\\timetable_manager_icon.ico"
+            "TargetName" = "8:timetable_manager_icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_DA1AA599E9F649F497A6CEFAC8DAD358"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -168,7 +194,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:TimetableManagerSetup"
+        "ProductName" = "8:Timetable Manager"
         "ProductCode" = "8:{9D23CE96-5C2D-4BC4-A962-D4BE065AA27D}"
         "PackageCode" = "8:{FB5EC327-AAD5-420D-B19D-1DC9976B07DE}"
         "UpgradeCode" = "8:{E1A0C1A1-24FE-4746-9C64-0B83B54E639F}"
@@ -178,12 +204,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:2020-REG-WE-05"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:TimetableManagerSetup"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:2020-REG-WE-05"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -292,7 +318,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5C7A9788C1954E2785EA40D8ADD834A6"
             {
-            "Name" = "8:Shortcut to Publish Items from TimetableManager.WPF (Active)"
+            "Name" = "8:Timetable Manager"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -301,7 +327,7 @@
             "Target" = "8:_459BB46B0CC44CB1B6BAA4859BB0ACAD"
             "Folder" = "8:_41AF780877DB475A98C8BE62FFB6EECA"
             "WorkingFolder" = "8:_DA1AA599E9F649F497A6CEFAC8DAD358"
-            "Icon" = "8:"
+            "Icon" = "8:_4DEFCF51B2B14847A4CA511367F1B661"
             "Feature" = "8:"
             }
         }
