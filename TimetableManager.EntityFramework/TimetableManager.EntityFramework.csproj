@@ -75,6 +75,18 @@
     <Compile Remove="Migrations\20200927131527_v11.Designer.cs" />
     <Compile Remove="Migrations\20200927165023_v12.cs" />
     <Compile Remove="Migrations\20200927165023_v12.Designer.cs" />
+    <Compile Remove="Migrations\20201001095316_final-test-1.cs" />
+    <Compile Remove="Migrations\20201001095316_final-test-1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Timetable.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Timetable.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
