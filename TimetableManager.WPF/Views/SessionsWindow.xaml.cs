@@ -311,6 +311,8 @@ namespace TimetableManager.WPF.Views
                 }
             });
             clear();
+            SessionDataGridList.Clear();
+            LoadSessionData();
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
