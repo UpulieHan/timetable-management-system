@@ -36,10 +36,7 @@ namespace TimetableManager.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=database-1.cmxg05ztpr3u.us-east-1.rds.amazonaws.com,1433;Database=timetableDb;User Id=admin;Password=test1234;");
-
-//             optionsBuilder.UseSqlite("Filename=C:/Users/ASUS/source/repos/timetable-management-system/TimetableManager.EntityFramework/Timetable.db");
-
-            optionsBuilder.UseSqlite("Filename=D:/Developement/uni-projects/timetable-management-system/TimetableManager.EntityFramework/Timetable.db");
+            optionsBuilder.UseSqlite("Filename=Timetable.db");
 
             base.OnConfiguring(optionsBuilder);
         }
