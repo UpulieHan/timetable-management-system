@@ -21,21 +21,29 @@
     <None Remove="Resources\settings_icon.png" />
     <None Remove="Resources\under_dev_banner.jpg" />
     <None Remove="Resources\view.png" />
+    <None Remove="Timetable.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Timetable.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\generate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TimetableManager.Domain\TimetableManager.Domain.csproj" />
-    <ProjectReference Include="..\TimetableManager.EntityFramework\TimetableManager.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>
