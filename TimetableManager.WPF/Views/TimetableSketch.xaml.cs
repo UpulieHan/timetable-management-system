@@ -176,7 +176,7 @@ namespace TimetableManager.WPF.Views
 
             if (type == "Lecturer")
             {
-                createLecturerTT(lecturer);
+                //createLecturerTT(lecturer);
             }
             else if (type == "Group")
             {
