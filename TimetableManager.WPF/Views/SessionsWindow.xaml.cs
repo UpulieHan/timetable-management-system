@@ -355,6 +355,11 @@ namespace TimetableManager.WPF.Views
             StudentsNumberTextBox.Text = "";
             DurationTextBox.Text = "";
     }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Sorry! This feature is under development!",  "Coming Soon");
+        }
     }
 
     public class LoadDataGridModel
