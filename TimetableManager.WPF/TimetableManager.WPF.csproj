@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x86;x64</Platforms>
+    <Authors>2020-REG-WE-05</Authors>
+    <Product>Timetable Manager System</Product>
+    <Description>Timetable Manager System</Description>
+    <RepositoryUrl>https://github.com/lwpamihiranga/timetable-management-system</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
