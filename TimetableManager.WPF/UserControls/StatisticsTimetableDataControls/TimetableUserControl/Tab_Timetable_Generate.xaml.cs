@@ -91,6 +91,8 @@ namespace TimetableManager.WPF.StatisticsTimetableDataControls.TimetableUserCont
                 TimetableSketch timetableSketch = new TimetableSketch("Subgroup", s.SubGroupID);
                 Trace.WriteLine(s.SubGroupID);
             }
+
+            MessageBox.Show("Sorry! Generating timetable function is under development at the moment. But the relavant directories are created in the programe root directory.", "Comming soon!");
         }
     }
 }
