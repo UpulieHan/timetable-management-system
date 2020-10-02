@@ -53,7 +53,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="0,0,0,-45">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="20"/>
@@ -98,7 +98,7 @@
                         <Label Content="Session 2" />
                         <ComboBox x:Name="SessionTwoComboBox" SelectionChanged="SessionTwoComboBox_SelectionChanged" Width="100" />
                     </StackPanel>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,22,0,0">
                         <StackPanel Orientation="Vertical">
                              <Label x:Name="CardLecturerName1" Width="auto" />
                              <Label x:Name="CardSubjectName1"  />
@@ -107,7 +107,7 @@
                              <Label x:Name="CardCount1" />
                         </StackPanel>
                     </TextBlock>
-                    <TextBlock Grid.Row="1" Grid.Column="3">
+                    <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,22,0,0">
                         <StackPanel Orientation="Vertical">
                              <Label x:Name="CardLecturerName2" Width="auto" />
                              <Label x:Name="CardSubjectName2" />
