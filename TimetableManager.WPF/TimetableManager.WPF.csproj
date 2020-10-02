@@ -9,6 +9,7 @@
     <Product>Timetable Manager System</Product>
     <Description>Timetable Manager System</Description>
     <RepositoryUrl>https://github.com/lwpamihiranga/timetable-management-system</RepositoryUrl>
+    <ApplicationIcon>timetable_manager_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
