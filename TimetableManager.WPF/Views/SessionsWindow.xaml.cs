@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -281,6 +282,12 @@ namespace TimetableManager.WPF.Views
 
         private void AddSessionButton_Click(object sender, RoutedEventArgs e)
         {
+            if (StudentsNumberTextBox.Text.Trim() == "" || DurationTextBox.Text.Trim() == "" || SelectedLecturerList.Count == 0 || SelectedTagList.Count == 0 || SelectedSubjectList.Count == 0 || (SelectedGroupIdList.Count == 0 && SelectedSubGroupIdList.Count == 0))
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            }
+
             SessionDataService sessionDataService = new SessionDataService(new EntityFramework.TimetableManagerDbContext());
 
             int studentCount = Int32.Parse(StudentsNumberTextBox.Text.Trim());
@@ -304,6 +311,8 @@ namespace TimetableManager.WPF.Views
                 }
             });
             clear();
+            SessionDataGridList.Clear();
+            LoadSessionData();
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
@@ -355,6 +364,23 @@ namespace TimetableManager.WPF.Views
             StudentsNumberTextBox.Text = "";
             DurationTextBox.Text = "";
     }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Sorry! This feature is under development!",  "Coming Soon");
+        }
+
+        private void StudentsNumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void DurationTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 
     public class LoadDataGridModel

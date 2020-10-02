@@ -281,6 +281,12 @@ namespace TimetableManager.WPF.Views
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if(TypeComboBox.SelectedItem == null || ValueListComboBox.SelectedItem == null || RoomTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            }
+
             ComboBoxItem selected = (ComboBoxItem)TypeComboBox.SelectedItem;
             string value = selected.Content.ToString();
 

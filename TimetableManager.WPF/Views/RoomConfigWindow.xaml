@@ -107,6 +107,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Unavailability">
+                <Image Source="/Resources/under_dev_banner.jpg" Height="337" Margin="36,0,68,0"  />
             </TabItem>
             <TabItem Header="Load Room">
                 <Grid>

@@ -185,6 +185,13 @@ namespace TimetableManager.WPF.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+
+            if (comboBoxSelectRes.SelectedItem == null || comboBoxDay.SelectedItem == null || comboBoxResVal.SelectedItem == null)
+            {
+                MessageBox.Show("Sorry! Fields cannot be empty!", "Error");
+                return;
+            }
+
             object v = comboBoxSelectRes.SelectedValue;
             string value = v.ToString();
             string timeSlot = (string)comboBoxDay.SelectedItem;
